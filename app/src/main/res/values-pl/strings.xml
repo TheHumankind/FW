@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlowerWorld</string>
+    <string name="logo_description">Logo FlowerWorld</string>
+    <string name="login">Zaloguj się</string>
+</resources>
