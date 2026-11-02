@@ -44,7 +44,8 @@ Do not assume every target user has them: newer Huawei/Honor devices may not.
 - Navigation: Navigation Compose with string routes (`navigation/AppNavigation.kt`); every route has its own ViewModels.
 - ViewModels get dependencies from `AppContainer` through `containerViewModelFactory` (see `MainViewModel.Factory`); `FlowerWorldApp` owns the container.
 - Photos: picked with the system photo picker (no permission), compressed by `PhotoStorage` (`FilePhotoStorage`: JPEG, max 800 px, `files/photos/`); a plant keeps only the path.
-- Plants live behind `PlantRepository`; for now `InMemoryPlantRepository` seeded with `TestPlants` (lost when the process dies) until Room replaces it.
+- Plants live behind `PlantRepository`; `RoomPlantRepository` stores them in Room (`data/local/`: entities `plants` + `plant_photos`, DAO, mappers; sync fields `createdAt`/`updatedAt`/`isDeleted`). The database starts empty; `TestPlants` is only for previews.
+- Room schemas are exported to `app/schemas/` (commit them). Changing an entity needs a new database version and a migration.
 - Theme, colors, fonts and spacing live in `ui/theme`; strings live in `strings.xml`.
 - Dependency versions live in `libs.versions.toml`. Add libraries only when needed.
 
@@ -79,8 +80,8 @@ Firebase, any server or networking, Google services. The backend choice is postp
 so any backend can be plugged in later by one new class; do not tie the code to Firestore-specific features.
 
 ## Test data
-- `app/src/main/res/drawable-nodpi/test_plant_1..3.webp`: test plant photos (800 px wide, WebP q75), used only to render UI and fake data.
-  They are not real user content: remove them together with the fake repository once real photos from app storage are used.
+- `data/fake/TestPlants.kt` and `app/src/main/res/drawable-nodpi/test_plant_1..3.webp`: made-up plants and photos (800 px wide, WebP q75), used only by previews.
+  They are not real user content.
 
 ## Checkpoints
 - [x] Android Studio and SDK installed, `adb` works
@@ -93,6 +94,6 @@ so any backend can be plugged in later by one new class; do not tie the code to 
 - [x] Screens: welcome, login form, main (footer only); state-based navigation
 - [x] User describes the app idea (plant tracker, see "App idea")
 - [x] Skeleton: repository interface + in-memory implementation, Navigation Compose, add-plant flow with photo storage
-- [ ] Room and local data
+- [x] Room and local data (plants and photo paths survive restarts)
 - [ ] Backend choice and server integration (later)
 - [ ] Emulator system image (download was interrupted; optional, a phone is available)

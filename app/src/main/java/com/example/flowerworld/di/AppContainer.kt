@@ -1,8 +1,9 @@
 package com.example.flowerworld.di
 
 import android.content.Context
-import com.example.flowerworld.data.fake.TestPlants
-import com.example.flowerworld.data.repository.InMemoryPlantRepository
+import androidx.room.Room
+import com.example.flowerworld.data.local.FlowerWorldDatabase
+import com.example.flowerworld.data.repository.RoomPlantRepository
 import com.example.flowerworld.data.storage.FilePhotoStorage
 import com.example.flowerworld.domain.repository.PlantRepository
 import com.example.flowerworld.domain.storage.PhotoStorage
@@ -15,7 +16,11 @@ import com.example.flowerworld.domain.usecase.AddPlantUseCase
 class AppContainer(context: Context) {
     private val appContext = context.applicationContext
 
-    val plantRepository: PlantRepository by lazy { InMemoryPlantRepository(TestPlants) } // TODO: Room
+    private val database: FlowerWorldDatabase by lazy {
+        Room.databaseBuilder(appContext, FlowerWorldDatabase::class.java, FlowerWorldDatabase.Name).build()
+    }
+
+    val plantRepository: PlantRepository by lazy { RoomPlantRepository(database.plantDao()) }
     val photoStorage: PhotoStorage by lazy { FilePhotoStorage(appContext) }
     val addPlantUseCase: AddPlantUseCase by lazy { AddPlantUseCase(plantRepository, photoStorage) }
 }
