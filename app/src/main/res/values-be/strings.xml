@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FlowerWorld</string>
+    <string name="logo_description">Лагатып FlowerWorld</string>
+    <string name="login">Увайсці</string>
+    <string name="sign_up">Зарэгістравацца</string>
+    <string name="login_label">Лагін</string>
+    <string name="password_label">Пароль</string>
+    <string name="confirm">Пацвердзіць</string>
+    <string name="show_password">Паказаць</string>
+    <string name="hide_password">Схаваць</string>
+</resources>

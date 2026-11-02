@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FlowerWorld</string>
+    <string name="logo_description">Logo FlowerWorld</string>
+    <string name="login">Zaloguj się</string>
+    <string name="sign_up">Zarejestruj się</string>
+    <string name="login_label">Login</string>
+    <string name="password_label">Hasło</string>
+    <string name="confirm">Potwierdź</string>
+    <string name="show_password">Pokaż</string>
+    <string name="hide_password">Ukryj</string>
+</resources>
