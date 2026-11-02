@@ -22,7 +22,7 @@ import com.example.flowerworld.R
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 import com.example.flowerworld.ui.theme.HunterGreen
 
-/** Поле пароля: скрывает символы и позволяет временно показать их. */
+/** Password field: hides characters and lets the user reveal them temporarily. */
 @Composable
 fun AppPasswordField(
     value: String,

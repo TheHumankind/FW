@@ -43,7 +43,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun FlowerWorldTheme(
     darkTheme: Boolean = false,
-    // Dynamic color (Android 12+) выключен, чтобы всегда использовалась фирменная палитра
+    // Dynamic color (Android 12+) is off so the brand palette is always used
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {

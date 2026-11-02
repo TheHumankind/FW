@@ -55,7 +55,7 @@ fun WelcomeScreen(
         AppTextButton(
             text = stringResource(R.string.sign_up),
             onClick = onSignUpClick,
-            // компенсируем невидимый запас области нажатия (48dp), чтобы видимый отступ был 15dp
+            // offset the invisible 48dp touch-target padding so the visible gap is 15dp
             modifier = Modifier.offset(y = (-16).dp)
         )
     }

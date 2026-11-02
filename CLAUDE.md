@@ -1,65 +1,78 @@
 # FlowerWorld
 
-Android-приложение на Kotlin + Jetpack Compose. Пакет: `com.example.flowerworld`.
-Идея приложения пока не определена — перед созданием фич уточнить у пользователя.
-Общение с пользователем: по-русски.
+Android app in Kotlin + Jetpack Compose. Package: `com.example.flowerworld`.
+The app idea is not defined yet: ask the user before building features.
+Communication with the user: in Russian.
+Code comments, KDoc, commit messages and this file: in English.
 
-## Окружение
-- Android Studio + SDK: `C:\Users\Longs\AppData\Local\Android\Sdk` (прописан в `local.properties`, в git не попадает).
-- JDK: берём из Android Studio, перед вызовом Gradle задавать
+## Environment
+- Android Studio + SDK: `C:\Users\Longs\AppData\Local\Android\Sdk` (set in `local.properties`, which is not tracked by git; a git worktree does not have it, so pass `ANDROID_HOME` instead).
+- JDK: use the one bundled with Android Studio; set it before calling Gradle:
   `JAVA_HOME="C:\Program Files\Android\Android Studio\jbr"`.
-- Версии: AGP 9.5.0, Kotlin 2.2.10, Compose BOM 2026.02.01 (см. `gradle/libs.versions.toml`).
-- Git: ветка `main`, remote `origin` = https://github.com/TheHumankind/FW.git.
-  Первый коммит сделан локально; `git push` выполнять только после подтверждения пользователя.
+- Versions: AGP 9.5.0, Kotlin 2.2.10, Compose BOM 2026.02.01 (see `gradle/libs.versions.toml`).
+- Git: branch `main`, remote `origin` = https://github.com/TheHumankind/FW.git.
+  Run `git push` only when the user asks for it.
 
-## Команды
+## Commands
 ```bash
-./gradlew assembleDebug      # сборка
-./gradlew installDebug       # сборка и установка на подключённое устройство
-adb devices -l               # проверить устройство
-adb shell am start -n com.example.flowerworld/.MainActivity   # запустить приложение
+./gradlew assembleDebug      # build
+./gradlew installDebug       # build and install on the connected device
+adb devices -l               # check the device
+adb shell am start -n com.example.flowerworld/.MainActivity   # launch the app
 ```
-`adb` лежит в `<sdk>\platform-tools`, в PATH его нет.
+`adb` lives in `<sdk>\platform-tools`; it is not on PATH.
 
-## Тестовое устройство
-Huawei YAL-L21 (Nova 5T, Android 10), подключён по USB, отладка включена.
-На нём **нет сервисов Google**: не работают FCM, вход через Google, карты Google.
+## Test device
+Huawei YAL-L21 (Nova 5T / Honor 20, Android 10), connected over USB, USB debugging enabled.
+It has **no Google services**: FCM, Google sign-in and Google Maps do not work.
 
-## Архитектура (договорённости)
-- MVVM + однонаправленный поток данных: Compose-экран → `ViewModel` с `StateFlow<UiState>` → репозиторий.
-- Слои: `ui`, `data`, при необходимости `domain`. Пакеты по фичам (`feature/<name>/`).
-- Один модуль `app`, пока нет причины разбивать.
-- Тема, цвета, шрифты, отступы — в `ui/theme`; строки — в `strings.xml`.
+## Architecture (agreements)
+- MVVM + unidirectional data flow: Compose screen -> `ViewModel` with `StateFlow<UiState>` -> repository.
+- Layers: `ui`, `data`, and `domain` when needed. Packages by feature (`feature/<name>/`).
+- A single `app` module until there is a reason to split it.
+- Theme, colors, fonts and spacing live in `ui/theme`; strings live in `strings.xml`.
+- Dependency versions live in `libs.versions.toml`. Add libraries only when needed.
 
-### Мультиязычность
-- Языки: английский (по умолчанию, `res/values/`), польский (`values-pl`), белорусский (`values-be`), русский (`values-ru`), украинский (`values-uk`).
-- Любой текст для пользователя — только через строковые ресурсы (`stringResource`), без хардкода в коде.
-- Новая строка добавляется сразу во все пять `strings.xml`; переводы подбираем сами, без запроса у пользователя.
-- Для количеств — `<plurals>`, для подстановок — позиционные `%1$s`. ViewModel не возвращает готовые строки, только `@StringRes`/тип состояния.
-- Версии зависимостей — в `libs.versions.toml`. Библиотеки добавляем по мере необходимости.
+### Localization
+- Languages: English (default, `res/values/`), Polish (`values-pl`), Belarusian (`values-be`), Russian (`values-ru`), Ukrainian (`values-uk`).
+- All user-facing text goes through string resources (`stringResource`); no hardcoded text in code.
+- A new string is added to all five `strings.xml` files at once; find the translations yourself, do not ask the user.
+- Use `<plurals>` for quantities and positional `%1$s` for substitutions. A ViewModel never returns ready-made strings, only `@StringRes` or a state type.
 
-### Сервер будет, но не сразу
-Сейчас работаем с шаблонами и локальными данными. Код должен быть готов к серверу:
-- Экраны и ViewModel зависят от интерфейса репозитория, не от источника данных.
-  Сначала фейковые данные, затем Room, позже сетевая реализация.
-- Разделять доменную модель, сущность Room и будущий сетевой DTO, между ними мапперы.
-- Local-first: UI читает только из локальной базы, сервер потом лишь синхронизирует её.
-- Идентификаторы сущностей — строковые UUID, не автоинкремент.
-- В таблицах сразу поля для синхронизации (время изменения, флаг удаления).
-- В состоянии UI предусмотреть `Loading` / `Success` / `Error`.
+### ViewModel and global state
+- A screen that has state or logic gets its own ViewModel (one screen, one ViewModel, one `UiState`). A screen without logic (e.g. `WelcomeScreen`) does not need one.
+- Small components (`AppButton`, `AppTextField`, `AppPasswordField`, etc.) are "dumb": state comes in as parameters, events go out as lambdas. They have no ViewModel.
+- Global state does not live in a ViewModel or in global variables (`object` holding a `var` is forbidden). It lives in singleton repositories; screen ViewModels subscribe to them via `Flow`/`StateFlow`.
+  - User settings (theme, language, etc.): `DataStore` + `SettingsRepository`; applied from the top: a root ViewModel passes the values to `FlowerWorldTheme`.
+  - Current user and session: `SessionRepository` with `StateFlow<User?>`.
+  - App data: Room as the single source of truth (local-first).
+- Repositories are created once per app. While there are few screens, use a manual `AppContainer`; pick a DI library (Koin or Hilt) when the first real shared state appears, and only on the user's command.
 
-### Что НЕ подключаем без команды пользователя
-Firebase, любой сервер и сеть, Google-сервисы. Выбор бэкенда отложен; из-за Huawei
-рассматривать варианты без привязки к Google (Supabase, свой API, Huawei Push Kit).
+### The server will come, but not right away
+For now we work with templates and local data. The code must be ready for a server:
+- Screens and ViewModels depend on a repository interface, not on a data source.
+  First fake data, then Room, later a network implementation.
+- Keep the domain model, the Room entity and the future network DTO separate, with mappers between them.
+- Local-first: the UI reads only from the local database; the server later just syncs it.
+- Entity ids are string UUIDs, not auto-increment.
+- Tables get sync fields from the start (modification time, deleted flag).
+- UI state must provide `Loading` / `Success` / `Error`.
 
-## Чекпойнты
-- [x] Android Studio и SDK установлены, `adb` работает
-- [x] Проект создан (Empty Activity, Compose), `assembleDebug` проходит
-- [x] Приложение установлено и запущено на телефоне
-- [x] Git-репозиторий создан, первый коммит, remote добавлен
-- [ ] Первый push на GitHub (ждёт подтверждения пользователя)
-- [ ] Пользователь описывает идею приложения
-- [ ] Каркас: пакеты, навигация, экраны-заглушки, фейковый репозиторий
-- [ ] Room и локальные данные
-- [ ] Выбор бэкенда и подключение сервера (позже)
-- [ ] Системный образ эмулятора (скачивание оборвалось, не обязательно: есть телефон)
+### What we do NOT add without the user's command
+Firebase, any server or networking, Google services. The backend choice is postponed; because of Huawei,
+consider options without Google dependencies (Supabase, a custom API, Huawei Push Kit).
+
+## Checkpoints
+- [x] Android Studio and SDK installed, `adb` works
+- [x] Project created (Empty Activity, Compose), `assembleDebug` passes
+- [x] App installed and launched on the phone
+- [x] Git repository created, first commit, remote added
+- [x] Feature branch `claude/android-app-first-feature-9ead0f` pushed to GitHub (not merged into `main` yet)
+- [x] Theme (palette, font, light by default), localization (5 languages)
+- [x] Components: `AppButton`, `AppTextButton`, `AppTextField`, `AppPasswordField`, `AppRoundButton`, `AppFooter`
+- [x] Screens: welcome, login form, main (footer only); state-based navigation
+- [ ] User describes the app idea
+- [ ] Skeleton: fake repository, real navigation
+- [ ] Room and local data
+- [ ] Backend choice and server integration (later)
+- [ ] Emulator system image (download was interrupted; optional, a phone is available)

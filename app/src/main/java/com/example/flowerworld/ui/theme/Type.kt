@@ -19,7 +19,7 @@ val Typography = Typography(
     bodyLarge = Base.bodyLarge.withAppFont(),
     bodyMedium = Base.bodyMedium.withAppFont(),
     bodySmall = Base.bodySmall.withAppFont(),
-    // Текст кнопок — жирный
+    // Button text is bold
     labelLarge = Base.labelLarge.withAppFont().copy(fontWeight = FontWeight.Bold),
     labelMedium = Base.labelMedium.withAppFont().copy(fontWeight = FontWeight.Bold),
     labelSmall = Base.labelSmall.withAppFont()

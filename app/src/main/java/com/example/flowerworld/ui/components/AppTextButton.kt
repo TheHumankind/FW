@@ -14,7 +14,7 @@ import com.example.flowerworld.R
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 import com.example.flowerworld.ui.theme.HunterGreen
 
-/** Кнопка без фона и границ: выглядит как обычный подчёркнутый текст. */
+/** Button without background or border: looks like plain underlined text. */
 @Composable
 fun AppTextButton(
     text: String,
