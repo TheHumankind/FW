@@ -2,6 +2,7 @@ package com.example.flowerworld.ui.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,8 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
-import com.example.flowerworld.ui.theme.HunterGreen
-import com.example.flowerworld.ui.theme.Timberwolf
+import com.example.flowerworld.ui.theme.Dimens
 
 @Composable
 fun AppButton(
@@ -25,10 +25,10 @@ fun AppButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        shape = RoundedCornerShape(2.dp),
+        shape = RoundedCornerShape(Dimens.ControlCornerRadius),
         colors = ButtonDefaults.buttonColors(
-            containerColor = HunterGreen,
-            contentColor = Timberwolf
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
         )
     ) {
         Text(text = text.uppercase())

@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
-import com.example.flowerworld.ui.theme.HunterGreen
 
 /** Password field: hides characters and lets the user reveal them temporarily. */
 @Composable
@@ -45,7 +44,7 @@ fun AppPasswordField(
             Text(
                 text = stringResource(if (visible) R.string.hide_password else R.string.show_password),
                 style = MaterialTheme.typography.labelMedium,
-                color = HunterGreen,
+                color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .clickable(role = Role.Button) { visible = !visible }
                     .padding(horizontal = 12.dp, vertical = 8.dp)

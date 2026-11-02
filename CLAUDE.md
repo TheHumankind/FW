@@ -89,7 +89,7 @@ so any backend can be plugged in later by one new class; do not tie the code to 
 - [x] Git repository created, first commit, remote added
 - [x] Feature branch `claude/android-app-first-feature-9ead0f` pushed to GitHub (not merged into `main` yet)
 - [x] Theme (palette, font, light by default), localization (5 languages)
-- [x] Components: `AppButton`, `AppTextButton`, `AppTextField`, `AppPasswordField`, `AppRoundButton`, `AppFooter`
+- [x] Components: `AppButton`, `AppTextButton`, `AppTextField`, `AppPasswordField`, `AppFooter`, `AppIconButton`, `AppTopBar`, `AppPhotoPicker`, `PlantCard`
 - [x] Screens: welcome, login form, main (footer only); state-based navigation
 - [x] User describes the app idea (plant tracker, see "App idea")
 - [x] Skeleton: repository interface + in-memory implementation, Navigation Compose, add-plant flow with photo storage

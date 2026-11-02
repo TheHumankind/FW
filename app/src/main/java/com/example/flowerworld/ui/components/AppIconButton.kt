@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
-import com.example.flowerworld.ui.theme.HunterGreen
 
 /** Icon-only button without a background: the icon is tinted with [tint] and scaled to [size]. */
 @Composable
@@ -27,7 +27,7 @@ fun AppIconButton(
     contentDescription: String?,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    tint: Color = HunterGreen,
+    tint: Color = MaterialTheme.colorScheme.primary,
     size: Dp = 40.dp
 ) {
     Box(

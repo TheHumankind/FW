@@ -1,9 +1,7 @@
 package com.example.flowerworld.feature.addplant
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -26,9 +24,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
 import com.example.flowerworld.ui.components.AppButton
 import com.example.flowerworld.ui.components.AppPhotoPicker
+import com.example.flowerworld.ui.components.AppScreen
 import com.example.flowerworld.ui.components.AppTextField
 import com.example.flowerworld.ui.components.AppTopBar
 import com.example.flowerworld.ui.components.rememberPhotoPicker
+import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /** Full screen form that creates a new plant. Calls [onClose] when the user leaves it or the plant is added. */
@@ -70,19 +70,13 @@ private fun AddPlantContent(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .navigationBarsPadding()
-            .imePadding()
-    ) {
+    AppScreen(modifier = modifier.navigationBarsPadding().imePadding()) {
         AppTopBar(title = stringResource(R.string.add_plant), onBackClick = onBackClick)
         Column(
             modifier = Modifier
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 32.dp, vertical = 8.dp),
+                .padding(horizontal = Dimens.ScreenHorizontalPadding, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             AppPhotoPicker(photoUri = state.photoUri, onClick = onPhotoClick)
@@ -131,7 +125,7 @@ private fun AddPlantContent(
             enabled = !state.isSaving,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 32.dp, vertical = 16.dp)
+                .padding(horizontal = Dimens.ScreenHorizontalPadding, vertical = 16.dp)
         )
     }
 }

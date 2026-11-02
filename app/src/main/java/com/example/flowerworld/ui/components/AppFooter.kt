@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Eco
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -21,10 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
-import com.example.flowerworld.ui.theme.BrunswickGreen
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
-import com.example.flowerworld.ui.theme.HunterGreen
-import com.example.flowerworld.ui.theme.Sage
 
 /** Sections the footer switches between, in display order. */
 enum class FooterTab(val icon: ImageVector, @StringRes val label: Int) {
@@ -48,7 +46,7 @@ fun AppFooter(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(Sage)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .navigationBarsPadding()
             .padding(horizontal = 16.dp, vertical = 12.dp)
             // fixed content height: the bar does not resize when buttons switch
@@ -64,7 +62,11 @@ fun AppFooter(
             AppIconButton(
                 icon = tab.icon,
                 contentDescription = stringResource(tab.label),
-                tint = if (tab == selectedTab) BrunswickGreen else HunterGreen,
+                tint = if (tab == selectedTab) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.primary
+                },
                 size = size,
                 onClick = { onSelect(tab) }
             )

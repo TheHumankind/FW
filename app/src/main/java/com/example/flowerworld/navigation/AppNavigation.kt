@@ -17,11 +17,14 @@ private object Routes {
     const val AddPlant = "add_plant"
 }
 
+// TODO: switch back to Routes.Welcome once login and sign up are really used
+private const val StartDestination = Routes.Main
+
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.Welcome) {
+    NavHost(navController = navController, startDestination = StartDestination) {
         composable(Routes.Welcome) {
             WelcomeScreen(onLoginClick = { navController.navigate(Routes.Login) })
         }

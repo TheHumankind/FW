@@ -1,14 +1,10 @@
 package com.example.flowerworld.feature.addplant
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.flowerworld.di.containerViewModelFactory
 import com.example.flowerworld.domain.model.PlantDraft
 import com.example.flowerworld.domain.usecase.AddPlantUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import com.example.flowerworld.ui.UiStateViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -30,23 +26,22 @@ data class AddPlantUiState(
     val isSaved: Boolean = false
 )
 
-class AddPlantViewModel(private val addPlant: AddPlantUseCase) : ViewModel() {
-    private val _uiState = MutableStateFlow(AddPlantUiState())
-    val uiState: StateFlow<AddPlantUiState> = _uiState.asStateFlow()
+class AddPlantViewModel(
+    private val addPlant: AddPlantUseCase
+) : UiStateViewModel<AddPlantUiState>(AddPlantUiState()) {
+    fun onTitleChange(value: String) = updateState { copy(title = value, titleError = null) }
 
-    fun onTitleChange(value: String) = _uiState.update { it.copy(title = value, titleError = null) }
+    fun onDescriptionChange(value: String) = updateState { copy(description = value) }
 
-    fun onDescriptionChange(value: String) = _uiState.update { it.copy(description = value) }
-
-    fun onNameChange(value: String) = _uiState.update { it.copy(name = value, nameError = null) }
+    fun onNameChange(value: String) = updateState { copy(name = value, nameError = null) }
 
     fun onWateringIntervalChange(value: String) =
-        _uiState.update { it.copy(wateringInterval = value, intervalError = null) }
+        updateState { copy(wateringInterval = value, intervalError = null) }
 
-    fun onPhotoPicked(uri: String) = _uiState.update { it.copy(photoUri = uri, saveFailed = false) }
+    fun onPhotoPicked(uri: String) = updateState { copy(photoUri = uri, saveFailed = false) }
 
     fun onAddClick() {
-        val state = _uiState.value
+        val state = currentState
         if (state.isSaving) return
 
         val title = state.title.trim()
@@ -60,9 +55,7 @@ class AddPlantViewModel(private val addPlant: AddPlantUseCase) : ViewModel() {
             else -> null
         }
         if (titleError != null || nameError != null || intervalError != null || interval == null) {
-            _uiState.update {
-                it.copy(titleError = titleError, nameError = nameError, intervalError = intervalError)
-            }
+            updateState { copy(titleError = titleError, nameError = nameError, intervalError = intervalError) }
             return
         }
 
@@ -74,12 +67,12 @@ class AddPlantViewModel(private val addPlant: AddPlantUseCase) : ViewModel() {
             photoSourceUri = state.photoUri
         )
         viewModelScope.launch {
-            _uiState.update { it.copy(isSaving = true, saveFailed = false) }
+            updateState { copy(isSaving = true, saveFailed = false) }
             try {
                 addPlant(draft)
-                _uiState.update { it.copy(isSaving = false, isSaved = true) }
+                updateState { copy(isSaving = false, isSaved = true) }
             } catch (e: IOException) {
-                _uiState.update { it.copy(isSaving = false, saveFailed = true) }
+                updateState { copy(isSaving = false, saveFailed = true) }
             }
         }
     }

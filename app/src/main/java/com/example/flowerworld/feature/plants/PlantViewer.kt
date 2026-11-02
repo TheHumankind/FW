@@ -9,8 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,8 +18,10 @@ import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
 import com.example.flowerworld.ui.components.PlantCard
+import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 private val AddButtonSize = 36.dp
@@ -37,21 +37,17 @@ fun PlantViewer(
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         if (plants.isEmpty()) {
-            Text(
-                text = stringResource(R.string.plant_viewer_placeholder),
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.align(Alignment.Center)
-            )
+            AppCenteredMessage(text = stringResource(R.string.plant_viewer_placeholder))
         } else {
             LazyColumn(
                 contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                    top = 16.dp,
+                    start = Dimens.ListPadding,
+                    end = Dimens.ListPadding,
+                    top = Dimens.ListPadding,
                     // leave room for the add button that floats over the list
                     bottom = AddButtonSize + AddButtonPadding * 2
                 ),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(Dimens.ListItemSpacing),
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(plants, key = { it.id }) { plant ->

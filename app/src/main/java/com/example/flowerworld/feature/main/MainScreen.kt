@@ -1,10 +1,6 @@
 package com.example.flowerworld.feature.main
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -15,6 +11,7 @@ import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.feature.account.AccountViewer
 import com.example.flowerworld.feature.plants.PlantViewer
 import com.example.flowerworld.ui.components.AppFooter
+import com.example.flowerworld.ui.components.AppScreen
 import com.example.flowerworld.ui.components.FooterTab
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
@@ -40,12 +37,7 @@ private fun MainContent(
     onAddPlantClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .statusBarsPadding()
-    ) {
+    AppScreen(modifier = modifier.statusBarsPadding()) {
         when (state.selectedTab) {
             FooterTab.Plants -> PlantViewer(
                 plants = state.plants,

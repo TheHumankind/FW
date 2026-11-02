@@ -9,7 +9,3 @@ val FernGreen = Color(0xFF588157)
 val Sage = Color(0xFFA3B18A)
 val Timberwolf = Color(0xFFDAD7CD)
 val TextPrimary = Color(0xFF1E1E1E)
-
-// Temporary debug colors for the footer buttons
-val DebugRed = Color(0xFFD32F2F)
-val Brown = Color(0xFF795548)
