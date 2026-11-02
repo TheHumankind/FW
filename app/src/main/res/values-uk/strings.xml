@@ -8,4 +8,6 @@
     <string name="confirm">Підтвердити</string>
     <string name="show_password">Показати</string>
     <string name="hide_password">Сховати</string>
+    <string name="footer_plants">Рослини</string>
+    <string name="footer_profile">Профіль</string>
 </resources>

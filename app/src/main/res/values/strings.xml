@@ -8,4 +8,6 @@
     <string name="confirm">Confirm</string>
     <string name="show_password">Show</string>
     <string name="hide_password">Hide</string>
+    <string name="footer_plants">Plants</string>
+    <string name="footer_profile">Profile</string>
 </resources>

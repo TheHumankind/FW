@@ -8,4 +8,6 @@
     <string name="confirm">Potwierdź</string>
     <string name="show_password">Pokaż</string>
     <string name="hide_password">Ukryj</string>
+    <string name="footer_plants">Rośliny</string>
+    <string name="footer_profile">Profil</string>
 </resources>
