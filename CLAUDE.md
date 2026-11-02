@@ -73,6 +73,10 @@ Firebase, any server or networking, Google services. The backend choice is postp
 (Room, screens, reminders) works. Keep all server access behind repository interfaces (e.g. `SyncRepository`)
 so any backend can be plugged in later by one new class; do not tie the code to Firestore-specific features.
 
+## Test data
+- `app/src/main/res/drawable-nodpi/test_plant_1..3.webp`: test plant photos (800 px wide, WebP q75), used only to render UI and fake data.
+  They are not real user content: remove them together with the fake repository once real photos from app storage are used.
+
 ## Checkpoints
 - [x] Android Studio and SDK installed, `adb` works
 - [x] Project created (Empty Activity, Compose), `assembleDebug` passes
