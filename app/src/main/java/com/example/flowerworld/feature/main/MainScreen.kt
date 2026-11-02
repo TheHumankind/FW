@@ -3,6 +3,7 @@ package com.example.flowerworld.feature.main
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,9 +40,15 @@ private fun MainContent(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
+            .statusBarsPadding()
     ) {
         when (state.selectedTab) {
-            FooterTab.Plants -> PlantViewer(onAddPlantClick = {}, modifier = Modifier.weight(1f)) // TODO: open the add-plant screen
+            FooterTab.Plants -> PlantViewer(
+                plants = state.plants,
+                onAddPlantClick = {}, // TODO: open the add-plant screen
+                onEditPlantClick = {}, // TODO: open the edit-plant screen
+                modifier = Modifier.weight(1f)
+            )
             FooterTab.Profile -> AccountViewer(Modifier.weight(1f))
         }
         AppFooter(

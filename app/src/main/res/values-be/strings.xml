@@ -13,4 +13,11 @@
     <string name="plant_viewer_placeholder">Прагляд раслін</string>
     <string name="account_viewer_placeholder">Пакуль не рэалізавана</string>
     <string name="add_plant">Дадаць расліну</string>
+    <string name="edit_plant">Рэдагаваць расліну</string>
+    <plurals name="watering_interval_hours">
+        <item quantity="one">Паліваць кожную %1$d гадзіну</item>
+        <item quantity="few">Паліваць кожныя %1$d гадзіны</item>
+        <item quantity="many">Паліваць кожныя %1$d гадзін</item>
+        <item quantity="other">Паліваць кожныя %1$d гадзіны</item>
+    </plurals>
 </resources>

@@ -13,4 +13,11 @@
     <string name="plant_viewer_placeholder">Перегляд рослин</string>
     <string name="account_viewer_placeholder">Поки не реалізовано</string>
     <string name="add_plant">Додати рослину</string>
+    <string name="edit_plant">Редагувати рослину</string>
+    <plurals name="watering_interval_hours">
+        <item quantity="one">Поливати кожну %1$d годину</item>
+        <item quantity="few">Поливати кожні %1$d години</item>
+        <item quantity="many">Поливати кожні %1$d годин</item>
+        <item quantity="other">Поливати кожні %1$d години</item>
+    </plurals>
 </resources>

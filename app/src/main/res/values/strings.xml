@@ -13,4 +13,9 @@
     <string name="plant_viewer_placeholder">Plant view</string>
     <string name="account_viewer_placeholder">Not implemented for now</string>
     <string name="add_plant">Add plant</string>
+    <string name="edit_plant">Edit plant</string>
+    <plurals name="watering_interval_hours">
+        <item quantity="one">Water every %1$d hour</item>
+        <item quantity="other">Water every %1$d hours</item>
+    </plurals>
 </resources>

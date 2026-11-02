@@ -13,4 +13,11 @@
     <string name="plant_viewer_placeholder">Widok roślin</string>
     <string name="account_viewer_placeholder">Jeszcze nie zaimplementowano</string>
     <string name="add_plant">Dodaj roślinę</string>
+    <string name="edit_plant">Edytuj roślinę</string>
+    <plurals name="watering_interval_hours">
+        <item quantity="one">Podlewaj co %1$d godzinę</item>
+        <item quantity="few">Podlewaj co %1$d godziny</item>
+        <item quantity="many">Podlewaj co %1$d godzin</item>
+        <item quantity="other">Podlewaj co %1$d godziny</item>
+    </plurals>
 </resources>
