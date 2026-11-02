@@ -40,6 +40,11 @@ Do not assume every target user has them: newer Huawei/Honor devices may not.
 - MVVM + unidirectional data flow: Compose screen -> `ViewModel` with `StateFlow<UiState>` -> repository.
 - Layers: `ui`, `data`, and `domain` when needed. Packages by feature (`feature/<name>/`).
 - A single `app` module until there is a reason to split it.
+- Packages: `domain/` (models, repository and storage interfaces, use cases; no Android types), `data/` (implementations: repositories, file storage, fake data), `di/` (manual `AppContainer`, ViewModel factories), `feature/<name>/`, `ui/components`, `navigation/`.
+- Navigation: Navigation Compose with string routes (`navigation/AppNavigation.kt`); every route has its own ViewModels.
+- ViewModels get dependencies from `AppContainer` through `containerViewModelFactory` (see `MainViewModel.Factory`); `FlowerWorldApp` owns the container.
+- Photos: picked with the system photo picker (no permission), compressed by `PhotoStorage` (`FilePhotoStorage`: JPEG, max 800 px, `files/photos/`); a plant keeps only the path.
+- Plants live behind `PlantRepository`; for now `InMemoryPlantRepository` seeded with `TestPlants` (lost when the process dies) until Room replaces it.
 - Theme, colors, fonts and spacing live in `ui/theme`; strings live in `strings.xml`.
 - Dependency versions live in `libs.versions.toml`. Add libraries only when needed.
 
@@ -87,7 +92,7 @@ so any backend can be plugged in later by one new class; do not tie the code to 
 - [x] Components: `AppButton`, `AppTextButton`, `AppTextField`, `AppPasswordField`, `AppRoundButton`, `AppFooter`
 - [x] Screens: welcome, login form, main (footer only); state-based navigation
 - [x] User describes the app idea (plant tracker, see "App idea")
-- [ ] Skeleton: fake repository, real navigation
+- [x] Skeleton: repository interface + in-memory implementation, Navigation Compose, add-plant flow with photo storage
 - [ ] Room and local data
 - [ ] Backend choice and server integration (later)
 - [ ] Emulator system image (download was interrupted; optional, a phone is available)

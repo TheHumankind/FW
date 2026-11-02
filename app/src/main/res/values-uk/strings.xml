@@ -20,4 +20,15 @@
         <item quantity="many">Поливати кожні %1$d годин</item>
         <item quantity="other">Поливати кожні %1$d години</item>
     </plurals>
+    <string name="back">Назад</string>
+    <string name="choose_photo">Обрати фото</string>
+    <string name="change_photo">Змінити фото</string>
+    <string name="field_title">Назва</string>
+    <string name="field_description">Опис</string>
+    <string name="field_name">Імʼя</string>
+    <string name="field_watering_interval">Інтервал поливу (години)</string>
+    <string name="add">Додати</string>
+    <string name="error_required">Обовʼязкове поле</string>
+    <string name="error_invalid_number">Введіть ціле число більше 0</string>
+    <string name="error_save_failed">Не вдалося зберегти фото. Оберіть інше.</string>
 </resources>

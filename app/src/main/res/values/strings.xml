@@ -18,4 +18,15 @@
         <item quantity="one">Water every %1$d hour</item>
         <item quantity="other">Water every %1$d hours</item>
     </plurals>
+    <string name="back">Back</string>
+    <string name="choose_photo">Choose photo</string>
+    <string name="change_photo">Change photo</string>
+    <string name="field_title">Title</string>
+    <string name="field_description">Description</string>
+    <string name="field_name">Name</string>
+    <string name="field_watering_interval">Watering interval (hours)</string>
+    <string name="add">Add</string>
+    <string name="error_required">Required field</string>
+    <string name="error_invalid_number">Enter a whole number above 0</string>
+    <string name="error_save_failed">Could not save the photo. Choose another one.</string>
 </resources>

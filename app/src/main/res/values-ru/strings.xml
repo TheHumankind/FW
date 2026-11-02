@@ -20,4 +20,15 @@
         <item quantity="many">Поливать каждые %1$d часов</item>
         <item quantity="other">Поливать каждые %1$d часа</item>
     </plurals>
+    <string name="back">Назад</string>
+    <string name="choose_photo">Выбрать фото</string>
+    <string name="change_photo">Изменить фото</string>
+    <string name="field_title">Название</string>
+    <string name="field_description">Описание</string>
+    <string name="field_name">Имя</string>
+    <string name="field_watering_interval">Интервал полива (часы)</string>
+    <string name="add">Добавить</string>
+    <string name="error_required">Обязательное поле</string>
+    <string name="error_invalid_number">Введите целое число больше 0</string>
+    <string name="error_save_failed">Не удалось сохранить фото. Выберите другое.</string>
 </resources>

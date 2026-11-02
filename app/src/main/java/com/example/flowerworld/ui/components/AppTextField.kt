@@ -25,14 +25,21 @@ fun AppTextField(
     imeAction: ImeAction = ImeAction.Next,
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    trailingContent: (@Composable () -> Unit)? = null
+    trailingContent: (@Composable () -> Unit)? = null,
+    singleLine: Boolean = true,
+    minLines: Int = 1,
+    // Error text under the field; null means the field is valid
+    errorText: String? = null
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier,
         label = { Text(label) },
-        singleLine = true,
+        singleLine = singleLine,
+        minLines = minLines,
+        isError = errorText != null,
+        supportingText = errorText?.let { { Text(it) } },
         shape = RoundedCornerShape(2.dp),
         visualTransformation = visualTransformation,
         trailingIcon = trailingContent,

@@ -20,4 +20,15 @@
         <item quantity="many">Podlewaj co %1$d godzin</item>
         <item quantity="other">Podlewaj co %1$d godziny</item>
     </plurals>
+    <string name="back">Wstecz</string>
+    <string name="choose_photo">Wybierz zdjęcie</string>
+    <string name="change_photo">Zmień zdjęcie</string>
+    <string name="field_title">Nazwa</string>
+    <string name="field_description">Opis</string>
+    <string name="field_name">Imię</string>
+    <string name="field_watering_interval">Odstęp między podlewaniami (godz.)</string>
+    <string name="add">Dodaj</string>
+    <string name="error_required">Pole wymagane</string>
+    <string name="error_invalid_number">Podaj liczbę całkowitą większą od 0</string>
+    <string name="error_save_failed">Nie udało się zapisać zdjęcia. Wybierz inne.</string>
 </resources>

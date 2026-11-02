@@ -1,29 +1,46 @@
 package com.example.flowerworld.navigation
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.flowerworld.feature.addplant.AddPlantScreen
 import com.example.flowerworld.feature.login.LoginScreen
 import com.example.flowerworld.feature.main.MainScreen
 import com.example.flowerworld.feature.welcome.WelcomeScreen
 
-private enum class Screen { Welcome, Login, Main }
+/** Routes of the app; each one has its own back stack entry and so its own ViewModels. */
+private object Routes {
+    const val Welcome = "welcome"
+    const val Login = "login"
+    const val Main = "main"
+    const val AddPlant = "add_plant"
+}
 
-// Simple state-based navigation; replace with Navigation Compose when there are more screens.
 @Composable
 fun AppNavigation() {
-    var screen by rememberSaveable { mutableStateOf(Screen.Welcome) }
+    val navController = rememberNavController()
 
-    when (screen) {
-        Screen.Welcome -> WelcomeScreen(onLoginClick = { screen = Screen.Login })
-        Screen.Login -> {
-            BackHandler { screen = Screen.Welcome }
-            // No validation yet: "Confirm" goes straight to the main screen
-            LoginScreen(onConfirmClick = { screen = Screen.Main })
+    NavHost(navController = navController, startDestination = Routes.Welcome) {
+        composable(Routes.Welcome) {
+            WelcomeScreen(onLoginClick = { navController.navigate(Routes.Login) })
         }
-        Screen.Main -> MainScreen()
+        composable(Routes.Login) {
+            // No validation yet: "Confirm" goes straight to the main screen
+            LoginScreen(
+                onConfirmClick = {
+                    navController.navigate(Routes.Main) {
+                        // after logging in, "back" leaves the app instead of returning to the welcome screen
+                        popUpTo(Routes.Welcome) { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable(Routes.Main) {
+            MainScreen(onAddPlantClick = { navController.navigate(Routes.AddPlant) })
+        }
+        composable(Routes.AddPlant) {
+            AddPlantScreen(onClose = { navController.popBackStack() })
+        }
     }
 }

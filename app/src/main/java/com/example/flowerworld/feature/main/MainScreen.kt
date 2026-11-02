@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.feature.account.AccountViewer
 import com.example.flowerworld.feature.plants.PlantViewer
 import com.example.flowerworld.ui.components.AppFooter
@@ -19,13 +20,15 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 @Composable
 fun MainScreen(
+    onAddPlantClick: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel()
+    viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     MainContent(
         state = state,
         onFooterSelect = viewModel::onFooterSelect,
+        onAddPlantClick = onAddPlantClick,
         modifier = modifier
     )
 }
@@ -34,6 +37,7 @@ fun MainScreen(
 private fun MainContent(
     state: MainUiState,
     onFooterSelect: (FooterTab) -> Unit,
+    onAddPlantClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -45,7 +49,7 @@ private fun MainContent(
         when (state.selectedTab) {
             FooterTab.Plants -> PlantViewer(
                 plants = state.plants,
-                onAddPlantClick = {}, // TODO: open the add-plant screen
+                onAddPlantClick = onAddPlantClick,
                 onEditPlantClick = {}, // TODO: open the edit-plant screen
                 modifier = Modifier.weight(1f)
             )
@@ -62,6 +66,10 @@ private fun MainContent(
 @Composable
 private fun MainContentPreview() {
     FlowerWorldTheme {
-        MainContent(state = MainUiState(), onFooterSelect = {})
+        MainContent(
+            state = MainUiState(plants = TestPlants),
+            onFooterSelect = {},
+            onAddPlantClick = {}
+        )
     }
 }
