@@ -10,4 +10,5 @@
     <string name="hide_password">Скрыть</string>
     <string name="footer_plants">Растения</string>
     <string name="footer_profile">Профиль</string>
+    <string name="plant_viewer_placeholder">Просмотр растений</string>
 </resources>

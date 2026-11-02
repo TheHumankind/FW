@@ -26,12 +26,11 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 import com.example.flowerworld.ui.theme.HunterGreen
 import com.example.flowerworld.ui.theme.Sage
 
-private data class FooterItem(val icon: ImageVector, @StringRes val label: Int)
-
-private val FooterItems = listOf(
-    FooterItem(Icons.Filled.Eco, R.string.footer_plants),
-    FooterItem(Icons.Filled.AccountCircle, R.string.footer_profile)
-)
+/** Sections the footer switches between, in display order. */
+enum class FooterTab(val icon: ImageVector, @StringRes val label: Int) {
+    Plants(Icons.Filled.Eco, R.string.footer_plants),
+    Profile(Icons.Filled.AccountCircle, R.string.footer_profile)
+}
 
 private val ButtonSize = 38.dp
 private val SelectedButtonSize = ButtonSize + 12.dp
@@ -42,8 +41,8 @@ private val SelectedButtonSize = ButtonSize + 12.dp
  */
 @Composable
 fun AppFooter(
-    selectedIndex: Int,
-    onSelect: (Int) -> Unit,
+    selectedTab: FooterTab,
+    onSelect: (FooterTab) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -57,17 +56,17 @@ fun AppFooter(
         horizontalArrangement = Arrangement.spacedBy(13.dp, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        FooterItems.forEachIndexed { index, item ->
+        FooterTab.entries.forEach { tab ->
             val size by animateDpAsState(
-                targetValue = if (index == selectedIndex) SelectedButtonSize else ButtonSize,
+                targetValue = if (tab == selectedTab) SelectedButtonSize else ButtonSize,
                 label = "footerButtonSize"
             )
             AppIconButton(
-                icon = item.icon,
-                contentDescription = stringResource(item.label),
-                tint = if (index == selectedIndex) BrunswickGreen else HunterGreen,
+                icon = tab.icon,
+                contentDescription = stringResource(tab.label),
+                tint = if (tab == selectedTab) BrunswickGreen else HunterGreen,
                 size = size,
-                onClick = { onSelect(index) }
+                onClick = { onSelect(tab) }
             )
         }
     }
@@ -77,6 +76,6 @@ fun AppFooter(
 @Composable
 private fun AppFooterPreview() {
     FlowerWorldTheme {
-        AppFooter(selectedIndex = 0, onSelect = {})
+        AppFooter(selectedTab = FooterTab.Plants, onSelect = {})
     }
 }

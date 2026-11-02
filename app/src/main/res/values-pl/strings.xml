@@ -10,4 +10,5 @@
     <string name="hide_password">Ukryj</string>
     <string name="footer_plants">Rośliny</string>
     <string name="footer_profile">Profil</string>
+    <string name="plant_viewer_placeholder">Widok roślin</string>
 </resources>

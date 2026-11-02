@@ -11,7 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.flowerworld.feature.plants.PlantViewer
 import com.example.flowerworld.ui.components.AppFooter
+import com.example.flowerworld.ui.components.FooterTab
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 @Composable
@@ -30,7 +32,7 @@ fun MainScreen(
 @Composable
 private fun MainContent(
     state: MainUiState,
-    onFooterSelect: (Int) -> Unit,
+    onFooterSelect: (FooterTab) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -38,9 +40,12 @@ private fun MainContent(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        Spacer(Modifier.weight(1f))
+        when (state.selectedTab) {
+            FooterTab.Plants -> PlantViewer(Modifier.weight(1f))
+            FooterTab.Profile -> Spacer(Modifier.weight(1f))
+        }
         AppFooter(
-            selectedIndex = state.selectedIndex,
+            selectedTab = state.selectedTab,
             onSelect = onFooterSelect
         )
     }
