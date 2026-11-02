@@ -41,7 +41,7 @@ private fun MainContent(
             .background(MaterialTheme.colorScheme.background)
     ) {
         when (state.selectedTab) {
-            FooterTab.Plants -> PlantViewer(Modifier.weight(1f))
+            FooterTab.Plants -> PlantViewer(onAddPlantClick = {}, modifier = Modifier.weight(1f)) // TODO: open the add-plant screen
             FooterTab.Profile -> AccountViewer(Modifier.weight(1f))
         }
         AppFooter(

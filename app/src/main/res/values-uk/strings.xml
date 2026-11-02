@@ -12,4 +12,5 @@
     <string name="footer_profile">Профіль</string>
     <string name="plant_viewer_placeholder">Перегляд рослин</string>
     <string name="account_viewer_placeholder">Поки не реалізовано</string>
+    <string name="add_plant">Додати рослину</string>
 </resources>
