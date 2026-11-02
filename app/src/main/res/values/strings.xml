@@ -11,4 +11,5 @@
     <string name="footer_plants">Plants</string>
     <string name="footer_profile">Profile</string>
     <string name="plant_viewer_placeholder">Plant view</string>
+    <string name="account_viewer_placeholder">Not implemented for now</string>
 </resources>
