@@ -21,7 +21,7 @@ val Typography = Typography(
     bodySmall = Base.bodySmall.withAppFont(),
     // Текст кнопок — жирный
     labelLarge = Base.labelLarge.withAppFont().copy(fontWeight = FontWeight.Bold),
-    labelMedium = Base.labelMedium.withAppFont(),
+    labelMedium = Base.labelMedium.withAppFont().copy(fontWeight = FontWeight.Bold),
     labelSmall = Base.labelSmall.withAppFont()
 )
 

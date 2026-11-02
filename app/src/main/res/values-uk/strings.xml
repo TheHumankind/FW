@@ -2,4 +2,5 @@
     <string name="app_name">FlowerWorld</string>
     <string name="logo_description">Логотип FlowerWorld</string>
     <string name="login">Увійти</string>
+    <string name="sign_up">Зареєструватися</string>
 </resources>
