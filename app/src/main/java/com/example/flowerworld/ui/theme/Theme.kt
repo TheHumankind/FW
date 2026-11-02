@@ -2,7 +2,6 @@ package com.example.flowerworld.ui.theme
 
 import android.app.Activity
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -36,14 +35,14 @@ private val LightColorScheme = lightColorScheme(
     tertiary = BrunswickGreen,
     onTertiary = Timberwolf,
     background = Timberwolf,
-    onBackground = BrunswickGreen,
+    onBackground = TextPrimary,
     surface = Timberwolf,
-    onSurface = BrunswickGreen
+    onSurface = TextPrimary
 )
 
 @Composable
 fun FlowerWorldTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = false,
     // Dynamic color (Android 12+) выключен, чтобы всегда использовалась фирменная палитра
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
