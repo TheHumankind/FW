@@ -41,4 +41,9 @@
     <string name="plant_not_found">Рослину не знайдено</string>
     <string name="plants_header">Ваші рослини</string>
     <string name="delete_plant">Видалити</string>
+    <string name="reminder_hint_title">Надійні нагадування</string>
+    <string name="reminder_hint_text">Деякі телефони зупиняють застосунки у фоні, тому нагадування про полив можуть запізнюватися або не надходити. Виключіть FlowerWorld з оптимізації батареї та дозвольте автозапуск.</string>
+    <string name="reminder_hint_battery">Налаштування оптимізації батареї</string>
+    <string name="reminder_hint_autostart">Налаштування автозапуску</string>
+    <string name="reminder_hint_dismiss">Зрозуміло</string>
 </resources>

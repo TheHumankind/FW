@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -13,7 +14,9 @@ import com.example.flowerworld.feature.account.AccountViewer
 import com.example.flowerworld.feature.plants.PlantViewer
 import com.example.flowerworld.ui.components.AppFooter
 import com.example.flowerworld.ui.components.AppScreen
+import com.example.flowerworld.reminder.ReminderSettings
 import com.example.flowerworld.ui.components.FooterTab
+import com.example.flowerworld.ui.components.ReminderHintDialog
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 @Composable
@@ -24,6 +27,18 @@ fun MainScreen(
     viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    if (state.showReminderHint) {
+        ReminderHintDialog(
+            onBatteryClick = { ReminderSettings.openBatterySettings(context) },
+            onAutostartClick = if (ReminderSettings.hasAutostartScreen) {
+                { ReminderSettings.openAutostartSettings(context) }
+            } else {
+                null
+            },
+            onDismiss = viewModel::onReminderHintDismiss
+        )
+    }
     MainContent(
         state = state,
         onFooterSelect = viewModel::onFooterSelect,

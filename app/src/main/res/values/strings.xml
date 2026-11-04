@@ -39,4 +39,9 @@
     <string name="plant_not_found">Plant not found</string>
     <string name="plants_header">Your plants</string>
     <string name="delete_plant">Delete</string>
+    <string name="reminder_hint_title">Keep reminders reliable</string>
+    <string name="reminder_hint_text">Some phones stop apps in the background, so watering reminders may arrive late or not at all. Exclude FlowerWorld from battery optimization and allow it to autostart.</string>
+    <string name="reminder_hint_battery">Battery optimization settings</string>
+    <string name="reminder_hint_autostart">Autostart settings</string>
+    <string name="reminder_hint_dismiss">Got it</string>
 </resources>

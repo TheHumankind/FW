@@ -41,4 +41,9 @@
     <string name="plant_not_found">Расліна не знойдзена</string>
     <string name="plants_header">Вашы расліны</string>
     <string name="delete_plant">Выдаліць</string>
+    <string name="reminder_hint_title">Надзейныя напамінкі</string>
+    <string name="reminder_hint_text">Некаторыя тэлефоны спыняюць праграмы ў фоне, таму напамінкі пра паліў могуць спазняцца ці не прыходзіць. Выключыце FlowerWorld з аптымізацыі батарэі і дазвольце аўтазапуск.</string>
+    <string name="reminder_hint_battery">Налады аптымізацыі батарэі</string>
+    <string name="reminder_hint_autostart">Налады аўтазапуску</string>
+    <string name="reminder_hint_dismiss">Зразумела</string>
 </resources>

@@ -41,4 +41,9 @@
     <string name="plant_not_found">Растение не найдено</string>
     <string name="plants_header">Ваши растения</string>
     <string name="delete_plant">Удалить</string>
+    <string name="reminder_hint_title">Надёжные напоминания</string>
+    <string name="reminder_hint_text">Некоторые телефоны останавливают приложения в фоне, поэтому напоминания о поливе могут опаздывать или не приходить. Исключите FlowerWorld из оптимизации батареи и разрешите автозапуск.</string>
+    <string name="reminder_hint_battery">Настройки оптимизации батареи</string>
+    <string name="reminder_hint_autostart">Настройки автозапуска</string>
+    <string name="reminder_hint_dismiss">Понятно</string>
 </resources>

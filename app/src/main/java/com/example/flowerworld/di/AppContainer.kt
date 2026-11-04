@@ -3,9 +3,11 @@ package com.example.flowerworld.di
 import android.content.Context
 import androidx.room.Room
 import com.example.flowerworld.data.local.FlowerWorldDatabase
+import com.example.flowerworld.data.repository.PrefsSettingsRepository
 import com.example.flowerworld.data.repository.RoomPlantRepository
 import com.example.flowerworld.data.storage.FilePhotoStorage
 import com.example.flowerworld.domain.repository.PlantRepository
+import com.example.flowerworld.domain.repository.SettingsRepository
 import com.example.flowerworld.domain.storage.PhotoStorage
 import com.example.flowerworld.domain.usecase.AddPlantUseCase
 import com.example.flowerworld.reminder.ReminderScheduler
@@ -25,6 +27,7 @@ class AppContainer(context: Context) {
 
     val plantRepository: PlantRepository by lazy { RoomPlantRepository(database.plantDao()) }
     val reminderScheduler: ReminderScheduler by lazy { ReminderScheduler(appContext) }
+    val settingsRepository: SettingsRepository by lazy { PrefsSettingsRepository(appContext) }
     val photoStorage: PhotoStorage by lazy { FilePhotoStorage(appContext) }
     val addPlantUseCase: AddPlantUseCase by lazy { AddPlantUseCase(plantRepository, photoStorage) }
 }

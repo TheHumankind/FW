@@ -41,4 +41,9 @@
     <string name="plant_not_found">Nie znaleziono rośliny</string>
     <string name="plants_header">Twoje rośliny</string>
     <string name="delete_plant">Usuń</string>
+    <string name="reminder_hint_title">Niezawodne przypomnienia</string>
+    <string name="reminder_hint_text">Niektóre telefony wyłączają aplikacje w tle, przez co przypomnienia o podlewaniu mogą się spóźniać lub nie przychodzić. Wyłącz dla FlowerWorld optymalizację baterii i zezwól na autostart.</string>
+    <string name="reminder_hint_battery">Ustawienia optymalizacji baterii</string>
+    <string name="reminder_hint_autostart">Ustawienia autostartu</string>
+    <string name="reminder_hint_dismiss">Rozumiem</string>
 </resources>
