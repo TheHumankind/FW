@@ -37,7 +37,11 @@ class ReminderScheduler(
         saveScheduledIds(currentIds)
         for (plant in plants) {
             when {
-                plant.nextWateringAt > now -> scheduleAt(plant.id, plant.nextWateringAt)
+                plant.nextWateringAt > now -> {
+                    scheduleAt(plant.id, plant.nextWateringAt)
+                    // watered (in the app or from the notification): the old reminder is obsolete
+                    NotificationManagerCompat.from(context).cancel(ReminderReceiver.notificationId(plant.id))
+                }
                 !hasAlarm(plant.id) -> scheduleAt(plant.id, now + OverdueDelayMillis)
             }
         }

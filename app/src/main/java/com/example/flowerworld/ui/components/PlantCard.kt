@@ -63,12 +63,13 @@ private val MenuMinWidth = 112.dp
 /**
  * Thin horizontal card of a plant: the latest photo on the left,
  * the name and the time left until the next watering on the right. Tap opens the plant,
- * long press opens a menu with "Delete" whose top-right corner is under the finger.
+ * long press opens a menu with "Watered" and "Delete" whose top-right corner is under the finger.
  */
 @Composable
 fun PlantCard(
     plant: Plant,
     onClick: () -> Unit,
+    onWateredClick: () -> Unit,
     onDeleteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -135,6 +136,10 @@ fun PlantCard(
             PlantCardMenu(
                 touchPosition = touchPosition,
                 onDismiss = { menuExpanded = false },
+                onWateredClick = {
+                    menuExpanded = false
+                    onWateredClick()
+                },
                 onDeleteClick = {
                     menuExpanded = false
                     onDeleteClick()
@@ -152,6 +157,7 @@ fun PlantCard(
 private fun PlantCardMenu(
     touchPosition: Offset,
     onDismiss: () -> Unit,
+    onWateredClick: () -> Unit,
     onDeleteClick: () -> Unit
 ) {
     val positionProvider = remember(touchPosition) {
@@ -183,6 +189,11 @@ private fun PlantCardMenu(
             tonalElevation = 3.dp
         ) {
             Column(modifier = Modifier.width(IntrinsicSize.Max).padding(vertical = 4.dp)) {
+                DropdownMenuItem(
+                    text = { Text(stringResource(R.string.action_watered)) },
+                    onClick = onWateredClick,
+                    modifier = Modifier.width(MenuMinWidth)
+                )
                 DropdownMenuItem(
                     text = {
                         Text(
@@ -217,6 +228,6 @@ private const val DurationMarker = "\u0000"
 @Composable
 private fun PlantCardPreview() {
     FlowerWorldTheme {
-        PlantCard(plant = TestPlants.first(), onClick = {}, onDeleteClick = {})
+        PlantCard(plant = TestPlants.first(), onClick = {}, onWateredClick = {}, onDeleteClick = {})
     }
 }

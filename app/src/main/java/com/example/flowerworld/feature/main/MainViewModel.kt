@@ -43,6 +43,10 @@ class MainViewModel(
 
     fun onFooterSelect(tab: FooterTab) = selectedTab.update { tab }
 
+    fun onWaterPlant(plant: Plant) {
+        viewModelScope.launch { plantRepository.markWatered(plant.id) }
+    }
+
     fun onDeletePlant(plant: Plant) {
         viewModelScope.launch { plantRepository.delete(plant.id) }
     }

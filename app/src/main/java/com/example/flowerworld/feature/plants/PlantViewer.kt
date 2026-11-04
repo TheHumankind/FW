@@ -38,6 +38,7 @@ fun PlantViewer(
     plants: List<Plant>,
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
+    onWaterPlant: (Plant) -> Unit,
     onDeletePlant: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -51,7 +52,7 @@ fun PlantViewer(
                 .padding(start = Dimens.ListPadding, end = Dimens.ListPadding, top = Dimens.ListPadding)
         )
         Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
-            PlantList(plants, onAddPlantClick, onPlantClick, onDeletePlant)
+            PlantList(plants, onAddPlantClick, onPlantClick, onWaterPlant, onDeletePlant)
         }
     }
 }
@@ -61,6 +62,7 @@ private fun PlantList(
     plants: List<Plant>,
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
+    onWaterPlant: (Plant) -> Unit,
     onDeletePlant: (Plant) -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -82,6 +84,7 @@ private fun PlantList(
                     PlantCard(
                         plant = plant,
                         onClick = { onPlantClick(plant) },
+                        onWateredClick = { onWaterPlant(plant) },
                         onDeleteClick = { onDeletePlant(plant) }
                     )
                 }
@@ -103,6 +106,6 @@ private fun PlantList(
 @Composable
 private fun PlantViewerPreview() {
     FlowerWorldTheme {
-        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {}, onDeletePlant = {})
+        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {}, onWaterPlant = {}, onDeletePlant = {})
     }
 }

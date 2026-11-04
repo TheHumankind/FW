@@ -44,6 +44,7 @@ fun MainScreen(
         onFooterSelect = viewModel::onFooterSelect,
         onAddPlantClick = onAddPlantClick,
         onPlantClick = onPlantClick,
+        onWaterPlant = viewModel::onWaterPlant,
         onDeletePlant = viewModel::onDeletePlant,
         modifier = modifier
     )
@@ -55,6 +56,7 @@ private fun MainContent(
     onFooterSelect: (FooterTab) -> Unit,
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
+    onWaterPlant: (Plant) -> Unit,
     onDeletePlant: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -64,6 +66,7 @@ private fun MainContent(
                 plants = state.plants,
                 onAddPlantClick = onAddPlantClick,
                 onPlantClick = onPlantClick,
+                onWaterPlant = onWaterPlant,
                 onDeletePlant = onDeletePlant,
                 modifier = Modifier.weight(1f)
             )
@@ -85,6 +88,7 @@ private fun MainContentPreview() {
             onFooterSelect = {},
             onAddPlantClick = {},
             onPlantClick = {},
+            onWaterPlant = {},
             onDeletePlant = {}
         )
     }
