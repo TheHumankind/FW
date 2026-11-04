@@ -13,13 +13,13 @@
     <string name="plant_viewer_placeholder">Прагляд раслін</string>
     <string name="account_viewer_placeholder">Пакуль не рэалізавана</string>
     <string name="add_plant">Дадаць расліну</string>
-    <string name="edit_plant">Рэдагаваць расліну</string>
-    <plurals name="watering_interval_hours">
-        <item quantity="one">Паліваць кожную %1$d гадзіну</item>
-        <item quantity="few">Паліваць кожныя %1$d гадзіны</item>
-        <item quantity="many">Паліваць кожныя %1$d гадзін</item>
-        <item quantity="other">Паліваць кожныя %1$d гадзіны</item>
+    <plurals name="next_watering_in_hours">
+        <item quantity="one">Да наступнага паліву: %1$d гадзіна</item>
+        <item quantity="few">Да наступнага паліву: %1$d гадзіны</item>
+        <item quantity="many">Да наступнага паліву: %1$d гадзін</item>
+        <item quantity="other">Да наступнага паліву: %1$d гадзіны</item>
     </plurals>
+    <string name="next_watering_overdue">Паліў затрымліваецца</string>
     <string name="back">Назад</string>
     <string name="choose_photo">Абраць фота</string>
     <string name="change_photo">Змяніць фота</string>
@@ -31,4 +31,11 @@
     <string name="error_required">Абавязковае поле</string>
     <string name="error_invalid_number">Увядзіце цэлы лік больш за 0</string>
     <string name="error_save_failed">Не атрымалася захаваць фота. Абярыце іншае.</string>
+    <string name="notification_channel_name">Нагадванні пра паліў</string>
+    <string name="notification_channel_description">Нагадвае, калі расліну трэба паліць</string>
+    <string name="reminder_text">Пара паліць гэтую расліну</string>
+    <string name="action_watered">Паліта</string>
+    <string name="info_last_watered">Апошні паліў</string>
+    <string name="info_next_watering">Наступны паліў</string>
+    <string name="plant_not_found">Расліна не знойдзена</string>
 </resources>

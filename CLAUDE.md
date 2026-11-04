@@ -43,6 +43,7 @@ Do not assume every target user has them: newer Huawei/Honor devices may not.
 - Packages: `domain/` (models, repository and storage interfaces, use cases; no Android types), `data/` (implementations: repositories, file storage, fake data), `di/` (manual `AppContainer`, ViewModel factories), `feature/<name>/`, `ui/components`, `navigation/`.
 - Navigation: Navigation Compose with string routes (`navigation/AppNavigation.kt`); every route has its own ViewModels.
 - ViewModels get dependencies from `AppContainer` through `containerViewModelFactory` (see `MainViewModel.Factory`); `FlowerWorldApp` owns the container.
+- Reminders: `reminder/` (`ReminderScheduler` sets one exact alarm per plant; `ReminderReceiver` shows the notification and re-arms a 6 h repeat; `WateredReceiver`; `BootReceiver`). `FlowerWorldApp` keeps alarms in sync with the database.
 - Photos: picked with the system photo picker (no permission), compressed by `PhotoStorage` (`FilePhotoStorage`: JPEG, max 800 px, `files/photos/`); a plant keeps only the path.
 - Plants live behind `PlantRepository`; `RoomPlantRepository` stores them in Room (`data/local/`: entities `plants` + `plant_photos`, DAO, mappers; sync fields `createdAt`/`updatedAt`/`isDeleted`). The database starts empty; `TestPlants` is only for previews.
 - Room schemas are exported to `app/schemas/` (commit them). Changing an entity needs a new database version and a migration.
@@ -95,5 +96,9 @@ so any backend can be plugged in later by one new class; do not tie the code to 
 - [x] User describes the app idea (plant tracker, see "App idea")
 - [x] Skeleton: repository interface + in-memory implementation, Navigation Compose, add-plant flow with photo storage
 - [x] Room and local data (plants and photo paths survive restarts)
+- [x] Watering reminders: `ReminderScheduler` (exact alarms), notification with a "Watered" action, reschedule on boot (`reminder/`); `Plant.lastWateredAt` (Room v2)
+- [x] Plant info screen opened by tapping a plant card
+- [ ] Battery optimization / autostart hint for Honor/Huawei
+- [ ] Verify reminder firing on schedule and after reboot on the device
 - [ ] Backend choice and server integration (later)
 - [ ] Emulator system image (download was interrupted; optional, a phone is available)

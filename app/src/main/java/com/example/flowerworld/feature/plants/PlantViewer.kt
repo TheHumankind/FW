@@ -32,7 +32,7 @@ private val AddButtonPadding = 16.dp
 fun PlantViewer(
     plants: List<Plant>,
     onAddPlantClick: () -> Unit,
-    onEditPlantClick: (Plant) -> Unit,
+    onPlantClick: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -51,7 +51,7 @@ fun PlantViewer(
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(plants, key = { it.id }) { plant ->
-                    PlantCard(plant = plant, onEditClick = { onEditPlantClick(plant) })
+                    PlantCard(plant = plant, onClick = { onPlantClick(plant) })
                 }
             }
         }
@@ -71,6 +71,6 @@ fun PlantViewer(
 @Composable
 private fun PlantViewerPreview() {
     FlowerWorldTheme {
-        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onEditPlantClick = {})
+        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {})
     }
 }

@@ -8,4 +8,7 @@ interface PlantRepository {
     val plants: Flow<List<Plant>>
 
     suspend fun add(plant: Plant)
+
+    /** Records that the plant with [plantId] was watered just now. */
+    suspend fun markWatered(plantId: String)
 }

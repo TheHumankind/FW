@@ -1,6 +1,7 @@
 package com.example.flowerworld.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,10 +12,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Eco
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,25 +35,25 @@ private val CardShape = RoundedCornerShape(12.dp)
 
 /**
  * Thin horizontal card of a plant: the latest photo on the left,
- * the name and the watering interval on the right, the edit button at the end.
+ * the name and the time left until the next watering on the right. The whole card is clickable.
  */
 @Composable
 fun PlantCard(
     plant: Plant,
-    onEditClick: () -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val photo = plant.photos.maxByOrNull { it.key }?.value
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(CardHeight)
             .clip(CardShape)
-            .background(MaterialTheme.colorScheme.primaryContainer),
+            .background(MaterialTheme.colorScheme.primaryContainer)
+            .clickable(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically
     ) {
         PhotoBox(
-            photoUri = photo,
+            photoUri = plant.latestPhoto,
             contentDescription = plant.name,
             placeholder = Icons.Filled.Eco,
             placeholderTint = MaterialTheme.colorScheme.onSecondary,
@@ -74,26 +75,19 @@ fun PlantCard(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
+            val hoursLeft = remember(plant) { plant.hoursUntilNextWatering(System.currentTimeMillis()) }
             Text(
-                text = pluralStringResource(
-                    R.plurals.watering_interval_hours,
-                    plant.wateringIntervalHours,
-                    plant.wateringIntervalHours
-                ),
+                text = if (hoursLeft > 0) {
+                    pluralStringResource(R.plurals.next_watering_in_hours, hoursLeft, hoursLeft)
+                } else {
+                    stringResource(R.string.next_watering_overdue)
+                },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
-                maxLines = 2,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
         }
-        AppIconButton(
-            icon = Icons.Filled.Edit,
-            contentDescription = stringResource(R.string.edit_plant),
-            onClick = onEditClick,
-            size = 28.dp,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-            modifier = Modifier.padding(end = 12.dp)
-        )
     }
 }
 
@@ -101,6 +95,6 @@ fun PlantCard(
 @Composable
 private fun PlantCardPreview() {
     FlowerWorldTheme {
-        PlantCard(plant = TestPlants.first(), onEditClick = {})
+        PlantCard(plant = TestPlants.first(), onClick = {})
     }
 }

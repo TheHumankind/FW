@@ -13,13 +13,13 @@
     <string name="plant_viewer_placeholder">Просмотр растений</string>
     <string name="account_viewer_placeholder">Пока не реализовано</string>
     <string name="add_plant">Добавить растение</string>
-    <string name="edit_plant">Редактировать растение</string>
-    <plurals name="watering_interval_hours">
-        <item quantity="one">Поливать каждый %1$d час</item>
-        <item quantity="few">Поливать каждые %1$d часа</item>
-        <item quantity="many">Поливать каждые %1$d часов</item>
-        <item quantity="other">Поливать каждые %1$d часа</item>
+    <plurals name="next_watering_in_hours">
+        <item quantity="one">До следующего полива: %1$d час</item>
+        <item quantity="few">До следующего полива: %1$d часа</item>
+        <item quantity="many">До следующего полива: %1$d часов</item>
+        <item quantity="other">До следующего полива: %1$d часа</item>
     </plurals>
+    <string name="next_watering_overdue">Полив просрочен</string>
     <string name="back">Назад</string>
     <string name="choose_photo">Выбрать фото</string>
     <string name="change_photo">Изменить фото</string>
@@ -31,4 +31,11 @@
     <string name="error_required">Обязательное поле</string>
     <string name="error_invalid_number">Введите целое число больше 0</string>
     <string name="error_save_failed">Не удалось сохранить фото. Выберите другое.</string>
+    <string name="notification_channel_name">Напоминания о поливе</string>
+    <string name="notification_channel_description">Напоминает, когда растение нужно полить</string>
+    <string name="reminder_text">Пора полить это растение</string>
+    <string name="action_watered">Полито</string>
+    <string name="info_last_watered">Последний полив</string>
+    <string name="info_next_watering">Следующий полив</string>
+    <string name="plant_not_found">Растение не найдено</string>
 </resources>

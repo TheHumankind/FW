@@ -8,6 +8,7 @@ import com.example.flowerworld.data.storage.FilePhotoStorage
 import com.example.flowerworld.domain.repository.PlantRepository
 import com.example.flowerworld.domain.storage.PhotoStorage
 import com.example.flowerworld.domain.usecase.AddPlantUseCase
+import com.example.flowerworld.reminder.ReminderScheduler
 
 /**
  * Manual dependency container: creates the app-wide singletons once and hands them to ViewModels.
@@ -17,10 +18,13 @@ class AppContainer(context: Context) {
     private val appContext = context.applicationContext
 
     private val database: FlowerWorldDatabase by lazy {
-        Room.databaseBuilder(appContext, FlowerWorldDatabase::class.java, FlowerWorldDatabase.Name).build()
+        Room.databaseBuilder(appContext, FlowerWorldDatabase::class.java, FlowerWorldDatabase.Name)
+            .addMigrations(FlowerWorldDatabase.Migration1To2)
+            .build()
     }
 
     val plantRepository: PlantRepository by lazy { RoomPlantRepository(database.plantDao()) }
+    val reminderScheduler: ReminderScheduler by lazy { ReminderScheduler(appContext) }
     val photoStorage: PhotoStorage by lazy { FilePhotoStorage(appContext) }
     val addPlantUseCase: AddPlantUseCase by lazy { AddPlantUseCase(plantRepository, photoStorage) }
 }

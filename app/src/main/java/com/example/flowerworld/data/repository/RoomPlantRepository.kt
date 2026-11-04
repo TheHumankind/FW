@@ -23,4 +23,8 @@ class RoomPlantRepository(
         val now = clock.millis()
         plantDao.insert(plant.toEntity(now), plant.toPhotoEntities(now))
     }
+
+    override suspend fun markWatered(plantId: String) {
+        plantDao.markWatered(plantId, clock.millis())
+    }
 }

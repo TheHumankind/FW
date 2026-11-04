@@ -1,9 +1,13 @@
 package com.example.flowerworld.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.flowerworld.feature.plantinfo.PlantInfoScreen
+import com.example.flowerworld.feature.plantinfo.PlantInfoViewModel
 import com.example.flowerworld.feature.addplant.AddPlantScreen
 import com.example.flowerworld.feature.login.LoginScreen
 import com.example.flowerworld.feature.main.MainScreen
@@ -15,6 +19,9 @@ private object Routes {
     const val Login = "login"
     const val Main = "main"
     const val AddPlant = "add_plant"
+    const val PlantInfo = "plant_info/{${PlantInfoViewModel.PlantIdArg}}"
+
+    fun plantInfo(plantId: String) = "plant_info/$plantId"
 }
 
 // TODO: switch back to Routes.Welcome once login and sign up are really used
@@ -40,7 +47,16 @@ fun AppNavigation() {
             )
         }
         composable(Routes.Main) {
-            MainScreen(onAddPlantClick = { navController.navigate(Routes.AddPlant) })
+            MainScreen(
+                onAddPlantClick = { navController.navigate(Routes.AddPlant) },
+                onPlantClick = { plant -> navController.navigate(Routes.plantInfo(plant.id)) }
+            )
+        }
+        composable(
+            route = Routes.PlantInfo,
+            arguments = listOf(navArgument(PlantInfoViewModel.PlantIdArg) { type = NavType.StringType })
+        ) {
+            PlantInfoScreen(onBackClick = { navController.popBackStack() })
         }
         composable(Routes.AddPlant) {
             AddPlantScreen(onClose = { navController.popBackStack() })

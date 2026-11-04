@@ -13,13 +13,13 @@
     <string name="plant_viewer_placeholder">Widok roślin</string>
     <string name="account_viewer_placeholder">Jeszcze nie zaimplementowano</string>
     <string name="add_plant">Dodaj roślinę</string>
-    <string name="edit_plant">Edytuj roślinę</string>
-    <plurals name="watering_interval_hours">
-        <item quantity="one">Podlewaj co %1$d godzinę</item>
-        <item quantity="few">Podlewaj co %1$d godziny</item>
-        <item quantity="many">Podlewaj co %1$d godzin</item>
-        <item quantity="other">Podlewaj co %1$d godziny</item>
+    <plurals name="next_watering_in_hours">
+        <item quantity="one">Do następnego podlewania: %1$d godzina</item>
+        <item quantity="few">Do następnego podlewania: %1$d godziny</item>
+        <item quantity="many">Do następnego podlewania: %1$d godzin</item>
+        <item quantity="other">Do następnego podlewania: %1$d godziny</item>
     </plurals>
+    <string name="next_watering_overdue">Podlewanie jest spóźnione</string>
     <string name="back">Wstecz</string>
     <string name="choose_photo">Wybierz zdjęcie</string>
     <string name="change_photo">Zmień zdjęcie</string>
@@ -31,4 +31,11 @@
     <string name="error_required">Pole wymagane</string>
     <string name="error_invalid_number">Podaj liczbę całkowitą większą od 0</string>
     <string name="error_save_failed">Nie udało się zapisać zdjęcia. Wybierz inne.</string>
+    <string name="notification_channel_name">Przypomnienia o podlewaniu</string>
+    <string name="notification_channel_description">Przypomina, kiedy roślina wymaga podlania</string>
+    <string name="reminder_text">Czas podlać tę roślinę</string>
+    <string name="action_watered">Podlano</string>
+    <string name="info_last_watered">Ostatnie podlewanie</string>
+    <string name="info_next_watering">Następne podlewanie</string>
+    <string name="plant_not_found">Nie znaleziono rośliny</string>
 </resources>

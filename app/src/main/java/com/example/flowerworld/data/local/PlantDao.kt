@@ -13,6 +13,10 @@ interface PlantDao {
     @Query("SELECT * FROM plants WHERE isDeleted = 0 ORDER BY createdAt, id")
     fun observePlants(): Flow<List<PlantWithPhotos>>
 
+    /** Records a watering at [wateredAt] (epoch millis); also bumps the sync modification time. */
+    @Query("UPDATE plants SET lastWateredAt = :wateredAt, updatedAt = :wateredAt WHERE id = :id AND isDeleted = 0")
+    suspend fun markWatered(id: String, wateredAt: Long)
+
     @Insert
     suspend fun insertPlant(plant: PlantEntity)
 
