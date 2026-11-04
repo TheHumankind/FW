@@ -29,9 +29,10 @@ fun PlantCard(
     onWateredClick: () -> Unit,
     onDeadClick: () -> Unit,
     modifier: Modifier = Modifier,
-    timeUnit: IntervalUnit = IntervalUnit.Hours
+    timeUnit: IntervalUnit = IntervalUnit.Days
 ) {
-    val timeLeft = remember(plant, timeUnit) { plant.timeUntilNextWatering(System.currentTimeMillis(), timeUnit) }
+    val now = remember(plant) { System.currentTimeMillis() }
+    val timeLeft = remember(plant, timeUnit) { plant.timeUntilNextWatering(now, timeUnit) }
     MenuCard(
         onClick = onClick,
         modifier = modifier,
@@ -55,10 +56,10 @@ fun PlantCard(
     ) {
         PlantCardBody(
             plant = plant,
-            bottomText = if (timeLeft > 0) {
-                nextWateringText(timeLeft, timeUnit)
-            } else {
+            bottomText = if (plant.isWateringDue(now)) {
                 AnnotatedString(stringResource(R.string.next_watering_overdue))
+            } else {
+                nextWateringText(timeLeft, timeUnit)
             }
         )
     }

@@ -94,7 +94,7 @@ private fun BoxScope.PlantList(
 private fun PlantViewerPreview() {
     FlowerWorldTheme {
         PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {}, onWaterPlant = {}, onPlantDied = {},
-            timeUnit = IntervalUnit.Hours
+            timeUnit = IntervalUnit.Days
         )
     }
 }

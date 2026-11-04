@@ -25,7 +25,7 @@ data class MainUiState(
     // One-time hint about battery optimization and autostart, shown once the user has plants
     val showReminderHint: Boolean = false,
     // What the time left until watering is counted in on the plant cards
-    val cardTimeUnit: IntervalUnit = IntervalUnit.Hours
+    val cardTimeUnit: IntervalUnit = IntervalUnit.Days
 )
 
 class MainViewModel(

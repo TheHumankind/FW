@@ -75,7 +75,7 @@ private fun SettingsContent(
 @Composable
 private fun SettingsContentPreview() {
     FlowerWorldTheme {
-        SettingsContent(state = SettingsUiState.Success(AppLanguage.English, IntervalUnit.Hours),
+        SettingsContent(state = SettingsUiState.Success(AppLanguage.English, IntervalUnit.Days),
             onLanguageSelect = {},
             onCardTimeUnitSelect = {}
         )

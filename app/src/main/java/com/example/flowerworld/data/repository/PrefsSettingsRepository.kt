@@ -19,7 +19,7 @@ class PrefsSettingsRepository(context: Context) : SettingsRepository {
     private val languageState = MutableStateFlow(storedLanguage(context) ?: AppLanguage.systemDefault())
 
     private val cardTimeUnitState = MutableStateFlow(
-        IntervalUnit.entries.firstOrNull { it.name == prefs.getString(KeyCardTimeUnit, null) } ?: IntervalUnit.Hours
+        IntervalUnit.entries.firstOrNull { it.name == prefs.getString(KeyCardTimeUnit, null) } ?: IntervalUnit.Days
     )
 
     override val reminderHintShown: Flow<Boolean> = hintShown.asStateFlow()

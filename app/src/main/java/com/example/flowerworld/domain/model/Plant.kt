@@ -34,8 +34,20 @@ data class Plant(
     /** Path of the most recent photo, or null if there are none. */
     val latestPhoto: String? get() = photos.maxByOrNull { it.key }?.value
 
-    /** Whole [unit]s left until the next watering, rounded up; 0 when it is already due. */
-    fun timeUntilNextWatering(nowMillis: Long, unit: IntervalUnit): Int =
-        Math.ceilDiv(nextWateringAt - nowMillis, TimeUnit.HOURS.toMillis(unit.hours.toLong()))
-            .coerceAtLeast(0L).toInt()
+    /** True when the plant has to be watered already. */
+    fun isWateringDue(nowMillis: Long): Boolean = nextWateringAt <= nowMillis
+
+    /**
+     * Whole [unit]s left until the next watering; 0 when it is already due.
+     * Days are rounded down, so the last day shows "0 days" (water it today); hours are rounded up.
+     */
+    fun timeUntilNextWatering(nowMillis: Long, unit: IntervalUnit): Int {
+        val left = nextWateringAt - nowMillis
+        val unitMillis = TimeUnit.HOURS.toMillis(unit.hours.toLong())
+        val count = when (unit) {
+            IntervalUnit.Days -> Math.floorDiv(left, unitMillis)
+            IntervalUnit.Hours -> Math.ceilDiv(left, unitMillis)
+        }
+        return count.coerceAtLeast(0L).toInt()
+    }
 }
