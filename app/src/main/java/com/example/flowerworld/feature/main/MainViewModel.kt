@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 data class MainUiState(
     // Selected footer tab; plants are shown by default
@@ -19,7 +20,7 @@ data class MainUiState(
     val plants: List<Plant> = emptyList()
 )
 
-class MainViewModel(plantRepository: PlantRepository) : ViewModel() {
+class MainViewModel(private val plantRepository: PlantRepository) : ViewModel() {
     private val selectedTab = MutableStateFlow(FooterTab.Plants)
 
     val uiState: StateFlow<MainUiState> = combine(selectedTab, plantRepository.plants) { tab, plants ->
@@ -27,6 +28,10 @@ class MainViewModel(plantRepository: PlantRepository) : ViewModel() {
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), MainUiState())
 
     fun onFooterSelect(tab: FooterTab) = selectedTab.update { tab }
+
+    fun onDeletePlant(plant: Plant) {
+        viewModelScope.launch { plantRepository.delete(plant.id) }
+    }
 
     companion object {
         private const val StopTimeoutMillis = 5_000L

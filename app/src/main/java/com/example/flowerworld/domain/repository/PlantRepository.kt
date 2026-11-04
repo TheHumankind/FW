@@ -11,4 +11,7 @@ interface PlantRepository {
 
     /** Records that the plant with [plantId] was watered just now. */
     suspend fun markWatered(plantId: String)
+
+    /** Removes the plant with [plantId] from [plants]. */
+    suspend fun delete(plantId: String)
 }

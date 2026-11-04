@@ -27,4 +27,8 @@ class RoomPlantRepository(
     override suspend fun markWatered(plantId: String) {
         plantDao.markWatered(plantId, clock.millis())
     }
+
+    override suspend fun delete(plantId: String) {
+        plantDao.markDeleted(plantId, clock.millis())
+    }
 }

@@ -40,4 +40,5 @@
     <string name="info_next_watering">Наступны паліў</string>
     <string name="plant_not_found">Расліна не знойдзена</string>
     <string name="plants_header">Вашы расліны</string>
+    <string name="delete_plant">Выдаліць</string>
 </resources>

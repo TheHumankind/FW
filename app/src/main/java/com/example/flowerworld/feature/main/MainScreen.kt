@@ -29,6 +29,7 @@ fun MainScreen(
         onFooterSelect = viewModel::onFooterSelect,
         onAddPlantClick = onAddPlantClick,
         onPlantClick = onPlantClick,
+        onDeletePlant = viewModel::onDeletePlant,
         modifier = modifier
     )
 }
@@ -39,6 +40,7 @@ private fun MainContent(
     onFooterSelect: (FooterTab) -> Unit,
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
+    onDeletePlant: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AppScreen(modifier = modifier.statusBarsPadding()) {
@@ -47,6 +49,7 @@ private fun MainContent(
                 plants = state.plants,
                 onAddPlantClick = onAddPlantClick,
                 onPlantClick = onPlantClick,
+                onDeletePlant = onDeletePlant,
                 modifier = Modifier.weight(1f)
             )
             FooterTab.Profile -> AccountViewer(Modifier.weight(1f))
@@ -66,7 +69,8 @@ private fun MainContentPreview() {
             state = MainUiState(plants = TestPlants),
             onFooterSelect = {},
             onAddPlantClick = {},
-            onPlantClick = {}
+            onPlantClick = {},
+            onDeletePlant = {}
         )
     }
 }

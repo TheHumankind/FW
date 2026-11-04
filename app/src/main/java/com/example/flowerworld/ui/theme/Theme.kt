@@ -21,7 +21,9 @@ private val DarkColorScheme = darkColorScheme(
     background = BrunswickGreen,
     onBackground = Timberwolf,
     surface = BrunswickGreen,
-    onSurface = Timberwolf
+    onSurface = Timberwolf,
+    error = AlertDanger,
+    onError = Timberwolf
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -36,7 +38,9 @@ private val LightColorScheme = lightColorScheme(
     background = Timberwolf,
     onBackground = TextPrimary,
     surface = Timberwolf,
-    onSurface = TextPrimary
+    onSurface = TextPrimary,
+    error = AlertDanger,
+    onError = Timberwolf
 )
 
 @Composable

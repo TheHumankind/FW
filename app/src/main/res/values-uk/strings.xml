@@ -40,4 +40,5 @@
     <string name="info_next_watering">Наступний полив</string>
     <string name="plant_not_found">Рослину не знайдено</string>
     <string name="plants_header">Ваші рослини</string>
+    <string name="delete_plant">Видалити</string>
 </resources>

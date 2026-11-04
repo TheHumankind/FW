@@ -17,6 +17,10 @@ interface PlantDao {
     @Query("UPDATE plants SET lastWateredAt = :wateredAt, updatedAt = :wateredAt WHERE id = :id AND isDeleted = 0")
     suspend fun markWatered(id: String, wateredAt: Long)
 
+    /** Marks the plant as deleted at [deletedAt]; the row stays until the server knows about it. */
+    @Query("UPDATE plants SET isDeleted = 1, updatedAt = :deletedAt WHERE id = :id")
+    suspend fun markDeleted(id: String, deletedAt: Long)
+
     @Insert
     suspend fun insertPlant(plant: PlantEntity)
 

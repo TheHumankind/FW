@@ -40,4 +40,5 @@
     <string name="info_next_watering">Następne podlewanie</string>
     <string name="plant_not_found">Nie znaleziono rośliny</string>
     <string name="plants_header">Twoje rośliny</string>
+    <string name="delete_plant">Usuń</string>
 </resources>
