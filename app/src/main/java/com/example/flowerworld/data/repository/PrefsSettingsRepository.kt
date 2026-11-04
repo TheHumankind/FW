@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.content.edit
 import com.example.flowerworld.domain.model.AppLanguage
 import com.example.flowerworld.domain.model.IntervalUnit
+import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,11 +23,17 @@ class PrefsSettingsRepository(context: Context) : SettingsRepository {
         IntervalUnit.entries.firstOrNull { it.name == prefs.getString(KeyCardTimeUnit, null) } ?: IntervalUnit.Days
     )
 
+    private val cardHeadingState = MutableStateFlow(
+        PlantHeading.entries.firstOrNull { it.name == prefs.getString(KeyCardHeading, null) } ?: PlantHeading.Title
+    )
+
     override val reminderHintShown: Flow<Boolean> = hintShown.asStateFlow()
 
     override val language: Flow<AppLanguage> = languageState.asStateFlow()
 
     override val cardTimeUnit: Flow<IntervalUnit> = cardTimeUnitState.asStateFlow()
+
+    override val cardHeading: Flow<PlantHeading> = cardHeadingState.asStateFlow()
 
     override suspend fun markReminderHintShown() {
         prefs.edit { putBoolean(KeyReminderHintShown, true) }
@@ -43,11 +50,17 @@ class PrefsSettingsRepository(context: Context) : SettingsRepository {
         cardTimeUnitState.value = unit
     }
 
+    override suspend fun setCardHeading(heading: PlantHeading) {
+        prefs.edit { putString(KeyCardHeading, heading.name) }
+        cardHeadingState.value = heading
+    }
+
     companion object {
         private const val PrefsName = "settings"
         private const val KeyReminderHintShown = "reminderHintShown"
         private const val KeyLanguage = "language"
         private const val KeyCardTimeUnit = "cardTimeUnit"
+        private const val KeyCardHeading = "cardHeading"
 
         /**
          * The language the user has chosen, or null while the app follows the device language.

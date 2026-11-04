@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.flowerworld.di.containerViewModelFactory
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.domain.repository.PlantRepository
 import com.example.flowerworld.domain.repository.SettingsRepository
 import com.example.flowerworld.ui.components.FooterTab
@@ -25,7 +26,9 @@ data class MainUiState(
     // One-time hint about battery optimization and autostart, shown once the user has plants
     val showReminderHint: Boolean = false,
     // What the time left until watering is counted in on the plant cards
-    val cardTimeUnit: IntervalUnit = IntervalUnit.Days
+    val cardTimeUnit: IntervalUnit = IntervalUnit.Days,
+    // Which name of a plant is the heading of its card
+    val cardHeading: PlantHeading = PlantHeading.Title
 )
 
 class MainViewModel(
@@ -39,15 +42,17 @@ class MainViewModel(
         plantRepository.plants,
         plantRepository.deadPlants,
         settingsRepository.reminderHintShown,
-        settingsRepository.cardTimeUnit
-    ) { tab, plants, deadPlants, hintShown, cardTimeUnit ->
+        // combine() takes at most five typed flows, so the two card settings go in as a pair
+        combine(settingsRepository.cardTimeUnit, settingsRepository.cardHeading) { unit, heading -> unit to heading }
+    ) { tab, plants, deadPlants, hintShown, (cardTimeUnit, cardHeading) ->
         MainUiState(
             selectedTab = tab,
             // the plant that needs watering first (overdue ones included) goes to the top
             plants = plants.sortedBy { it.nextWateringAt },
             deadPlants = deadPlants,
             showReminderHint = plants.isNotEmpty() && !hintShown,
-            cardTimeUnit = cardTimeUnit
+            cardTimeUnit = cardTimeUnit,
+            cardHeading = cardHeading
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), MainUiState())
 

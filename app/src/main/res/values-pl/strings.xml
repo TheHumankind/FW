@@ -60,5 +60,7 @@
     <string name="revive_plant">Ożyw</string>
     <string name="info_died">Data śmierci</string>
     <string name="settings_language">Język</string>
-    <string name="settings_card_time_unit">Czas na kartach roślin</string>
+    <string name="settings_card_time_unit">Czas do podlewania</string>
+    <string name="settings_cards_section">Karty roślin</string>
+    <string name="settings_card_heading">Wyświetlany tytuł rośliny</string>
 </resources>

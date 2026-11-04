@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.ui.formatDate
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
@@ -20,7 +21,8 @@ fun DeadPlantCard(
     plant: Plant,
     onClick: () -> Unit,
     onReviveClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    heading: PlantHeading = PlantHeading.Title
 ) {
     val diedText = plant.diedAt?.let { AnnotatedString(stringResource(R.string.died_on, formatDate(it))) }
     MenuCard(
@@ -36,7 +38,7 @@ fun DeadPlantCard(
             )
         }
     ) {
-        PlantCardBody(plant = plant, bottomText = diedText)
+        PlantCardBody(plant = plant, heading = heading, bottomText = diedText)
     }
 }
 

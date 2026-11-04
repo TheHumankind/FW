@@ -16,6 +16,7 @@ import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /**
@@ -29,7 +30,8 @@ fun PlantCard(
     onWateredClick: () -> Unit,
     onDeadClick: () -> Unit,
     modifier: Modifier = Modifier,
-    timeUnit: IntervalUnit = IntervalUnit.Days
+    timeUnit: IntervalUnit = IntervalUnit.Days,
+    heading: PlantHeading = PlantHeading.Title
 ) {
     val now = remember(plant) { System.currentTimeMillis() }
     val timeLeft = remember(plant, timeUnit) { plant.timeUntilNextWatering(now, timeUnit) }
@@ -56,6 +58,7 @@ fun PlantCard(
     ) {
         PlantCardBody(
             plant = plant,
+            heading = heading,
             bottomText = if (plant.isWateringDue(now)) {
                 AnnotatedString(stringResource(R.string.next_watering_overdue))
             } else {

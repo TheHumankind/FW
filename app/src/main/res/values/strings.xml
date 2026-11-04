@@ -62,5 +62,7 @@
     <string name="language_belarusian" translatable="false">Беларуская</string>
     <string name="language_russian" translatable="false">Русский</string>
     <string name="language_ukrainian" translatable="false">Українська</string>
-    <string name="settings_card_time_unit">Time on plant cards</string>
+    <string name="settings_card_time_unit">Time until watering</string>
+    <string name="settings_cards_section">Plant cards</string>
+    <string name="settings_card_heading">Displayed plant title</string>
 </resources>

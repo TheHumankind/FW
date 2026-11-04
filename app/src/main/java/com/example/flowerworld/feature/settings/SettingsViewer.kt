@@ -15,6 +15,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.AppLanguage
 import com.example.flowerworld.domain.model.IntervalUnit
+import com.example.flowerworld.domain.model.PlantHeading
+import com.example.flowerworld.ui.components.AppSettingsSection
 import com.example.flowerworld.ui.nameRes
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppListScreen
@@ -32,6 +34,7 @@ fun SettingsViewer(
         state = state,
         onLanguageSelect = viewModel::onLanguageSelect,
         onCardTimeUnitSelect = viewModel::onCardTimeUnitSelect,
+        onCardHeadingSelect = viewModel::onCardHeadingSelect,
         modifier = modifier
     )
 }
@@ -41,6 +44,7 @@ private fun SettingsContent(
     state: SettingsUiState,
     onLanguageSelect: (AppLanguage) -> Unit,
     onCardTimeUnitSelect: (IntervalUnit) -> Unit,
+    onCardHeadingSelect: (PlantHeading) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AppListScreen(title = stringResource(R.string.settings_header), modifier = modifier) {
@@ -58,14 +62,24 @@ private fun SettingsContent(
                     itemLeading = { Text(it.flag) },
                     modifier = Modifier.fillMaxWidth()
                 )
-                AppDropdown(
-                    items = IntervalUnit.entries,
-                    selected = state.cardTimeUnit,
-                    onSelect = onCardTimeUnitSelect,
-                    label = stringResource(R.string.settings_card_time_unit),
-                    itemLabel = { stringResource(it.nameRes) },
-                    modifier = Modifier.fillMaxWidth()
-                )
+                AppSettingsSection(title = stringResource(R.string.settings_cards_section)) {
+                    AppDropdown(
+                        items = PlantHeading.entries,
+                        selected = state.cardHeading,
+                        onSelect = onCardHeadingSelect,
+                        label = stringResource(R.string.settings_card_heading),
+                        itemLabel = { stringResource(it.nameRes) },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    AppDropdown(
+                        items = IntervalUnit.entries,
+                        selected = state.cardTimeUnit,
+                        onSelect = onCardTimeUnitSelect,
+                        label = stringResource(R.string.settings_card_time_unit),
+                        itemLabel = { stringResource(it.nameRes) },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
         }
     }
@@ -75,9 +89,10 @@ private fun SettingsContent(
 @Composable
 private fun SettingsContentPreview() {
     FlowerWorldTheme {
-        SettingsContent(state = SettingsUiState.Success(AppLanguage.English, IntervalUnit.Days),
+        SettingsContent(state = SettingsUiState.Success(AppLanguage.English, IntervalUnit.Days, PlantHeading.Title),
             onLanguageSelect = {},
-            onCardTimeUnitSelect = {}
+            onCardTimeUnitSelect = {},
+            onCardHeadingSelect = {}
         )
     }
 }

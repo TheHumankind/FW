@@ -34,6 +34,12 @@ data class Plant(
     /** Path of the most recent photo, or null if there are none. */
     val latestPhoto: String? get() = photos.maxByOrNull { it.key }?.value
 
+    /** The text a card shows as the plant's heading: its title (species) or its personal name. */
+    fun headingText(heading: PlantHeading): String = when (heading) {
+        PlantHeading.Title -> title
+        PlantHeading.Name -> name
+    }
+
     /** True when the plant has to be watered already. */
     fun isWateringDue(nowMillis: Long): Boolean = nextWateringAt <= nowMillis
 

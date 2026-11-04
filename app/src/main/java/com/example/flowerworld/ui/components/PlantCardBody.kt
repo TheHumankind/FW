@@ -18,14 +18,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantHeading
 
 /**
- * Inside of a [MenuCard] row: the latest photo on the left; on the right the plant's name pinned
+ * Inside of a [MenuCard] row: the latest photo on the left; on the right the plant's [heading] pinned
  * to the top and [bottomText] pinned to the bottom (nothing if it is null).
  */
 @Composable
 fun RowScope.PlantCardBody(
     plant: Plant,
+    heading: PlantHeading,
     bottomText: AnnotatedString?
 ) {
     PhotoBox(
@@ -45,7 +47,7 @@ fun RowScope.PlantCardBody(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = plant.name.uppercase(),
+            text = plant.headingText(heading).uppercase(),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimaryContainer,

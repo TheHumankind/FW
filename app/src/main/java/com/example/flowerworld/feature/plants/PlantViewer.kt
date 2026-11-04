@@ -19,6 +19,7 @@ import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
 import com.example.flowerworld.ui.components.AppListScreen
@@ -38,13 +39,14 @@ fun PlantViewer(
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
     timeUnit: IntervalUnit,
+    heading: PlantHeading,
     modifier: Modifier = Modifier
 ) {
     AppListScreen(title = stringResource(R.string.plants_header), modifier = modifier) {
         if (plants.isEmpty()) {
             AppCenteredMessage(text = stringResource(R.string.plant_viewer_placeholder))
         } else {
-            PlantList(plants, timeUnit, onPlantClick, onWaterPlant, onPlantDied)
+            PlantList(plants, timeUnit, heading, onPlantClick, onWaterPlant, onPlantDied)
         }
         AppIconButton(
             icon = Icons.Filled.AddCircle,
@@ -62,6 +64,7 @@ fun PlantViewer(
 private fun BoxScope.PlantList(
     plants: List<Plant>,
     timeUnit: IntervalUnit,
+    heading: PlantHeading,
     onPlantClick: (Plant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit
@@ -83,7 +86,8 @@ private fun BoxScope.PlantList(
                 onClick = { onPlantClick(plant) },
                 onWateredClick = { onWaterPlant(plant) },
                 onDeadClick = { onPlantDied(plant) },
-                timeUnit = timeUnit
+                timeUnit = timeUnit,
+                heading = heading
             )
         }
     }
@@ -94,7 +98,8 @@ private fun BoxScope.PlantList(
 private fun PlantViewerPreview() {
     FlowerWorldTheme {
         PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {}, onWaterPlant = {}, onPlantDied = {},
-            timeUnit = IntervalUnit.Days
+            timeUnit = IntervalUnit.Days,
+            heading = PlantHeading.Title
         )
     }
 }

@@ -60,5 +60,7 @@
     <string name="revive_plant">Воскресить</string>
     <string name="info_died">Дата смерти</string>
     <string name="settings_language">Язык</string>
-    <string name="settings_card_time_unit">Время на карточках растений</string>
+    <string name="settings_card_time_unit">Время до полива</string>
+    <string name="settings_cards_section">Карточки растений</string>
+    <string name="settings_card_heading">Отображаемый заголовок растения</string>
 </resources>

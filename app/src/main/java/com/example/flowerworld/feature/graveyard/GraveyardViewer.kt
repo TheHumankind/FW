@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppListScreen
 import com.example.flowerworld.ui.components.DeadPlantCard
@@ -24,6 +25,7 @@ fun GraveyardViewer(
     deadPlants: List<Plant>,
     onPlantClick: (Plant) -> Unit,
     onRevivePlant: (Plant) -> Unit,
+    heading: PlantHeading,
     modifier: Modifier = Modifier
 ) {
     AppListScreen(title = stringResource(R.string.graveyard_title), modifier = modifier) {
@@ -39,7 +41,8 @@ fun GraveyardViewer(
                     DeadPlantCard(
                         plant = plant,
                         onClick = { onPlantClick(plant) },
-                        onReviveClick = { onRevivePlant(plant) }
+                        onReviveClick = { onRevivePlant(plant) },
+                        heading = heading
                     )
                 }
             }
@@ -54,7 +57,8 @@ private fun GraveyardViewerPreview() {
         GraveyardViewer(
             deadPlants = TestPlants.map { it.copy(diedAt = 1_790_000_000_000L) },
             onPlantClick = {},
-            onRevivePlant = {}
+            onRevivePlant = {},
+            heading = PlantHeading.Title
         )
     }
 }

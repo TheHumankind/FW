@@ -72,12 +72,14 @@ private fun MainContent(
                 onWaterPlant = onWaterPlant,
                 onPlantDied = onPlantDied,
                 timeUnit = state.cardTimeUnit,
+                heading = state.cardHeading,
                 modifier = Modifier.weight(1f)
             )
             FooterTab.Graveyard -> GraveyardViewer(
                 deadPlants = state.deadPlants,
                 onPlantClick = onPlantClick,
                 onRevivePlant = onRevivePlant,
+                heading = state.cardHeading,
                 modifier = Modifier.weight(1f)
             )
             FooterTab.Settings -> SettingsViewer(Modifier.weight(1f))
