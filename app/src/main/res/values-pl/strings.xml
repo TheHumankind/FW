@@ -11,7 +11,6 @@
     <string name="footer_plants">Rośliny</string>
     <string name="footer_settings">Ustawienia</string>
     <string name="plant_viewer_placeholder">Widok roślin</string>
-    <string name="settings_placeholder">Jeszcze nie zaimplementowano</string>
     <string name="add_plant">Dodaj roślinę</string>
     <plurals name="hours_count">
         <item quantity="one">%1$d godzina</item>
@@ -52,4 +51,5 @@
     <string name="settings_header">Ustawienia aplikacji</string>
     <string name="revive_plant">Ożyw</string>
     <string name="info_died">Data śmierci</string>
+    <string name="settings_language">Język</string>
 </resources>

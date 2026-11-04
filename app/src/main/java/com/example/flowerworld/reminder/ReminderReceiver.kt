@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.example.flowerworld.FlowerWorldApp
 import com.example.flowerworld.MainActivity
 import com.example.flowerworld.R
+import com.example.flowerworld.ui.withAppLanguage
 import com.example.flowerworld.di.AppContainer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -55,6 +56,8 @@ class ReminderReceiver : BroadcastReceiver() {
             PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
         if (!canNotify) return
         createChannel(context)
+        // strings in the language chosen in the settings, not the device one
+        val localized = context.withAppLanguage()
 
         val requestCode = plantIntId(plantId)
         val open = PendingIntent.getActivity(
@@ -74,12 +77,12 @@ class ReminderReceiver : BroadcastReceiver() {
         val notification: Notification = NotificationCompat.Builder(context, ChannelId)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(plantName)
-            .setContentText(context.getString(R.string.reminder_text))
+            .setContentText(localized.getString(R.string.reminder_text))
             .setContentIntent(open)
             .setAutoCancel(true)
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .addAction(0, context.getString(R.string.action_watered), watered)
+            .addAction(0, localized.getString(R.string.action_watered), watered)
             .build()
         NotificationManagerCompat.from(context).notify(plantIntId(plantId), notification)
     }

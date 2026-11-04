@@ -11,7 +11,6 @@
     <string name="footer_plants">Рослини</string>
     <string name="footer_settings">Налаштування</string>
     <string name="plant_viewer_placeholder">Перегляд рослин</string>
-    <string name="settings_placeholder">Поки не реалізовано</string>
     <string name="add_plant">Додати рослину</string>
     <plurals name="hours_count">
         <item quantity="one">%1$d година</item>
@@ -52,4 +51,5 @@
     <string name="settings_header">Налаштування застосунку</string>
     <string name="revive_plant">Воскресити</string>
     <string name="info_died">Дата загибелі</string>
+    <string name="settings_language">Мова</string>
 </resources>

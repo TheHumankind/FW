@@ -1,6 +1,7 @@
 package com.example.flowerworld
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -9,9 +10,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.flowerworld.navigation.AppNavigation
+import com.example.flowerworld.ui.withAppLanguage
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 class MainActivity : ComponentActivity() {
+    /** Applies the language chosen in the settings (the device language until one is chosen). */
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(newBase.withAppLanguage())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

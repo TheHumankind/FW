@@ -11,7 +11,6 @@
     <string name="footer_plants">Plants</string>
     <string name="footer_settings">Settings</string>
     <string name="plant_viewer_placeholder">Plant view</string>
-    <string name="settings_placeholder">Not implemented for now</string>
     <string name="add_plant">Add plant</string>
     <plurals name="hours_count">
         <item quantity="one">%1$d hour</item>
@@ -50,4 +49,11 @@
     <string name="settings_header">App settings</string>
     <string name="revive_plant">Revive</string>
     <string name="info_died">Date of death</string>
+    <string name="settings_language">Language</string>
+    <!-- Language names are shown in the language itself in every translation -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_belarusian" translatable="false">Беларуская</string>
+    <string name="language_russian" translatable="false">Русский</string>
+    <string name="language_ukrainian" translatable="false">Українська</string>
 </resources>

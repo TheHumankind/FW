@@ -11,7 +11,6 @@
     <string name="footer_plants">Растения</string>
     <string name="footer_settings">Настройки</string>
     <string name="plant_viewer_placeholder">Просмотр растений</string>
-    <string name="settings_placeholder">Пока не реализовано</string>
     <string name="add_plant">Добавить растение</string>
     <plurals name="hours_count">
         <item quantity="one">%1$d час</item>
@@ -52,4 +51,5 @@
     <string name="settings_header">Настройки приложения</string>
     <string name="revive_plant">Воскресить</string>
     <string name="info_died">Дата смерти</string>
+    <string name="settings_language">Язык</string>
 </resources>
