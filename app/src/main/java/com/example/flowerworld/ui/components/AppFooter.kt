@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -22,12 +22,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
+import com.example.flowerworld.ui.icons.Tombstone
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /** Sections the footer switches between, in display order. */
 enum class FooterTab(val icon: ImageVector, @StringRes val label: Int) {
+    Graveyard(Icons.Filled.Tombstone, R.string.footer_graveyard),
     Plants(Icons.Filled.Eco, R.string.footer_plants),
-    Profile(Icons.Filled.AccountCircle, R.string.footer_profile)
+    Settings(Icons.Filled.Settings, R.string.footer_settings)
 }
 
 private val ButtonSize = 38.dp

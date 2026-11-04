@@ -9,9 +9,9 @@
     <string name="show_password">Показать</string>
     <string name="hide_password">Скрыть</string>
     <string name="footer_plants">Растения</string>
-    <string name="footer_profile">Профиль</string>
+    <string name="footer_settings">Настройки</string>
     <string name="plant_viewer_placeholder">Просмотр растений</string>
-    <string name="account_viewer_placeholder">Пока не реализовано</string>
+    <string name="settings_placeholder">Пока не реализовано</string>
     <string name="add_plant">Добавить растение</string>
     <plurals name="hours_count">
         <item quantity="one">%1$d час</item>
@@ -40,10 +40,15 @@
     <string name="info_next_watering">Следующий полив</string>
     <string name="plant_not_found">Растение не найдено</string>
     <string name="plants_header">Ваши растения</string>
-    <string name="delete_plant">Удалить</string>
+    <string name="mark_dead">Мертво</string>
     <string name="reminder_hint_title">Надёжные напоминания</string>
     <string name="reminder_hint_text">Некоторые телефоны останавливают приложения в фоне, поэтому напоминания о поливе могут опаздывать или не приходить. Исключите FlowerWorld из оптимизации батареи и разрешите автозапуск.</string>
     <string name="reminder_hint_battery">Настройки оптимизации батареи</string>
     <string name="reminder_hint_autostart">Настройки автозапуска</string>
     <string name="reminder_hint_dismiss">Понятно</string>
+    <string name="footer_graveyard">Кладбище</string>
+    <string name="graveyard_header">Кладбище</string>
+    <string name="graveyard_empty">Мёртвых растений пока нет</string>
+    <string name="died_on">Умерло: %1$s</string>
+    <string name="settings_header">Настройки приложения</string>
 </resources>

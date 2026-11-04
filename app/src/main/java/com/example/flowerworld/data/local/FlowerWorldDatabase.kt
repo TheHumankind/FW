@@ -8,7 +8,7 @@ import androidx.sqlite.execSQL
 
 @Database(
     entities = [PlantEntity::class, PlantPhotoEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class FlowerWorldDatabase : RoomDatabase() {
@@ -16,6 +16,13 @@ abstract class FlowerWorldDatabase : RoomDatabase() {
 
     companion object {
         const val Name = "flowerworld.db"
+
+        /** Adds the time a plant died; null means alive. */
+        val Migration2To3 = object : Migration(2, 3) {
+            override fun migrate(connection: SQLiteConnection) {
+                connection.execSQL("ALTER TABLE plants ADD COLUMN diedAt INTEGER")
+            }
+        }
 
         /** Adds the last watering time; existing plants count as watered when they were added. */
         val Migration1To2 = object : Migration(1, 2) {

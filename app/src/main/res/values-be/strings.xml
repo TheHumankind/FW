@@ -9,9 +9,9 @@
     <string name="show_password">Паказаць</string>
     <string name="hide_password">Схаваць</string>
     <string name="footer_plants">Расліны</string>
-    <string name="footer_profile">Профіль</string>
+    <string name="footer_settings">Налады</string>
     <string name="plant_viewer_placeholder">Прагляд раслін</string>
-    <string name="account_viewer_placeholder">Пакуль не рэалізавана</string>
+    <string name="settings_placeholder">Пакуль не рэалізавана</string>
     <string name="add_plant">Дадаць расліну</string>
     <plurals name="hours_count">
         <item quantity="one">%1$d гадзіна</item>
@@ -40,10 +40,15 @@
     <string name="info_next_watering">Наступны паліў</string>
     <string name="plant_not_found">Расліна не знойдзена</string>
     <string name="plants_header">Вашы расліны</string>
-    <string name="delete_plant">Выдаліць</string>
+    <string name="mark_dead">Мёртва</string>
     <string name="reminder_hint_title">Надзейныя напамінкі</string>
     <string name="reminder_hint_text">Некаторыя тэлефоны спыняюць праграмы ў фоне, таму напамінкі пра паліў могуць спазняцца ці не прыходзіць. Выключыце FlowerWorld з аптымізацыі батарэі і дазвольце аўтазапуск.</string>
     <string name="reminder_hint_battery">Налады аптымізацыі батарэі</string>
     <string name="reminder_hint_autostart">Налады аўтазапуску</string>
     <string name="reminder_hint_dismiss">Зразумела</string>
+    <string name="footer_graveyard">Могілкі</string>
+    <string name="graveyard_header">Могілкі</string>
+    <string name="graveyard_empty">Мёртвых раслін пакуль няма</string>
+    <string name="died_on">Памерла: %1$s</string>
+    <string name="settings_header">Налады праграмы</string>
 </resources>

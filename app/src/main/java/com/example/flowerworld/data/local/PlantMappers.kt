@@ -11,6 +11,7 @@ fun PlantWithPhotos.toDomain(): Plant = Plant(
     name = plant.name,
     wateringIntervalHours = plant.wateringIntervalHours,
     lastWateredAt = plant.lastWateredAt,
+    diedAt = plant.diedAt,
     photos = photos
         .filterNot { it.isDeleted }
         .associate { LocalDate.ofEpochDay(it.dateEpochDay) to it.path },
@@ -24,6 +25,7 @@ fun Plant.toEntity(nowMillis: Long): PlantEntity = PlantEntity(
     name = name,
     wateringIntervalHours = wateringIntervalHours,
     lastWateredAt = lastWateredAt,
+    diedAt = diedAt,
     createdAt = nowMillis,
     updatedAt = nowMillis,
 )

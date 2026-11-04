@@ -19,6 +19,8 @@ data class MainUiState(
     // Selected footer tab; plants are shown by default
     val selectedTab: FooterTab = FooterTab.Plants,
     val plants: List<Plant> = emptyList(),
+    // The graveyard: plants marked as dead, the most recent first
+    val deadPlants: List<Plant> = emptyList(),
     // One-time hint about battery optimization and autostart, shown once the user has plants
     val showReminderHint: Boolean = false
 )
@@ -32,12 +34,14 @@ class MainViewModel(
     val uiState: StateFlow<MainUiState> = combine(
         selectedTab,
         plantRepository.plants,
+        plantRepository.deadPlants,
         settingsRepository.reminderHintShown
-    ) { tab, plants, hintShown ->
+    ) { tab, plants, deadPlants, hintShown ->
         MainUiState(
             selectedTab = tab,
             // the plant that needs watering first (overdue ones included) goes to the top
             plants = plants.sortedBy { it.nextWateringAt },
+            deadPlants = deadPlants,
             showReminderHint = plants.isNotEmpty() && !hintShown
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), MainUiState())
@@ -48,8 +52,8 @@ class MainViewModel(
         viewModelScope.launch { plantRepository.markWatered(plant.id) }
     }
 
-    fun onDeletePlant(plant: Plant) {
-        viewModelScope.launch { plantRepository.delete(plant.id) }
+    fun onPlantDied(plant: Plant) {
+        viewModelScope.launch { plantRepository.markDead(plant.id) }
     }
 
     fun onReminderHintDismiss() {

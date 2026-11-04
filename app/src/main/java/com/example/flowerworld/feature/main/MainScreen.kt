@@ -10,7 +10,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.Plant
-import com.example.flowerworld.feature.account.AccountViewer
+import com.example.flowerworld.feature.settings.SettingsViewer
+import com.example.flowerworld.feature.graveyard.GraveyardViewer
 import com.example.flowerworld.feature.plants.PlantViewer
 import com.example.flowerworld.ui.components.AppFooter
 import com.example.flowerworld.ui.components.AppScreen
@@ -45,7 +46,7 @@ fun MainScreen(
         onAddPlantClick = onAddPlantClick,
         onPlantClick = onPlantClick,
         onWaterPlant = viewModel::onWaterPlant,
-        onDeletePlant = viewModel::onDeletePlant,
+        onPlantDied = viewModel::onPlantDied,
         modifier = modifier
     )
 }
@@ -57,7 +58,7 @@ private fun MainContent(
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
-    onDeletePlant: (Plant) -> Unit,
+    onPlantDied: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AppScreen(modifier = modifier.statusBarsPadding()) {
@@ -67,10 +68,14 @@ private fun MainContent(
                 onAddPlantClick = onAddPlantClick,
                 onPlantClick = onPlantClick,
                 onWaterPlant = onWaterPlant,
-                onDeletePlant = onDeletePlant,
+                onPlantDied = onPlantDied,
                 modifier = Modifier.weight(1f)
             )
-            FooterTab.Profile -> AccountViewer(Modifier.weight(1f))
+            FooterTab.Graveyard -> GraveyardViewer(
+                deadPlants = state.deadPlants,
+                modifier = Modifier.weight(1f)
+            )
+            FooterTab.Settings -> SettingsViewer(Modifier.weight(1f))
         }
         AppFooter(
             selectedTab = state.selectedTab,
@@ -89,7 +94,7 @@ private fun MainContentPreview() {
             onAddPlantClick = {},
             onPlantClick = {},
             onWaterPlant = {},
-            onDeletePlant = {}
+            onPlantDied = {}
         )
     }
 }

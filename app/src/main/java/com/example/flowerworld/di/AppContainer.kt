@@ -21,7 +21,7 @@ class AppContainer(context: Context) {
 
     private val database: FlowerWorldDatabase by lazy {
         Room.databaseBuilder(appContext, FlowerWorldDatabase::class.java, FlowerWorldDatabase.Name)
-            .addMigrations(FlowerWorldDatabase.Migration1To2)
+            .addMigrations(FlowerWorldDatabase.Migration1To2, FlowerWorldDatabase.Migration2To3)
             .build()
     }
 

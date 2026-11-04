@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit
  * @property photos photo history: date the photo was taken -> path of the compressed photo in app storage.
  *   One photo per date; empty if there are none.
  * @property lastWateredAt epoch millis of the last watering; for a new plant, the time it was added.
+ * @property diedAt epoch millis when the user marked the plant as dead (it lives in the graveyard then); null while alive.
  */
 data class Plant(
     val id: String,
@@ -25,6 +26,7 @@ data class Plant(
     val wateringIntervalHours: Int,
     val photos: Map<LocalDate, String>,
     val lastWateredAt: Long = 0L,
+    val diedAt: Long? = null,
 ) {
     /** Epoch millis when the plant needs its next watering. */
     val nextWateringAt: Long get() = lastWateredAt + TimeUnit.HOURS.toMillis(wateringIntervalHours.toLong())

@@ -63,14 +63,14 @@ private val MenuMinWidth = 112.dp
 /**
  * Thin horizontal card of a plant: the latest photo on the left,
  * the name and the time left until the next watering on the right. Tap opens the plant,
- * long press opens a menu with "Watered" and "Delete" whose top-right corner is under the finger.
+ * long press opens a menu with "Watered" and "Dead" whose top-right corner is under the finger.
  */
 @Composable
 fun PlantCard(
     plant: Plant,
     onClick: () -> Unit,
     onWateredClick: () -> Unit,
-    onDeleteClick: () -> Unit,
+    onDeadClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
@@ -140,9 +140,9 @@ fun PlantCard(
                     menuExpanded = false
                     onWateredClick()
                 },
-                onDeleteClick = {
+                onDeadClick = {
                     menuExpanded = false
-                    onDeleteClick()
+                    onDeadClick()
                 }
             )
         }
@@ -158,7 +158,7 @@ private fun PlantCardMenu(
     touchPosition: Offset,
     onDismiss: () -> Unit,
     onWateredClick: () -> Unit,
-    onDeleteClick: () -> Unit
+    onDeadClick: () -> Unit
 ) {
     val positionProvider = remember(touchPosition) {
         object : PopupPositionProvider {
@@ -197,11 +197,11 @@ private fun PlantCardMenu(
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = stringResource(R.string.delete_plant),
+                            text = stringResource(R.string.mark_dead),
                             color = MaterialTheme.colorScheme.error
                         )
                     },
-                    onClick = onDeleteClick,
+                    onClick = onDeadClick,
                     modifier = Modifier.width(MenuMinWidth)
                 )
             }
@@ -228,6 +228,6 @@ private const val DurationMarker = "\u0000"
 @Composable
 private fun PlantCardPreview() {
     FlowerWorldTheme {
-        PlantCard(plant = TestPlants.first(), onClick = {}, onWateredClick = {}, onDeleteClick = {})
+        PlantCard(plant = TestPlants.first(), onClick = {}, onWateredClick = {}, onDeadClick = {})
     }
 }

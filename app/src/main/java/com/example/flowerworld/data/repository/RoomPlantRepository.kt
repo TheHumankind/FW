@@ -19,6 +19,9 @@ class RoomPlantRepository(
     override val plants: Flow<List<Plant>> =
         plantDao.observePlants().map { rows -> rows.map { it.toDomain() } }
 
+    override val deadPlants: Flow<List<Plant>> =
+        plantDao.observeDeadPlants().map { rows -> rows.map { it.toDomain() } }
+
     override suspend fun add(plant: Plant) {
         val now = clock.millis()
         plantDao.insert(plant.toEntity(now), plant.toPhotoEntities(now))
@@ -28,7 +31,7 @@ class RoomPlantRepository(
         plantDao.markWatered(plantId, clock.millis())
     }
 
-    override suspend fun delete(plantId: String) {
-        plantDao.markDeleted(plantId, clock.millis())
+    override suspend fun markDead(plantId: String) {
+        plantDao.markDead(plantId, clock.millis())
     }
 }

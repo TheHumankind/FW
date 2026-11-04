@@ -20,6 +20,7 @@ data class PlantEntity(
     val name: String,
     val wateringIntervalHours: Int,
     val lastWateredAt: Long,
+    val diedAt: Long? = null,
     val createdAt: Long,
     val updatedAt: Long,
     val isDeleted: Boolean = false,

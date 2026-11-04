@@ -99,6 +99,8 @@ so any backend can be plugged in later by one new class; do not tie the code to 
 - [x] Room and local data (plants and photo paths survive restarts)
 - [x] Watering reminders: `ReminderScheduler` (exact alarms), notification with a "Watered" action, reschedule on boot (`reminder/`); `Plant.lastWateredAt` (Room v2)
 - [x] Plant info screen opened by tapping a plant card
+- [x] Long-press menu on a plant card ("Watered", "Dead"); dead plants (`Plant.diedAt`, Room v3) go to the graveyard tab
+- [x] Footer tabs: graveyard, plants (center), app settings (placeholder)
 - [x] Battery optimization / autostart hint dialog (`ReminderHintDialog`, `ReminderSettings`; shown once via `SettingsRepository`)
 - [x] Reminders verified on the Honor: fire on time with the screen off, "Watered" action reschedules, alarms restored after reboot without opening the app
 - [ ] Backend choice and server integration (later)

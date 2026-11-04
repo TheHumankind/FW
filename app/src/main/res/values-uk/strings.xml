@@ -9,9 +9,9 @@
     <string name="show_password">Показати</string>
     <string name="hide_password">Сховати</string>
     <string name="footer_plants">Рослини</string>
-    <string name="footer_profile">Профіль</string>
+    <string name="footer_settings">Налаштування</string>
     <string name="plant_viewer_placeholder">Перегляд рослин</string>
-    <string name="account_viewer_placeholder">Поки не реалізовано</string>
+    <string name="settings_placeholder">Поки не реалізовано</string>
     <string name="add_plant">Додати рослину</string>
     <plurals name="hours_count">
         <item quantity="one">%1$d година</item>
@@ -40,10 +40,15 @@
     <string name="info_next_watering">Наступний полив</string>
     <string name="plant_not_found">Рослину не знайдено</string>
     <string name="plants_header">Ваші рослини</string>
-    <string name="delete_plant">Видалити</string>
+    <string name="mark_dead">Мертва</string>
     <string name="reminder_hint_title">Надійні нагадування</string>
     <string name="reminder_hint_text">Деякі телефони зупиняють застосунки у фоні, тому нагадування про полив можуть запізнюватися або не надходити. Виключіть FlowerWorld з оптимізації батареї та дозвольте автозапуск.</string>
     <string name="reminder_hint_battery">Налаштування оптимізації батареї</string>
     <string name="reminder_hint_autostart">Налаштування автозапуску</string>
     <string name="reminder_hint_dismiss">Зрозуміло</string>
+    <string name="footer_graveyard">Цвинтар</string>
+    <string name="graveyard_header">Цвинтар</string>
+    <string name="graveyard_empty">Мертвих рослин поки немає</string>
+    <string name="died_on">Загинула: %1$s</string>
+    <string name="settings_header">Налаштування застосунку</string>
 </resources>
