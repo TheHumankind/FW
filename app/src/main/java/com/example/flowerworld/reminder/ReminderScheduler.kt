@@ -40,11 +40,15 @@ class ReminderScheduler(
                 plant.nextWateringAt > now -> {
                     scheduleAt(plant.id, plant.nextWateringAt)
                     // watered (in the app or from the notification): the old reminder is obsolete
-                    NotificationManagerCompat.from(context).cancel(ReminderReceiver.notificationId(plant.id))
+                    dismissNotification(plant.id)
                 }
                 !hasAlarm(plant.id) -> scheduleAt(plant.id, now + OverdueDelayMillis)
             }
         }
+    }
+
+    private fun dismissNotification(plantId: String) {
+        NotificationManagerCompat.from(context).cancel(ReminderReceiver.plantIntId(plantId))
     }
 
     private fun cancel(plantId: String) {
@@ -52,7 +56,7 @@ class ReminderScheduler(
             alarmManager.cancel(it)
             it.cancel()
         }
-        NotificationManagerCompat.from(context).cancel(ReminderReceiver.notificationId(plantId))
+        dismissNotification(plantId)
     }
 
     // ids of the plants that had alarms at the last sync; kept on disk so a restart does not forget them
@@ -87,7 +91,7 @@ class ReminderScheduler(
             .putExtra(ReminderReceiver.ExtraPlantId, plantId)
         return PendingIntent.getBroadcast(
             context,
-            plantId.hashCode(),
+            ReminderReceiver.plantIntId(plantId),
             intent,
             flag or PendingIntent.FLAG_IMMUTABLE,
         )

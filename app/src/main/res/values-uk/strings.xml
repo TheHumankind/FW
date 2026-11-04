@@ -46,8 +46,7 @@
     <string name="reminder_hint_battery">Налаштування оптимізації батареї</string>
     <string name="reminder_hint_autostart">Налаштування автозапуску</string>
     <string name="reminder_hint_dismiss">Зрозуміло</string>
-    <string name="footer_graveyard">Цвинтар</string>
-    <string name="graveyard_header">Цвинтар</string>
+    <string name="graveyard_title">Цвинтар</string>
     <string name="graveyard_empty">Мертвих рослин поки немає</string>
     <string name="died_on">Загинула: %1$s</string>
     <string name="settings_header">Налаштування застосунку</string>

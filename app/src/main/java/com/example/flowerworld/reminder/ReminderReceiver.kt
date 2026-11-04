@@ -56,7 +56,7 @@ class ReminderReceiver : BroadcastReceiver() {
         if (!canNotify) return
         createChannel(context)
 
-        val requestCode = plantId.hashCode()
+        val requestCode = plantIntId(plantId)
         val open = PendingIntent.getActivity(
             context,
             requestCode,
@@ -81,7 +81,7 @@ class ReminderReceiver : BroadcastReceiver() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .addAction(0, context.getString(R.string.action_watered), watered)
             .build()
-        NotificationManagerCompat.from(context).notify(notificationId(plantId), notification)
+        NotificationManagerCompat.from(context).notify(plantIntId(plantId), notification)
     }
 
     companion object {
@@ -89,7 +89,8 @@ class ReminderReceiver : BroadcastReceiver() {
         const val ExtraPlantId = "plantId"
         const val ChannelId = "watering"
 
-        fun notificationId(plantId: String): Int = plantId.hashCode()
+        /** Int derived from the plant id: the notification id and the request code of its PendingIntents. */
+        fun plantIntId(plantId: String): Int = plantId.hashCode()
 
         /** Creates the notification channel; safe to call many times. */
         fun createChannel(context: Context) {
@@ -108,7 +109,7 @@ class WateredReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != ActionWatered) return
         val plantId = intent.getStringExtra(ReminderReceiver.ExtraPlantId) ?: return
-        NotificationManagerCompat.from(context).cancel(ReminderReceiver.notificationId(plantId))
+        NotificationManagerCompat.from(context).cancel(ReminderReceiver.plantIntId(plantId))
         launchAsync(context) { container ->
             container.plantRepository.markWatered(plantId)
             container.reminderScheduler.sync(container.plantRepository.plants.first())

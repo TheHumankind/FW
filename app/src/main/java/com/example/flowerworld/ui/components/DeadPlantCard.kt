@@ -1,30 +1,15 @@
 package com.example.flowerworld.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Eco
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.ui.formatDate
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 /**
  * Card of a dead plant in the graveyard: the last photo, the name and the date it died.
@@ -37,6 +22,7 @@ fun DeadPlantCard(
     onReviveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val diedText = plant.diedAt?.let { AnnotatedString(stringResource(R.string.died_on, formatDate(it))) }
     MenuCard(
         onClick = onClick,
         modifier = modifier,
@@ -50,47 +36,9 @@ fun DeadPlantCard(
             )
         }
     ) {
-        PhotoBox(
-            photoUri = plant.latestPhoto,
-            contentDescription = plant.name,
-            placeholder = Icons.Filled.Eco,
-            placeholderTint = MaterialTheme.colorScheme.onSecondary,
-            modifier = Modifier
-                .size(MenuCardHeight)
-                .background(MaterialTheme.colorScheme.secondary)
-        )
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .padding(horizontal = 12.dp, vertical = 10.dp),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = plant.name.uppercase(),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            plant.diedAt?.let { diedAt ->
-                Text(
-                    text = stringResource(R.string.died_on, formatDate(diedAt)),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        }
+        PlantCardBody(plant = plant, bottomText = diedText)
     }
 }
-
-private fun formatDate(epochMillis: Long): String =
-    DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-        .withZone(ZoneId.systemDefault())
-        .format(Instant.ofEpochMilli(epochMillis))
 
 @Preview(showBackground = true)
 @Composable

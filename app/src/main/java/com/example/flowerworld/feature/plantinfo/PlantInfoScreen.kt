@@ -32,12 +32,9 @@ import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
 import com.example.flowerworld.ui.components.AppScreen
 import com.example.flowerworld.ui.components.PhotoBox
+import com.example.flowerworld.ui.formatDateTime
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 private val PhotoHeight = 240.dp
 private val BackButtonSize = 36.dp
@@ -139,10 +136,6 @@ private fun InfoRow(label: String, value: String) {
     }
 }
 
-private fun formatDateTime(epochMillis: Long): String =
-    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
-        .withZone(ZoneId.systemDefault())
-        .format(Instant.ofEpochMilli(epochMillis))
 
 @Preview(showBackground = true)
 @Composable

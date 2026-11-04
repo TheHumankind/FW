@@ -46,8 +46,7 @@
     <string name="reminder_hint_battery">Налады аптымізацыі батарэі</string>
     <string name="reminder_hint_autostart">Налады аўтазапуску</string>
     <string name="reminder_hint_dismiss">Зразумела</string>
-    <string name="footer_graveyard">Могілкі</string>
-    <string name="graveyard_header">Могілкі</string>
+    <string name="graveyard_title">Могілкі</string>
     <string name="graveyard_empty">Мёртвых раслін пакуль няма</string>
     <string name="died_on">Памерла: %1$s</string>
     <string name="settings_header">Налады праграмы</string>

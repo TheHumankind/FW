@@ -1,15 +1,6 @@
 package com.example.flowerworld.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -19,19 +10,16 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /**
- * Thin horizontal card of a plant: the latest photo on the left,
- * the name and the time left until the next watering on the right. Tap opens the plant,
- * long press opens a menu with "Watered" and "Dead" whose top-right corner is under the finger.
+ * Card of a living plant: the latest photo, the name and the time left until the next watering.
+ * Tap opens the plant, long press opens a menu with "Watered" and "Dead" under the finger.
  */
 @Composable
 fun PlantCard(
@@ -41,6 +29,7 @@ fun PlantCard(
     onDeadClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val hoursLeft = remember(plant) { plant.hoursUntilNextWatering(System.currentTimeMillis()) }
     MenuCard(
         onClick = onClick,
         modifier = modifier,
@@ -62,44 +51,14 @@ fun PlantCard(
             )
         }
     ) {
-        PhotoBox(
-            photoUri = plant.latestPhoto,
-            contentDescription = plant.name,
-            placeholder = Icons.Filled.Eco,
-            placeholderTint = MaterialTheme.colorScheme.onSecondary,
-            modifier = Modifier
-                .size(MenuCardHeight)
-                .background(MaterialTheme.colorScheme.secondary)
+        PlantCardBody(
+            plant = plant,
+            bottomText = if (hoursLeft > 0) {
+                nextWateringText(hoursLeft)
+            } else {
+                AnnotatedString(stringResource(R.string.next_watering_overdue))
+            }
         )
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .padding(horizontal = 12.dp, vertical = 10.dp),
-            // the name is pinned to the top of the card, the watering line to the bottom
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = plant.name.uppercase(),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            val hoursLeft = remember(plant) { plant.hoursUntilNextWatering(System.currentTimeMillis()) }
-            Text(
-                text = if (hoursLeft > 0) {
-                    nextWateringText(hoursLeft)
-                } else {
-                    AnnotatedString(stringResource(R.string.next_watering_overdue))
-                },
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
     }
 }
 

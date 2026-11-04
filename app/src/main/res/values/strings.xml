@@ -44,8 +44,7 @@
     <string name="reminder_hint_battery">Battery optimization settings</string>
     <string name="reminder_hint_autostart">Autostart settings</string>
     <string name="reminder_hint_dismiss">Got it</string>
-    <string name="footer_graveyard">Graveyard</string>
-    <string name="graveyard_header">Graveyard</string>
+    <string name="graveyard_title">Graveyard</string>
     <string name="graveyard_empty">No dead plants yet</string>
     <string name="died_on">Died: %1$s</string>
     <string name="settings_header">App settings</string>

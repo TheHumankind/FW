@@ -27,7 +27,7 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /** Sections the footer switches between, in display order. */
 enum class FooterTab(val icon: ImageVector, @StringRes val label: Int) {
-    Graveyard(Icons.Filled.Tombstone, R.string.footer_graveyard),
+    Graveyard(Icons.Filled.Tombstone, R.string.graveyard_title),
     Plants(Icons.Filled.Eco, R.string.footer_plants),
     Settings(Icons.Filled.Settings, R.string.footer_settings)
 }

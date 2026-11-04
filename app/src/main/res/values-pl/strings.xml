@@ -46,8 +46,7 @@
     <string name="reminder_hint_battery">Ustawienia optymalizacji baterii</string>
     <string name="reminder_hint_autostart">Ustawienia autostartu</string>
     <string name="reminder_hint_dismiss">Rozumiem</string>
-    <string name="footer_graveyard">Cmentarz</string>
-    <string name="graveyard_header">Cmentarz</string>
+    <string name="graveyard_title">Cmentarz</string>
     <string name="graveyard_empty">Na razie brak martwych roślin</string>
     <string name="died_on">Zmarła: %1$s</string>
     <string name="settings_header">Ustawienia aplikacji</string>
