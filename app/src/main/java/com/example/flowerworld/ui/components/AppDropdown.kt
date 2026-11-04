@@ -22,7 +22,7 @@ import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /**
- * A field that opens a list of [items] to choose one from. [itemLabel] is the text of an item,
+ * A field that opens a list of [items] to choose one from. [label] is optional; [itemLabel] is the text of an item,
  * [itemLeading] an optional icon-like content in front of it (e.g. a flag), shown in the field and in the list.
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +31,7 @@ fun <T> AppDropdown(
     items: List<T>,
     selected: T,
     onSelect: (T) -> Unit,
-    label: String,
+    label: String?,
     itemLabel: @Composable (T) -> String,
     modifier: Modifier = Modifier,
     itemLeading: (@Composable (T) -> Unit)? = null
@@ -47,7 +47,7 @@ fun <T> AppDropdown(
             onValueChange = {},
             readOnly = true,
             singleLine = true,
-            label = { Text(label) },
+            label = label?.let { { Text(it) } },
             leadingIcon = itemLeading?.let { leading -> { leading(selected) } },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             shape = RoundedCornerShape(Dimens.ControlCornerRadius),

@@ -1,6 +1,5 @@
 package com.example.flowerworld.feature.settings
 
-import android.app.Activity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,7 +7,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -27,11 +25,9 @@ fun SettingsViewer(
     viewModel: SettingsViewModel = viewModel(factory = SettingsViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    val activity = LocalContext.current as? Activity
     SettingsContent(
         state = state,
-        // the activity restarts to read all strings in the new language
-        onLanguageSelect = { language -> viewModel.onLanguageSelect(language) { activity?.recreate() } },
+        onLanguageSelect = viewModel::onLanguageSelect,
         modifier = modifier
     )
 }

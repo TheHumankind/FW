@@ -25,7 +25,7 @@ class AddPlantUseCase(
         val plant = Plant(
             id = UUID.randomUUID().toString(),
             title = draft.title,
-            description = draft.description,
+            notes = draft.notes,
             name = draft.name,
             wateringIntervalHours = draft.wateringIntervalHours,
             photos = photos,

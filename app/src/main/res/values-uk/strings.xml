@@ -12,6 +12,12 @@
     <string name="footer_settings">Налаштування</string>
     <string name="plant_viewer_placeholder">Перегляд рослин</string>
     <string name="add_plant">Додати рослину</string>
+    <plurals name="days_count">
+        <item quantity="one">%1$d день</item>
+        <item quantity="few">%1$d дні</item>
+        <item quantity="many">%1$d днів</item>
+        <item quantity="other">%1$d дня</item>
+    </plurals>
     <plurals name="hours_count">
         <item quantity="one">%1$d година</item>
         <item quantity="few">%1$d години</item>
@@ -24,9 +30,11 @@
     <string name="choose_photo">Обрати фото</string>
     <string name="change_photo">Змінити фото</string>
     <string name="field_title">Назва</string>
-    <string name="field_description">Опис</string>
+    <string name="field_notes">Нотатки</string>
     <string name="field_name">Імʼя</string>
-    <string name="field_watering_interval">Інтервал поливу (години)</string>
+    <string name="field_watering_interval">Інтервал поливу</string>
+    <string name="unit_days">Дні</string>
+    <string name="unit_hours">Години</string>
     <string name="add">Додати</string>
     <string name="error_required">Обовʼязкове поле</string>
     <string name="error_invalid_number">Введіть ціле число більше 0</string>

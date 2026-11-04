@@ -2,10 +2,12 @@ package com.example.flowerworld.feature.addplant
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
+import androidx.annotation.StringRes
 import com.example.flowerworld.ui.components.AppButton
+import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppPhotoPicker
 import com.example.flowerworld.ui.components.AppScreen
 import com.example.flowerworld.ui.components.AppTextField
@@ -48,9 +52,10 @@ fun AddPlantScreen(
     AddPlantContent(
         state = state,
         onTitleChange = viewModel::onTitleChange,
-        onDescriptionChange = viewModel::onDescriptionChange,
+        onNotesChange = viewModel::onNotesChange,
         onNameChange = viewModel::onNameChange,
         onWateringIntervalChange = viewModel::onWateringIntervalChange,
+        onIntervalUnitChange = viewModel::onIntervalUnitChange,
         onPhotoClick = pickPhoto,
         onAddClick = viewModel::onAddClick,
         onBackClick = onClose,
@@ -62,9 +67,10 @@ fun AddPlantScreen(
 private fun AddPlantContent(
     state: AddPlantUiState,
     onTitleChange: (String) -> Unit,
-    onDescriptionChange: (String) -> Unit,
+    onNotesChange: (String) -> Unit,
     onNameChange: (String) -> Unit,
     onWateringIntervalChange: (String) -> Unit,
+    onIntervalUnitChange: (IntervalUnit) -> Unit,
     onPhotoClick: () -> Unit,
     onAddClick: () -> Unit,
     onBackClick: () -> Unit,
@@ -101,18 +107,29 @@ private fun AddPlantContent(
                 errorText = state.nameError?.message(),
                 modifier = Modifier.fillMaxWidth()
             )
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                AppTextField(
+                    value = state.wateringInterval,
+                    onValueChange = onWateringIntervalChange,
+                    label = stringResource(R.string.field_watering_interval),
+                    keyboardType = KeyboardType.Number,
+                    errorText = state.intervalError?.message(),
+                    modifier = Modifier.weight(1f)
+                )
+                AppDropdown(
+                    items = IntervalUnit.entries,
+                    selected = state.intervalUnit,
+                    onSelect = onIntervalUnitChange,
+                    label = null,
+                    itemLabel = { stringResource(it.nameRes) },
+                    // the text field starts half a label lower than a field without one
+                    modifier = Modifier.padding(top = 8.dp).width(UnitFieldWidth)
+                )
+            }
             AppTextField(
-                value = state.wateringInterval,
-                onValueChange = onWateringIntervalChange,
-                label = stringResource(R.string.field_watering_interval),
-                keyboardType = KeyboardType.Number,
-                errorText = state.intervalError?.message(),
-                modifier = Modifier.fillMaxWidth()
-            )
-            AppTextField(
-                value = state.description,
-                onValueChange = onDescriptionChange,
-                label = stringResource(R.string.field_description),
+                value = state.notes,
+                onValueChange = onNotesChange,
+                label = stringResource(R.string.field_notes),
                 singleLine = false,
                 minLines = 3,
                 imeAction = ImeAction.Default,
@@ -130,6 +147,15 @@ private fun AddPlantContent(
     }
 }
 
+private val UnitFieldWidth = 116.dp
+
+@get:StringRes
+private val IntervalUnit.nameRes: Int
+    get() = when (this) {
+        IntervalUnit.Days -> R.string.unit_days
+        IntervalUnit.Hours -> R.string.unit_hours
+    }
+
 @Composable
 private fun FieldError.message(): String = when (this) {
     FieldError.Required -> stringResource(R.string.error_required)
@@ -143,9 +169,10 @@ private fun AddPlantContentPreview() {
         AddPlantContent(
             state = AddPlantUiState(title = "Monstera", intervalError = FieldError.Required),
             onTitleChange = {},
-            onDescriptionChange = {},
+            onNotesChange = {},
             onNameChange = {},
             onWateringIntervalChange = {},
+            onIntervalUnitChange = {},
             onPhotoClick = {},
             onAddClick = {},
             onBackClick = {}

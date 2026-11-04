@@ -7,7 +7,7 @@ package com.example.flowerworld.domain.model
  */
 data class PlantDraft(
     val title: String,
-    val description: String,
+    val notes: String,
     val name: String,
     val wateringIntervalHours: Int,
     val photoSourceUri: String?,

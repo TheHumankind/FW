@@ -22,12 +22,8 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) : Vi
         .map { SettingsUiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), SettingsUiState.Loading)
 
-    /** Saves the language, then calls [onSaved] so the screen can restart to apply it. */
-    fun onLanguageSelect(language: AppLanguage, onSaved: () -> Unit) {
-        viewModelScope.launch {
-            settingsRepository.setLanguage(language)
-            onSaved()
-        }
+    fun onLanguageSelect(language: AppLanguage) {
+        viewModelScope.launch { settingsRepository.setLanguage(language) }
     }
 
     companion object {

@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -107,12 +108,12 @@ private fun PlantDetails(plant: Plant) {
         ) {
             InfoRow(stringResource(R.string.field_name), plant.name)
             InfoRow(stringResource(R.string.field_title), plant.title)
-            if (plant.description.isNotBlank()) {
-                InfoRow(stringResource(R.string.field_description), plant.description)
+            if (plant.notes.isNotBlank()) {
+                InfoRow(stringResource(R.string.field_notes), plant.notes)
             }
             InfoRow(
                 stringResource(R.string.field_watering_interval),
-                plant.wateringIntervalHours.toString()
+                wateringIntervalText(plant.wateringIntervalHours)
             )
             InfoRow(stringResource(R.string.info_last_watered), formatDateTime(plant.lastWateredAt))
             // a dead plant has no next watering, it has a date of death instead
@@ -147,3 +148,14 @@ private fun PlantInfoContentPreview() {
         )
     }
 }
+
+/** The interval in whole days when it is a multiple of 24 hours, otherwise in hours. */
+@Composable
+private fun wateringIntervalText(hours: Int): String =
+    if (hours % HoursInDay == 0) {
+        pluralStringResource(R.plurals.days_count, hours / HoursInDay, hours / HoursInDay)
+    } else {
+        pluralStringResource(R.plurals.hours_count, hours, hours)
+    }
+
+private const val HoursInDay = 24

@@ -12,6 +12,12 @@
     <string name="footer_settings">Ustawienia</string>
     <string name="plant_viewer_placeholder">Widok roślin</string>
     <string name="add_plant">Dodaj roślinę</string>
+    <plurals name="days_count">
+        <item quantity="one">%1$d dzień</item>
+        <item quantity="few">%1$d dni</item>
+        <item quantity="many">%1$d dni</item>
+        <item quantity="other">%1$d dnia</item>
+    </plurals>
     <plurals name="hours_count">
         <item quantity="one">%1$d godzina</item>
         <item quantity="few">%1$d godziny</item>
@@ -24,9 +30,11 @@
     <string name="choose_photo">Wybierz zdjęcie</string>
     <string name="change_photo">Zmień zdjęcie</string>
     <string name="field_title">Nazwa</string>
-    <string name="field_description">Opis</string>
+    <string name="field_notes">Notatki</string>
     <string name="field_name">Imię</string>
-    <string name="field_watering_interval">Odstęp między podlewaniami (godz.)</string>
+    <string name="field_watering_interval">Odstęp między podlewaniami</string>
+    <string name="unit_days">Dni</string>
+    <string name="unit_hours">Godziny</string>
     <string name="add">Dodaj</string>
     <string name="error_required">Pole wymagane</string>
     <string name="error_invalid_number">Podaj liczbę całkowitą większą od 0</string>

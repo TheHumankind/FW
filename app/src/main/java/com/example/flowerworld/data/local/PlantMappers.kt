@@ -7,7 +7,7 @@ import java.time.LocalDate
 fun PlantWithPhotos.toDomain(): Plant = Plant(
     id = plant.id,
     title = plant.title,
-    description = plant.description,
+    notes = plant.notes,
     name = plant.name,
     wateringIntervalHours = plant.wateringIntervalHours,
     lastWateredAt = plant.lastWateredAt,
@@ -21,7 +21,7 @@ fun PlantWithPhotos.toDomain(): Plant = Plant(
 fun Plant.toEntity(nowMillis: Long): PlantEntity = PlantEntity(
     id = id,
     title = title,
-    description = description,
+    notes = notes,
     name = name,
     wateringIntervalHours = wateringIntervalHours,
     lastWateredAt = lastWateredAt,

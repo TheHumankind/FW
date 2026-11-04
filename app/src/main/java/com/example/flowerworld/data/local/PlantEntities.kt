@@ -1,5 +1,6 @@
 package com.example.flowerworld.data.local
 
+import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -16,7 +17,8 @@ import androidx.room.Relation
 data class PlantEntity(
     @PrimaryKey val id: String,
     val title: String,
-    val description: String,
+    // the column keeps its old name: SQLite on older Android cannot rename columns, so no migration is needed
+    @ColumnInfo(name = "description") val notes: String,
     val name: String,
     val wateringIntervalHours: Int,
     val lastWateredAt: Long,

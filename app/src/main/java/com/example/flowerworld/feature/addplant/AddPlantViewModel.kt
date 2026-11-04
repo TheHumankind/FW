@@ -11,12 +11,16 @@ import java.io.IOException
 /** Why a form field is not valid; the screen turns it into a message. */
 enum class FieldError { Required, InvalidNumber }
 
+/** What the watering interval is counted in; [hours] is the length of one unit. */
+enum class IntervalUnit(val hours: Int) { Days(24), Hours(1) }
+
 data class AddPlantUiState(
     val title: String = "",
-    val description: String = "",
+    val notes: String = "",
     val name: String = "",
     // Kept as text while typing; parsed on "Add"
     val wateringInterval: String = "",
+    val intervalUnit: IntervalUnit = IntervalUnit.Days,
     val photoUri: String? = null,
     val titleError: FieldError? = null,
     val nameError: FieldError? = null,
@@ -31,12 +35,14 @@ class AddPlantViewModel(
 ) : UiStateViewModel<AddPlantUiState>(AddPlantUiState()) {
     fun onTitleChange(value: String) = updateState { copy(title = value, titleError = null) }
 
-    fun onDescriptionChange(value: String) = updateState { copy(description = value) }
+    fun onNotesChange(value: String) = updateState { copy(notes = value) }
 
     fun onNameChange(value: String) = updateState { copy(name = value, nameError = null) }
 
     fun onWateringIntervalChange(value: String) =
         updateState { copy(wateringInterval = value, intervalError = null) }
+
+    fun onIntervalUnitChange(unit: IntervalUnit) = updateState { copy(intervalUnit = unit, intervalError = null) }
 
     fun onPhotoPicked(uri: String) = updateState { copy(photoUri = uri, saveFailed = false) }
 
@@ -48,7 +54,12 @@ class AddPlantViewModel(
         val name = state.name.trim()
         val titleError = FieldError.Required.takeIf { title.isEmpty() }
         val nameError = FieldError.Required.takeIf { name.isEmpty() }
-        val interval = state.wateringInterval.trim().toIntOrNull()?.takeIf { it > 0 }
+        // the interval is stored in hours; a value too big for that counts as invalid
+        val interval = state.wateringInterval.trim().toLongOrNull()
+            ?.takeIf { it > 0 }
+            ?.times(state.intervalUnit.hours)
+            ?.takeIf { it <= Int.MAX_VALUE }
+            ?.toInt()
         val intervalError = when {
             state.wateringInterval.isBlank() -> FieldError.Required
             interval == null -> FieldError.InvalidNumber
@@ -61,7 +72,7 @@ class AddPlantViewModel(
 
         val draft = PlantDraft(
             title = title,
-            description = state.description.trim(),
+            notes = state.notes.trim(),
             name = name,
             wateringIntervalHours = interval,
             photoSourceUri = state.photoUri

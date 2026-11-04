@@ -16,7 +16,7 @@ val TestPlants: List<Plant> = listOf(
     Plant(
         id = "00000000-0000-4000-8000-000000000001",
         title = "Seedling",
-        description = "A young sprout that grows near the kitchen window.",
+        notes = "A young sprout that grows near the kitchen window.",
         name = "Sprout",
         wateringIntervalHours = 48,
         photos = mapOf(
@@ -27,7 +27,7 @@ val TestPlants: List<Plant> = listOf(
     Plant(
         id = "00000000-0000-4000-8000-000000000002",
         title = "Linden",
-        description = "Likes bright light, water when the top soil is dry.",
+        notes = "Likes bright light, water when the top soil is dry.",
         name = "Lindy",
         wateringIntervalHours = 72,
         photos = mapOf(
@@ -37,7 +37,7 @@ val TestPlants: List<Plant> = listOf(
     Plant(
         id = "00000000-0000-4000-8000-000000000003",
         title = "Hyacinth",
-        description = "Two bulbs in a wicker pot, waiting for the flowers.",
+        notes = "Two bulbs in a wicker pot, waiting for the flowers.",
         name = "Jacinta",
         wateringIntervalHours = 168,
         photos = mapOf(
@@ -48,7 +48,7 @@ val TestPlants: List<Plant> = listOf(
     Plant(
         id = "00000000-0000-4000-8000-000000000004",
         title = "Unknown plant",
-        description = "",
+        notes = "",
         name = "Mystery",
         wateringIntervalHours = 96,
         photos = emptyMap(),
