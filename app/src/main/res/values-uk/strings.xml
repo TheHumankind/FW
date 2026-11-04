@@ -64,4 +64,7 @@
     <string name="settings_cards_section">Картки рослин</string>
     <string name="settings_card_heading">Заголовок рослини, що відображається</string>
     <string name="settings_general_section">Загальні</string>
+    <string name="edit">Редагувати</string>
+    <string name="save">Зберегти</string>
+    <string name="cancel">Скасувати</string>
 </resources>

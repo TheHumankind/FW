@@ -28,10 +28,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
+import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
 import com.example.flowerworld.ui.components.AppScreen
+import com.example.flowerworld.ui.components.LongPressMenuBox
+import com.example.flowerworld.ui.components.MenuCardItem
 import com.example.flowerworld.ui.components.PhotoBox
 import com.example.flowerworld.ui.formatDateTime
 import com.example.flowerworld.ui.theme.Dimens
@@ -49,13 +52,25 @@ fun PlantInfoScreen(
     viewModel: PlantInfoViewModel = viewModel(factory = PlantInfoViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    PlantInfoContent(state = state, onBackClick = onBackClick, modifier = modifier)
+    PlantInfoContent(
+        state = state,
+        onBackClick = onBackClick,
+        onEditRequest = viewModel::onEditRequest,
+        onEditInput = viewModel::onEditInput,
+        onEditDismiss = viewModel::onEditDismiss,
+        onEditSave = viewModel::onEditSave,
+        modifier = modifier
+    )
 }
 
 @Composable
 private fun PlantInfoContent(
     state: PlantInfoUiState,
     onBackClick: () -> Unit,
+    onEditRequest: (PlantField) -> Unit,
+    onEditInput: () -> Unit,
+    onEditDismiss: () -> Unit,
+    onEditSave: (text: String, unit: IntervalUnit) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AppScreen(modifier = modifier) {
@@ -63,7 +78,18 @@ private fun PlantInfoContent(
             when (state) {
                 PlantInfoUiState.Loading -> Unit
                 PlantInfoUiState.Error -> AppCenteredMessage(text = stringResource(R.string.plant_not_found))
-                is PlantInfoUiState.Success -> PlantDetails(state.plant)
+                is PlantInfoUiState.Success -> {
+                    PlantDetails(state.plant, onEditRequest)
+                    state.edit?.let { edit ->
+                        EditPlantFieldDialog(
+                            plant = state.plant,
+                            edit = edit,
+                            onSave = onEditSave,
+                            onInput = onEditInput,
+                            onDismiss = onEditDismiss
+                        )
+                    }
+                }
             }
             // sticky: stays in the bottom-right corner while the details scroll, within thumb reach
             AppIconButton(
@@ -81,7 +107,7 @@ private fun PlantInfoContent(
 }
 
 @Composable
-private fun PlantDetails(plant: Plant) {
+private fun PlantDetails(plant: Plant, onEditRequest: (PlantField) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -106,15 +132,17 @@ private fun PlantDetails(plant: Plant) {
                 .padding(bottom = BackButtonSize + BackButtonPadding * 2),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            InfoRow(stringResource(R.string.field_name), plant.name)
-            InfoRow(stringResource(R.string.field_title), plant.title)
-            if (plant.notes.isNotBlank()) {
-                InfoRow(stringResource(R.string.field_notes), plant.notes)
+            // a long press on an editable row offers to edit it; the system rows below cannot be edited
+            EditableInfoRow(stringResource(R.string.field_name), plant.name) { onEditRequest(PlantField.Name) }
+            EditableInfoRow(stringResource(R.string.field_title), plant.title) { onEditRequest(PlantField.Title) }
+            // an empty note still has a row, otherwise there would be nothing to long press to add one
+            EditableInfoRow(stringResource(R.string.field_notes), plant.notes.ifBlank { EmptyValue }) {
+                onEditRequest(PlantField.Notes)
             }
-            InfoRow(
+            EditableInfoRow(
                 stringResource(R.string.field_watering_interval),
                 wateringIntervalText(plant.wateringIntervalHours)
-            )
+            ) { onEditRequest(PlantField.WateringInterval) }
             InfoRow(stringResource(R.string.info_last_watered), formatDateTime(plant.lastWateredAt))
             // a dead plant has no next watering, it has a date of death instead
             plant.diedAt
@@ -123,6 +151,26 @@ private fun PlantDetails(plant: Plant) {
         }
     }
 }
+
+/** An [InfoRow] whose long press opens a small menu with "Edit"; [onEditClick] opens the editor. */
+@Composable
+private fun EditableInfoRow(label: String, value: String, onEditClick: () -> Unit) {
+    LongPressMenuBox(
+        menu = { dismiss ->
+            MenuCardItem(
+                text = stringResource(R.string.edit),
+                onClick = {
+                    dismiss()
+                    onEditClick()
+                }
+            )
+        }
+    ) {
+        InfoRow(label, value)
+    }
+}
+
+private const val EmptyValue = "\u2014"
 
 /** A small label with its value underneath. */
 @Composable
@@ -144,7 +192,11 @@ private fun PlantInfoContentPreview() {
     FlowerWorldTheme {
         PlantInfoContent(
             state = PlantInfoUiState.Success(TestPlants.first()),
-            onBackClick = {}
+            onBackClick = {},
+            onEditRequest = {},
+            onEditInput = {},
+            onEditDismiss = {},
+            onEditSave = { _, _ -> }
         )
     }
 }

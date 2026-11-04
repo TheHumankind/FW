@@ -64,4 +64,7 @@
     <string name="settings_cards_section">Карткі раслін</string>
     <string name="settings_card_heading">Адлюстроўваемы загаловак расліны</string>
     <string name="settings_general_section">Агульныя</string>
+    <string name="edit">Рэдагаваць</string>
+    <string name="save">Захаваць</string>
+    <string name="cancel">Скасаваць</string>
 </resources>

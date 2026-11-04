@@ -4,14 +4,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.flowerworld.di.containerViewModelFactory
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.PlantDraft
+import com.example.flowerworld.domain.model.parseIntervalHours
 import com.example.flowerworld.domain.usecase.AddPlantUseCase
+import com.example.flowerworld.ui.FieldError
 import com.example.flowerworld.ui.UiStateViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
-
-/** Why a form field is not valid; the screen turns it into a message. */
-enum class FieldError { Required, InvalidNumber }
-
 
 data class AddPlantUiState(
     val title: String = "",
@@ -53,12 +51,7 @@ class AddPlantViewModel(
         val name = state.name.trim()
         val titleError = FieldError.Required.takeIf { title.isEmpty() }
         val nameError = FieldError.Required.takeIf { name.isEmpty() }
-        // the interval is stored in hours; a value too big for that counts as invalid
-        val interval = state.wateringInterval.trim().toLongOrNull()
-            ?.takeIf { it > 0 }
-            ?.times(state.intervalUnit.hours)
-            ?.takeIf { it <= Int.MAX_VALUE }
-            ?.toInt()
+        val interval = parseIntervalHours(state.wateringInterval, state.intervalUnit)
         val intervalError = when {
             state.wateringInterval.isBlank() -> FieldError.Required
             interval == null -> FieldError.InvalidNumber

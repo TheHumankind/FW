@@ -30,6 +30,16 @@ class RoomPlantRepository(
         plantDao.insert(plant.toEntity(now), plant.toPhotoEntities(now))
     }
 
+    override suspend fun updateDetails(
+        plantId: String,
+        title: String,
+        name: String,
+        notes: String,
+        wateringIntervalHours: Int
+    ) {
+        plantDao.updateDetails(plantId, title, name, notes, wateringIntervalHours, clock.millis())
+    }
+
     override suspend fun markWatered(plantId: String) {
         plantDao.markWatered(plantId, clock.millis())
     }

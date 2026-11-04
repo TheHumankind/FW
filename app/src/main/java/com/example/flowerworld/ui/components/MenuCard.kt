@@ -107,7 +107,7 @@ fun MenuCardItem(
 
 /** Popup whose top-right corner is at [touchPosition] (relative to the parent) and that stays inside the window. */
 @Composable
-private fun TouchPointMenu(
+internal fun TouchPointMenu(
     touchPosition: Offset,
     onDismiss: () -> Unit,
     content: @Composable ColumnScope.() -> Unit

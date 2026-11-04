@@ -66,4 +66,7 @@
     <string name="settings_cards_section">Plant cards</string>
     <string name="settings_card_heading">Displayed plant title</string>
     <string name="settings_general_section">General</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

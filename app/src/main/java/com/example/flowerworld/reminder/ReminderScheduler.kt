@@ -39,8 +39,14 @@ class ReminderScheduler(
             when {
                 plant.nextWateringAt > now -> {
                     scheduleAt(plant.id, plant.nextWateringAt)
+                    prefs.edit().putLong(syncedAtKey(plant.id), plant.nextWateringAt).apply()
                     // watered (in the app or from the notification): the old reminder is obsolete
                     dismissNotification(plant.id)
+                }
+                // the interval was shortened: the alarm from an earlier sync is still waiting for a later time
+                prefs.getLong(syncedAtKey(plant.id), 0L) > now -> {
+                    prefs.edit().remove(syncedAtKey(plant.id)).apply()
+                    scheduleAt(plant.id, now + OverdueDelayMillis)
                 }
                 !hasAlarm(plant.id) -> scheduleAt(plant.id, now + OverdueDelayMillis)
             }
@@ -61,6 +67,9 @@ class ReminderScheduler(
 
     // ids of the plants that had alarms at the last sync; kept on disk so a restart does not forget them
     private val prefs = context.getSharedPreferences(PrefsName, Context.MODE_PRIVATE)
+
+    // when the alarm set by the last sync is due (not the repeat ones set after a reminder)
+    private fun syncedAtKey(plantId: String) = "syncedAt_$plantId"
 
     private fun scheduledIds(): Set<String> = prefs.getStringSet(KeyScheduledIds, emptySet()).orEmpty()
 

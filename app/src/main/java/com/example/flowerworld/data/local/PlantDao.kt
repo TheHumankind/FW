@@ -31,6 +31,20 @@ interface PlantDao {
     @Query("UPDATE plants SET diedAt = :diedAt, updatedAt = :diedAt WHERE id = :id AND isDeleted = 0")
     suspend fun markDead(id: String, diedAt: Long)
 
+    /** Saves the user-editable details; also bumps the sync modification time. */
+    @Query(
+        "UPDATE plants SET title = :title, name = :name, description = :notes, " +
+            "wateringIntervalHours = :wateringIntervalHours, updatedAt = :updatedAt WHERE id = :id AND isDeleted = 0"
+    )
+    suspend fun updateDetails(
+        id: String,
+        title: String,
+        name: String,
+        notes: String,
+        wateringIntervalHours: Int,
+        updatedAt: Long,
+    )
+
     /** Records a watering at [wateredAt] (epoch millis); also bumps the sync modification time. */
     @Query("UPDATE plants SET lastWateredAt = :wateredAt, updatedAt = :wateredAt WHERE id = :id AND isDeleted = 0")
     suspend fun markWatered(id: String, wateredAt: Long)

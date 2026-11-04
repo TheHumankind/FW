@@ -25,6 +25,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.IntervalUnit
+import com.example.flowerworld.ui.FieldError
+import com.example.flowerworld.ui.message
 import com.example.flowerworld.ui.nameRes
 import com.example.flowerworld.ui.components.AppButton
 import com.example.flowerworld.ui.components.AppDropdown
@@ -149,12 +151,6 @@ private fun AddPlantContent(
 }
 
 private val UnitFieldWidth = 116.dp
-
-@Composable
-private fun FieldError.message(): String = when (this) {
-    FieldError.Required -> stringResource(R.string.error_required)
-    FieldError.InvalidNumber -> stringResource(R.string.error_invalid_number)
-}
 
 @Preview(showBackground = true)
 @Composable

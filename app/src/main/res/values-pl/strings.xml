@@ -64,4 +64,7 @@
     <string name="settings_cards_section">Karty roślin</string>
     <string name="settings_card_heading">Wyświetlany tytuł rośliny</string>
     <string name="settings_general_section">Ogólne</string>
+    <string name="edit">Edytuj</string>
+    <string name="save">Zapisz</string>
+    <string name="cancel">Anuluj</string>
 </resources>

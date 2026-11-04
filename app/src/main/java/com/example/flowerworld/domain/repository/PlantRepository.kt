@@ -16,6 +16,9 @@ interface PlantRepository {
 
     suspend fun add(plant: Plant)
 
+    /** Replaces the details the user can edit; the next watering time follows from [wateringIntervalHours]. */
+    suspend fun updateDetails(plantId: String, title: String, name: String, notes: String, wateringIntervalHours: Int)
+
     /** Records that the plant with [plantId] was watered just now. */
     suspend fun markWatered(plantId: String)
 
