@@ -47,6 +47,7 @@ fun MainScreen(
         onPlantClick = onPlantClick,
         onWaterPlant = viewModel::onWaterPlant,
         onPlantDied = viewModel::onPlantDied,
+        onRevivePlant = viewModel::onRevivePlant,
         modifier = modifier
     )
 }
@@ -59,6 +60,7 @@ private fun MainContent(
     onPlantClick: (Plant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
+    onRevivePlant: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AppScreen(modifier = modifier.statusBarsPadding()) {
@@ -73,6 +75,8 @@ private fun MainContent(
             )
             FooterTab.Graveyard -> GraveyardViewer(
                 deadPlants = state.deadPlants,
+                onPlantClick = onPlantClick,
+                onRevivePlant = onRevivePlant,
                 modifier = Modifier.weight(1f)
             )
             FooterTab.Settings -> SettingsViewer(Modifier.weight(1f))
@@ -94,7 +98,8 @@ private fun MainContentPreview() {
             onAddPlantClick = {},
             onPlantClick = {},
             onWaterPlant = {},
-            onPlantDied = {}
+            onPlantDied = {},
+            onRevivePlant = {}
         )
     }
 }

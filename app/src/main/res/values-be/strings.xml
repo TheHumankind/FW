@@ -51,4 +51,6 @@
     <string name="graveyard_empty">Мёртвых раслін пакуль няма</string>
     <string name="died_on">Памерла: %1$s</string>
     <string name="settings_header">Налады праграмы</string>
+    <string name="revive_plant">Ажывіць</string>
+    <string name="info_died">Дата смерці</string>
 </resources>

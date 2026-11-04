@@ -49,4 +49,6 @@
     <string name="graveyard_empty">No dead plants yet</string>
     <string name="died_on">Died: %1$s</string>
     <string name="settings_header">App settings</string>
+    <string name="revive_plant">Revive</string>
+    <string name="info_died">Date of death</string>
 </resources>

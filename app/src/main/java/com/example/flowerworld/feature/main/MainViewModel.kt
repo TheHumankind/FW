@@ -56,6 +56,10 @@ class MainViewModel(
         viewModelScope.launch { plantRepository.markDead(plant.id) }
     }
 
+    fun onRevivePlant(plant: Plant) {
+        viewModelScope.launch { plantRepository.revive(plant.id) }
+    }
+
     fun onReminderHintDismiss() {
         viewModelScope.launch { settingsRepository.markReminderHintShown() }
     }

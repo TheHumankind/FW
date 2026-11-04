@@ -51,4 +51,6 @@
     <string name="graveyard_empty">Мёртвых растений пока нет</string>
     <string name="died_on">Умерло: %1$s</string>
     <string name="settings_header">Настройки приложения</string>
+    <string name="revive_plant">Воскресить</string>
+    <string name="info_died">Дата смерти</string>
 </resources>

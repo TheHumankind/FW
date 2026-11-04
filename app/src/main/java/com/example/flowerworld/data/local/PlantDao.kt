@@ -18,6 +18,15 @@ interface PlantDao {
     @Query("SELECT * FROM plants WHERE isDeleted = 0 AND diedAt IS NOT NULL ORDER BY diedAt DESC, id")
     fun observeDeadPlants(): Flow<List<PlantWithPhotos>>
 
+    /** One plant, alive or dead, or null if it does not exist. Emits again whenever it changes. */
+    @Transaction
+    @Query("SELECT * FROM plants WHERE id = :id AND isDeleted = 0")
+    fun observePlant(id: String): Flow<PlantWithPhotos?>
+
+    /** Brings the plant back from the graveyard; also bumps the sync modification time. */
+    @Query("UPDATE plants SET diedAt = NULL, updatedAt = :revivedAt WHERE id = :id AND isDeleted = 0")
+    suspend fun markAlive(id: String, revivedAt: Long)
+
     /** Moves the plant to the graveyard at [diedAt] (epoch millis); also bumps the sync modification time. */
     @Query("UPDATE plants SET diedAt = :diedAt, updatedAt = :diedAt WHERE id = :id AND isDeleted = 0")
     suspend fun markDead(id: String, diedAt: Long)

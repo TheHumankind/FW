@@ -118,7 +118,10 @@ private fun PlantDetails(plant: Plant) {
                 plant.wateringIntervalHours.toString()
             )
             InfoRow(stringResource(R.string.info_last_watered), formatDateTime(plant.lastWateredAt))
-            InfoRow(stringResource(R.string.info_next_watering), formatDateTime(plant.nextWateringAt))
+            // a dead plant has no next watering, it has a date of death instead
+            plant.diedAt
+                ?.let { InfoRow(stringResource(R.string.info_died), formatDateTime(it)) }
+                ?: InfoRow(stringResource(R.string.info_next_watering), formatDateTime(plant.nextWateringAt))
         }
     }
 }

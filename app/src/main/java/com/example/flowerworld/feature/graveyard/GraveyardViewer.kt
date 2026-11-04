@@ -28,6 +28,8 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 @Composable
 fun GraveyardViewer(
     deadPlants: List<Plant>,
+    onPlantClick: (Plant) -> Unit,
+    onRevivePlant: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxSize()) {
@@ -48,7 +50,13 @@ fun GraveyardViewer(
                     verticalArrangement = Arrangement.spacedBy(Dimens.ListItemSpacing),
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(deadPlants, key = { it.id }) { plant -> DeadPlantCard(plant = plant) }
+                    items(deadPlants, key = { it.id }) { plant ->
+                        DeadPlantCard(
+                            plant = plant,
+                            onClick = { onPlantClick(plant) },
+                            onReviveClick = { onRevivePlant(plant) }
+                        )
+                    }
                 }
             }
         }
@@ -59,6 +67,10 @@ fun GraveyardViewer(
 @Composable
 private fun GraveyardViewerPreview() {
     FlowerWorldTheme {
-        GraveyardViewer(deadPlants = TestPlants.map { it.copy(diedAt = 1_790_000_000_000L) })
+        GraveyardViewer(
+            deadPlants = TestPlants.map { it.copy(diedAt = 1_790_000_000_000L) },
+            onPlantClick = {},
+            onRevivePlant = {}
+        )
     }
 }

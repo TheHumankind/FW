@@ -51,4 +51,6 @@
     <string name="graveyard_empty">Na razie brak martwych roślin</string>
     <string name="died_on">Zmarła: %1$s</string>
     <string name="settings_header">Ustawienia aplikacji</string>
+    <string name="revive_plant">Ożyw</string>
+    <string name="info_died">Data śmierci</string>
 </resources>

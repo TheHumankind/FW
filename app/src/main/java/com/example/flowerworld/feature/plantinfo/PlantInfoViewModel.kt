@@ -30,12 +30,8 @@ class PlantInfoViewModel(
 ) : ViewModel() {
     private val plantId: String = checkNotNull(savedStateHandle[PlantIdArg])
 
-    val uiState: StateFlow<PlantInfoUiState> = plantRepository.plants
-        .map { plants ->
-            plants.firstOrNull { it.id == plantId }
-                ?.let { PlantInfoUiState.Success(it) }
-                ?: PlantInfoUiState.Error
-        }
+    val uiState: StateFlow<PlantInfoUiState> = plantRepository.plant(plantId)
+        .map { plant -> if (plant != null) PlantInfoUiState.Success(plant) else PlantInfoUiState.Error }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), PlantInfoUiState.Loading)
 
     companion object {

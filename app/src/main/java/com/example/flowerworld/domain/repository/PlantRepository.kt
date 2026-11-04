@@ -11,6 +11,9 @@ interface PlantRepository {
     /** The graveyard: plants the user marked as dead, the most recent first. */
     val deadPlants: Flow<List<Plant>>
 
+    /** One plant, alive or dead; emits null if there is no such plant. */
+    fun plant(plantId: String): Flow<Plant?>
+
     suspend fun add(plant: Plant)
 
     /** Records that the plant with [plantId] was watered just now. */
@@ -18,4 +21,7 @@ interface PlantRepository {
 
     /** Moves the plant with [plantId] from [plants] to [deadPlants]. */
     suspend fun markDead(plantId: String)
+
+    /** Moves the plant with [plantId] back from [deadPlants] to [plants], as it was. */
+    suspend fun revive(plantId: String)
 }
