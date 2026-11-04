@@ -60,4 +60,5 @@
     <string name="revive_plant">Ажывіць</string>
     <string name="info_died">Дата смерці</string>
     <string name="settings_language">Мова</string>
+    <string name="settings_card_time_unit">Час на картках раслін</string>
 </resources>

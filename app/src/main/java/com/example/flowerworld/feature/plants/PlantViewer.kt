@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
+import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
@@ -36,13 +37,14 @@ fun PlantViewer(
     onPlantClick: (Plant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
+    timeUnit: IntervalUnit,
     modifier: Modifier = Modifier
 ) {
     AppListScreen(title = stringResource(R.string.plants_header), modifier = modifier) {
         if (plants.isEmpty()) {
             AppCenteredMessage(text = stringResource(R.string.plant_viewer_placeholder))
         } else {
-            PlantList(plants, onPlantClick, onWaterPlant, onPlantDied)
+            PlantList(plants, timeUnit, onPlantClick, onWaterPlant, onPlantDied)
         }
         AppIconButton(
             icon = Icons.Filled.AddCircle,
@@ -59,6 +61,7 @@ fun PlantViewer(
 @Composable
 private fun BoxScope.PlantList(
     plants: List<Plant>,
+    timeUnit: IntervalUnit,
     onPlantClick: (Plant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit
@@ -79,7 +82,8 @@ private fun BoxScope.PlantList(
                 plant = plant,
                 onClick = { onPlantClick(plant) },
                 onWateredClick = { onWaterPlant(plant) },
-                onDeadClick = { onPlantDied(plant) }
+                onDeadClick = { onPlantDied(plant) },
+                timeUnit = timeUnit
             )
         }
     }
@@ -89,6 +93,8 @@ private fun BoxScope.PlantList(
 @Composable
 private fun PlantViewerPreview() {
     FlowerWorldTheme {
-        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {}, onWaterPlant = {}, onPlantDied = {})
+        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {}, onWaterPlant = {}, onPlantDied = {},
+            timeUnit = IntervalUnit.Hours
+        )
     }
 }

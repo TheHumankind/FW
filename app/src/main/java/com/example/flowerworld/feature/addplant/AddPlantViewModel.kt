@@ -2,6 +2,7 @@ package com.example.flowerworld.feature.addplant
 
 import androidx.lifecycle.viewModelScope
 import com.example.flowerworld.di.containerViewModelFactory
+import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.PlantDraft
 import com.example.flowerworld.domain.usecase.AddPlantUseCase
 import com.example.flowerworld.ui.UiStateViewModel
@@ -11,8 +12,6 @@ import java.io.IOException
 /** Why a form field is not valid; the screen turns it into a message. */
 enum class FieldError { Required, InvalidNumber }
 
-/** What the watering interval is counted in; [hours] is the length of one unit. */
-enum class IntervalUnit(val hours: Int) { Days(24), Hours(1) }
 
 data class AddPlantUiState(
     val title: String = "",

@@ -14,6 +14,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
+import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
@@ -27,9 +28,10 @@ fun PlantCard(
     onClick: () -> Unit,
     onWateredClick: () -> Unit,
     onDeadClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    timeUnit: IntervalUnit = IntervalUnit.Hours
 ) {
-    val hoursLeft = remember(plant) { plant.hoursUntilNextWatering(System.currentTimeMillis()) }
+    val timeLeft = remember(plant, timeUnit) { plant.timeUntilNextWatering(System.currentTimeMillis(), timeUnit) }
     MenuCard(
         onClick = onClick,
         modifier = modifier,
@@ -53,8 +55,8 @@ fun PlantCard(
     ) {
         PlantCardBody(
             plant = plant,
-            bottomText = if (hoursLeft > 0) {
-                nextWateringText(hoursLeft)
+            bottomText = if (timeLeft > 0) {
+                nextWateringText(timeLeft, timeUnit)
             } else {
                 AnnotatedString(stringResource(R.string.next_watering_overdue))
             }
@@ -62,10 +64,14 @@ fun PlantCard(
     }
 }
 
-/** "9 hours until next watering" with only the time ("9 hours") in bold. */
+/** "9 hours until next watering" (or days) with only the time ("9 hours") in bold. */
 @Composable
-private fun nextWateringText(hours: Int): AnnotatedString {
-    val duration = pluralStringResource(R.plurals.hours_count, hours, hours)
+private fun nextWateringText(count: Int, unit: IntervalUnit): AnnotatedString {
+    val plural = when (unit) {
+        IntervalUnit.Days -> R.plurals.days_count
+        IntervalUnit.Hours -> R.plurals.hours_count
+    }
+    val duration = pluralStringResource(plural, count, count)
     // the translated sentence decides where the duration goes, so split it around a marker
     val parts = stringResource(R.string.next_watering_in, DurationMarker).split(DurationMarker)
     return buildAnnotatedString {

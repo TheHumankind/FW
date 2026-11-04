@@ -34,7 +34,8 @@ data class Plant(
     /** Path of the most recent photo, or null if there are none. */
     val latestPhoto: String? get() = photos.maxByOrNull { it.key }?.value
 
-    /** Whole hours left until the next watering, rounded up; 0 when it is already due. */
-    fun hoursUntilNextWatering(nowMillis: Long): Int =
-        Math.ceilDiv(nextWateringAt - nowMillis, TimeUnit.HOURS.toMillis(1)).coerceAtLeast(0L).toInt()
+    /** Whole [unit]s left until the next watering, rounded up; 0 when it is already due. */
+    fun timeUntilNextWatering(nowMillis: Long, unit: IntervalUnit): Int =
+        Math.ceilDiv(nextWateringAt - nowMillis, TimeUnit.HOURS.toMillis(unit.hours.toLong()))
+            .coerceAtLeast(0L).toInt()
 }

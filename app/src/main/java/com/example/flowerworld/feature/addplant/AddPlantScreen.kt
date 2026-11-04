@@ -24,7 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
-import androidx.annotation.StringRes
+import com.example.flowerworld.domain.model.IntervalUnit
+import com.example.flowerworld.ui.nameRes
 import com.example.flowerworld.ui.components.AppButton
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppPhotoPicker
@@ -148,13 +149,6 @@ private fun AddPlantContent(
 }
 
 private val UnitFieldWidth = 116.dp
-
-@get:StringRes
-private val IntervalUnit.nameRes: Int
-    get() = when (this) {
-        IntervalUnit.Days -> R.string.unit_days
-        IntervalUnit.Hours -> R.string.unit_hours
-    }
 
 @Composable
 private fun FieldError.message(): String = when (this) {

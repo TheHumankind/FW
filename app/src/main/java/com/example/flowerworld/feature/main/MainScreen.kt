@@ -71,6 +71,7 @@ private fun MainContent(
                 onPlantClick = onPlantClick,
                 onWaterPlant = onWaterPlant,
                 onPlantDied = onPlantDied,
+                timeUnit = state.cardTimeUnit,
                 modifier = Modifier.weight(1f)
             )
             FooterTab.Graveyard -> GraveyardViewer(
