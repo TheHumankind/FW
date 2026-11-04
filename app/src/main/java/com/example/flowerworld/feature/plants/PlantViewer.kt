@@ -2,6 +2,8 @@ package com.example.flowerworld.feature.plants
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,10 +11,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
@@ -35,7 +40,28 @@ fun PlantViewer(
     onPlantClick: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier.fillMaxSize()) {
+    Column(modifier = modifier.fillMaxSize()) {
+        Text(
+            text = stringResource(R.string.plants_header),
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = Dimens.ListPadding, end = Dimens.ListPadding, top = Dimens.ListPadding)
+        )
+        Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
+            PlantList(plants, onAddPlantClick, onPlantClick)
+        }
+    }
+}
+
+@Composable
+private fun PlantList(
+    plants: List<Plant>,
+    onAddPlantClick: () -> Unit,
+    onPlantClick: (Plant) -> Unit
+) {
+    Box(modifier = Modifier.fillMaxSize()) {
         if (plants.isEmpty()) {
             AppCenteredMessage(text = stringResource(R.string.plant_viewer_placeholder))
         } else {

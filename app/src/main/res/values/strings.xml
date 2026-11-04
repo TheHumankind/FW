@@ -36,4 +36,5 @@
     <string name="info_last_watered">Last watered</string>
     <string name="info_next_watering">Next watering</string>
     <string name="plant_not_found">Plant not found</string>
+    <string name="plants_header">Your plants</string>
 </resources>

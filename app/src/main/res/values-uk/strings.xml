@@ -38,4 +38,5 @@
     <string name="info_last_watered">Останній полив</string>
     <string name="info_next_watering">Наступний полив</string>
     <string name="plant_not_found">Рослину не знайдено</string>
+    <string name="plants_header">Ваші рослини</string>
 </resources>
