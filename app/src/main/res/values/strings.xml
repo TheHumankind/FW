@@ -13,10 +13,11 @@
     <string name="plant_viewer_placeholder">Plant view</string>
     <string name="account_viewer_placeholder">Not implemented for now</string>
     <string name="add_plant">Add plant</string>
-    <plurals name="next_watering_in_hours">
-        <item quantity="one">%1$d hour until next watering</item>
-        <item quantity="other">%1$d hours until next watering</item>
+    <plurals name="hours_count">
+        <item quantity="one">%1$d hour</item>
+        <item quantity="other">%1$d hours</item>
     </plurals>
+    <string name="next_watering_in">%1$s until next watering</string>
     <string name="next_watering_overdue">Watering is overdue</string>
     <string name="back">Back</string>
     <string name="choose_photo">Choose photo</string>

@@ -42,7 +42,7 @@ fun PlantViewer(
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         Text(
-            text = stringResource(R.string.plants_header),
+            text = stringResource(R.string.plants_header).uppercase(),
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier

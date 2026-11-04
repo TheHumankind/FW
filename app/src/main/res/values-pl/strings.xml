@@ -13,12 +13,13 @@
     <string name="plant_viewer_placeholder">Widok roślin</string>
     <string name="account_viewer_placeholder">Jeszcze nie zaimplementowano</string>
     <string name="add_plant">Dodaj roślinę</string>
-    <plurals name="next_watering_in_hours">
-        <item quantity="one">Do następnego podlewania: %1$d godzina</item>
-        <item quantity="few">Do następnego podlewania: %1$d godziny</item>
-        <item quantity="many">Do następnego podlewania: %1$d godzin</item>
-        <item quantity="other">Do następnego podlewania: %1$d godziny</item>
+    <plurals name="hours_count">
+        <item quantity="one">%1$d godzina</item>
+        <item quantity="few">%1$d godziny</item>
+        <item quantity="many">%1$d godzin</item>
+        <item quantity="other">%1$d godziny</item>
     </plurals>
+    <string name="next_watering_in">Do następnego podlewania: %1$s</string>
     <string name="next_watering_overdue">Podlewanie jest spóźnione</string>
     <string name="back">Wstecz</string>
     <string name="choose_photo">Wybierz zdjęcie</string>

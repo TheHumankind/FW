@@ -13,12 +13,13 @@
     <string name="plant_viewer_placeholder">Перегляд рослин</string>
     <string name="account_viewer_placeholder">Поки не реалізовано</string>
     <string name="add_plant">Додати рослину</string>
-    <plurals name="next_watering_in_hours">
-        <item quantity="one">До наступного поливу: %1$d година</item>
-        <item quantity="few">До наступного поливу: %1$d години</item>
-        <item quantity="many">До наступного поливу: %1$d годин</item>
-        <item quantity="other">До наступного поливу: %1$d години</item>
+    <plurals name="hours_count">
+        <item quantity="one">%1$d година</item>
+        <item quantity="few">%1$d години</item>
+        <item quantity="many">%1$d годин</item>
+        <item quantity="other">%1$d години</item>
     </plurals>
+    <string name="next_watering_in">До наступного поливу: %1$s</string>
     <string name="next_watering_overdue">Полив прострочено</string>
     <string name="back">Назад</string>
     <string name="choose_photo">Обрати фото</string>
