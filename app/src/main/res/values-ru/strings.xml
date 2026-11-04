@@ -67,4 +67,9 @@
     <string name="edit">Редактировать</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
+    <string name="add_photo">Добавить фото</string>
+    <string name="delete_photo">Удалить фото</string>
+    <string name="delete_photo_title">Удалить это фото?</string>
+    <string name="delete_photo_text">Фото будет безвозвратно удалено из этого растения.</string>
+    <string name="delete">Удалить</string>
 </resources>

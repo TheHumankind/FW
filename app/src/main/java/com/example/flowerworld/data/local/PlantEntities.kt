@@ -28,10 +28,9 @@ data class PlantEntity(
     val isDeleted: Boolean = false,
 )
 
-/** One photo of a plant, taken on [dateEpochDay]; only one photo per plant per day. */
+/** One photo of a plant, added at [takenAt] (epoch millis). A deleted photo stays as a row until the server knows about it. */
 @Entity(
     tableName = "plant_photos",
-    primaryKeys = ["plantId", "dateEpochDay"],
     foreignKeys = [
         ForeignKey(
             entity = PlantEntity::class,
@@ -43,8 +42,9 @@ data class PlantEntity(
     indices = [Index("plantId")],
 )
 data class PlantPhotoEntity(
+    @PrimaryKey val id: String,
     val plantId: String,
-    val dateEpochDay: Long,
+    val takenAt: Long,
     val path: String,
     val updatedAt: Long,
     val isDeleted: Boolean = false,

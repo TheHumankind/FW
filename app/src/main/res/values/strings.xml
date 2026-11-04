@@ -69,4 +69,9 @@
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="add_photo">Add photo</string>
+    <string name="delete_photo">Delete photo</string>
+    <string name="delete_photo_title">Delete this photo?</string>
+    <string name="delete_photo_text">The photo will be removed from this plant for good.</string>
+    <string name="delete">Delete</string>
 </resources>

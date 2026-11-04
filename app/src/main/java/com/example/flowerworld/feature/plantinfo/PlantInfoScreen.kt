@@ -10,14 +10,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Eco
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
@@ -30,12 +37,16 @@ import com.example.flowerworld.R
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantPhoto
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
 import com.example.flowerworld.ui.components.AppScreen
 import com.example.flowerworld.ui.components.LongPressMenuBox
 import com.example.flowerworld.ui.components.MenuCardItem
-import com.example.flowerworld.ui.components.PhotoBox
+import com.example.flowerworld.ui.components.AppTextButton
+import com.example.flowerworld.ui.components.PhotoPager
+import com.example.flowerworld.ui.components.photoPageCount
+import com.example.flowerworld.ui.components.rememberPhotoPicker
 import com.example.flowerworld.ui.formatDateTime
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
@@ -52,8 +63,11 @@ fun PlantInfoScreen(
     viewModel: PlantInfoViewModel = viewModel(factory = PlantInfoViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val pickPhoto = rememberPhotoPicker(viewModel::onPhotoPicked)
     PlantInfoContent(
         state = state,
+        onAddPhotoClick = pickPhoto,
+        onDeletePhoto = viewModel::onPhotoDelete,
         onBackClick = onBackClick,
         onEditRequest = viewModel::onEditRequest,
         onEditInput = viewModel::onEditInput,
@@ -66,6 +80,8 @@ fun PlantInfoScreen(
 @Composable
 private fun PlantInfoContent(
     state: PlantInfoUiState,
+    onAddPhotoClick: () -> Unit,
+    onDeletePhoto: (PlantPhoto) -> Unit,
     onBackClick: () -> Unit,
     onEditRequest: (PlantField) -> Unit,
     onEditInput: () -> Unit,
@@ -79,7 +95,7 @@ private fun PlantInfoContent(
                 PlantInfoUiState.Loading -> Unit
                 PlantInfoUiState.Error -> AppCenteredMessage(text = stringResource(R.string.plant_not_found))
                 is PlantInfoUiState.Success -> {
-                    PlantDetails(state.plant, onEditRequest)
+                    PlantDetails(state.plant, state.photoFailed, onAddPhotoClick, onDeletePhoto, onEditRequest)
                     state.edit?.let { edit ->
                         EditPlantFieldDialog(
                             plant = state.plant,
@@ -107,7 +123,31 @@ private fun PlantInfoContent(
 }
 
 @Composable
-private fun PlantDetails(plant: Plant, onEditRequest: (PlantField) -> Unit) {
+private fun PlantDetails(
+    plant: Plant,
+    photoFailed: Boolean,
+    onAddPhotoClick: () -> Unit,
+    onDeletePhoto: (PlantPhoto) -> Unit,
+    onEditRequest: (PlantField) -> Unit
+) {
+    val photos = plant.photosNewestFirst
+    val pagerState = rememberPagerState { photoPageCount(photos.size) }
+    // a new photo is the newest one: show it
+    var lastPhotoCount by remember { mutableIntStateOf(photos.size) }
+    LaunchedEffect(photos.size) {
+        if (photos.size > lastPhotoCount) pagerState.animateScrollToPage(0)
+        lastPhotoCount = photos.size
+    }
+    var photoToDelete by remember { mutableStateOf<PlantPhoto?>(null) }
+    photoToDelete?.let { photo ->
+        DeletePhotoDialog(
+            onConfirm = {
+                photoToDelete = null
+                onDeletePhoto(photo)
+            },
+            onDismiss = { photoToDelete = null }
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -115,14 +155,46 @@ private fun PlantDetails(plant: Plant, onEditRequest: (PlantField) -> Unit) {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        PhotoBox(
-            photoUri = plant.latestPhoto,
-            contentDescription = plant.name,
-            placeholder = Icons.Filled.Eco,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(PhotoHeight)
-        )
+        // a long press on the photos offers to add a photo or to delete the one on screen
+        LongPressMenuBox(
+            menu = { dismiss ->
+                MenuCardItem(
+                    text = stringResource(R.string.add_photo),
+                    onClick = {
+                        dismiss()
+                        onAddPhotoClick()
+                    }
+                )
+                photos.getOrNull(pagerState.currentPage)?.let { photo ->
+                    MenuCardItem(
+                        text = stringResource(R.string.delete_photo),
+                        color = MaterialTheme.colorScheme.error,
+                        onClick = {
+                            dismiss()
+                            photoToDelete = photo
+                        }
+                    )
+                }
+            }
+        ) {
+            PhotoPager(
+                photoPaths = photos.map { it.path },
+                pagerState = pagerState,
+                contentDescription = plant.name,
+                placeholder = Icons.Filled.Eco,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(PhotoHeight)
+            )
+        }
+        if (photoFailed) {
+            Text(
+                text = stringResource(R.string.error_save_failed),
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(horizontal = Dimens.ScreenHorizontalPadding)
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -150,6 +222,17 @@ private fun PlantDetails(plant: Plant, onEditRequest: (PlantField) -> Unit) {
                 ?: InfoRow(stringResource(R.string.info_next_watering), formatDateTime(plant.nextWateringAt))
         }
     }
+}
+
+@Composable
+private fun DeletePhotoDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.delete_photo_title)) },
+        text = { Text(stringResource(R.string.delete_photo_text)) },
+        confirmButton = { AppTextButton(text = stringResource(R.string.delete), onClick = onConfirm) },
+        dismissButton = { AppTextButton(text = stringResource(R.string.cancel), onClick = onDismiss) }
+    )
 }
 
 /** An [InfoRow] whose long press opens a small menu with "Edit"; [onEditClick] opens the editor. */
@@ -192,6 +275,8 @@ private fun PlantInfoContentPreview() {
     FlowerWorldTheme {
         PlantInfoContent(
             state = PlantInfoUiState.Success(TestPlants.first()),
+            onAddPhotoClick = {},
+            onDeletePhoto = {},
             onBackClick = {},
             onEditRequest = {},
             onEditInput = {},

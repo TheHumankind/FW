@@ -3,8 +3,10 @@ package com.example.flowerworld.data.repository
 import com.example.flowerworld.data.local.PlantDao
 import com.example.flowerworld.data.local.toDomain
 import com.example.flowerworld.data.local.toEntity
+import com.example.flowerworld.data.local.toEntity
 import com.example.flowerworld.data.local.toPhotoEntities
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantPhoto
 import com.example.flowerworld.domain.repository.PlantRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -38,6 +40,14 @@ class RoomPlantRepository(
         wateringIntervalHours: Int
     ) {
         plantDao.updateDetails(plantId, title, name, notes, wateringIntervalHours, clock.millis())
+    }
+
+    override suspend fun addPhoto(plantId: String, photo: PlantPhoto) {
+        plantDao.insertPhoto(photo.toEntity(plantId, clock.millis()))
+    }
+
+    override suspend fun deletePhoto(photoId: String) {
+        plantDao.markPhotoDeleted(photoId, clock.millis())
     }
 
     override suspend fun markWatered(plantId: String) {

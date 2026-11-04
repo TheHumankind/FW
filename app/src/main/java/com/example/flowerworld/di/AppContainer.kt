@@ -9,7 +9,9 @@ import com.example.flowerworld.data.storage.FilePhotoStorage
 import com.example.flowerworld.domain.repository.PlantRepository
 import com.example.flowerworld.domain.repository.SettingsRepository
 import com.example.flowerworld.domain.storage.PhotoStorage
+import com.example.flowerworld.domain.usecase.AddPlantPhotoUseCase
 import com.example.flowerworld.domain.usecase.AddPlantUseCase
+import com.example.flowerworld.domain.usecase.DeletePlantPhotoUseCase
 import com.example.flowerworld.reminder.ReminderScheduler
 
 /**
@@ -21,7 +23,11 @@ class AppContainer(context: Context) {
 
     private val database: FlowerWorldDatabase by lazy {
         Room.databaseBuilder(appContext, FlowerWorldDatabase::class.java, FlowerWorldDatabase.Name)
-            .addMigrations(FlowerWorldDatabase.Migration1To2, FlowerWorldDatabase.Migration2To3)
+            .addMigrations(
+                FlowerWorldDatabase.Migration1To2,
+                FlowerWorldDatabase.Migration2To3,
+                FlowerWorldDatabase.Migration3To4
+            )
             .build()
     }
 
@@ -30,4 +36,6 @@ class AppContainer(context: Context) {
     val settingsRepository: SettingsRepository by lazy { PrefsSettingsRepository(appContext) }
     val photoStorage: PhotoStorage by lazy { FilePhotoStorage(appContext) }
     val addPlantUseCase: AddPlantUseCase by lazy { AddPlantUseCase(plantRepository, photoStorage) }
+    val addPlantPhotoUseCase: AddPlantPhotoUseCase by lazy { AddPlantPhotoUseCase(plantRepository, photoStorage) }
+    val deletePlantPhotoUseCase: DeletePlantPhotoUseCase by lazy { DeletePlantPhotoUseCase(plantRepository, photoStorage) }
 }

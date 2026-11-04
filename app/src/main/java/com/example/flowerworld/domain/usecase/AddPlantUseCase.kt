@@ -2,12 +2,12 @@ package com.example.flowerworld.domain.usecase
 
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantDraft
+import com.example.flowerworld.domain.model.PlantPhoto
 import com.example.flowerworld.domain.repository.PlantRepository
 import com.example.flowerworld.domain.storage.PhotoStorage
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
 import java.time.Clock
-import java.time.LocalDate
 import java.util.UUID
 
 /** Creates a plant from a [PlantDraft]: stores its photo (if any) and saves the plant. */
@@ -20,7 +20,7 @@ class AddPlantUseCase(
     suspend operator fun invoke(draft: PlantDraft) {
         val photos = draft.photoSourceUri
             ?.let { photoStorage.import(it) }
-            ?.let { path -> mapOf(LocalDate.now(clock) to path) }
+            ?.let { path -> listOf(PlantPhoto(UUID.randomUUID().toString(), path, clock.millis())) }
             .orEmpty()
         val plant = Plant(
             id = UUID.randomUUID().toString(),
@@ -35,7 +35,7 @@ class AddPlantUseCase(
             plantRepository.add(plant)
         } catch (e: Exception) {
             // do not leave an orphan file behind when saving the plant failed
-            withContext(NonCancellable) { photos.values.forEach { photoStorage.delete(it) } }
+            withContext(NonCancellable) { photos.forEach { photoStorage.delete(it.path) } }
             throw e
         }
     }

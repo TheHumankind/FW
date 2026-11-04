@@ -50,6 +50,13 @@ interface PlantDao {
     suspend fun markWatered(id: String, wateredAt: Long)
 
     @Insert
+    suspend fun insertPhoto(photo: PlantPhotoEntity)
+
+    /** Marks the photo as deleted; also bumps the sync modification time. */
+    @Query("UPDATE plant_photos SET isDeleted = 1, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun markPhotoDeleted(id: String, updatedAt: Long)
+
+    @Insert
     suspend fun insertPlant(plant: PlantEntity)
 
     @Insert

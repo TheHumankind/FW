@@ -1,7 +1,7 @@
 package com.example.flowerworld.data.local
 
 import com.example.flowerworld.domain.model.Plant
-import java.time.LocalDate
+import com.example.flowerworld.domain.model.PlantPhoto
 
 /** Rows without the deleted ones turned into the domain model. */
 fun PlantWithPhotos.toDomain(): Plant = Plant(
@@ -14,7 +14,7 @@ fun PlantWithPhotos.toDomain(): Plant = Plant(
     diedAt = plant.diedAt,
     photos = photos
         .filterNot { it.isDeleted }
-        .associate { LocalDate.ofEpochDay(it.dateEpochDay) to it.path },
+        .map { PlantPhoto(id = it.id, path = it.path, takenAt = it.takenAt) },
 )
 
 /** A new plant as a row; [nowMillis] becomes both its creation and modification time. */
@@ -30,11 +30,12 @@ fun Plant.toEntity(nowMillis: Long): PlantEntity = PlantEntity(
     updatedAt = nowMillis,
 )
 
-fun Plant.toPhotoEntities(nowMillis: Long): List<PlantPhotoEntity> = photos.map { (date, path) ->
-    PlantPhotoEntity(
-        plantId = id,
-        dateEpochDay = date.toEpochDay(),
-        path = path,
-        updatedAt = nowMillis,
-    )
-}
+fun Plant.toPhotoEntities(nowMillis: Long): List<PlantPhotoEntity> = photos.map { it.toEntity(id, nowMillis) }
+
+fun PlantPhoto.toEntity(plantId: String, nowMillis: Long): PlantPhotoEntity = PlantPhotoEntity(
+    id = id,
+    plantId = plantId,
+    takenAt = takenAt,
+    path = path,
+    updatedAt = nowMillis,
+)

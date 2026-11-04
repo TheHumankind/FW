@@ -9,7 +9,10 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flowerworld.di.appContainer
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantPhoto
 import com.example.flowerworld.domain.model.parseIntervalHours
+import com.example.flowerworld.domain.usecase.AddPlantPhotoUseCase
+import com.example.flowerworld.domain.usecase.DeletePlantPhotoUseCase
 import com.example.flowerworld.domain.repository.PlantRepository
 import com.example.flowerworld.ui.FieldError
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +21,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 /** The details of a plant the user can edit; the other rows of the screen are system data. */
 enum class PlantField { Name, Title, Notes, WateringInterval }
@@ -28,7 +32,12 @@ data class PlantEdit(val field: PlantField, val error: FieldError? = null)
 /** What the plant info screen shows. */
 sealed interface PlantInfoUiState {
     data object Loading : PlantInfoUiState
-    data class Success(val plant: Plant, val edit: PlantEdit? = null) : PlantInfoUiState
+    data class Success(
+        val plant: Plant,
+        val edit: PlantEdit? = null,
+        /** The last photo could not be stored. */
+        val photoFailed: Boolean = false
+    ) : PlantInfoUiState
 
     /** There is no (non-deleted) plant with the requested id. */
     data object Error : PlantInfoUiState
@@ -37,14 +46,35 @@ sealed interface PlantInfoUiState {
 /** Observes one plant, chosen by the [PlantIdArg] navigation argument, and edits its details. */
 class PlantInfoViewModel(
     private val plantRepository: PlantRepository,
+    private val addPlantPhoto: AddPlantPhotoUseCase,
+    private val deletePlantPhoto: DeletePlantPhotoUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val plantId: String = checkNotNull(savedStateHandle[PlantIdArg])
     private val edit = MutableStateFlow<PlantEdit?>(null)
+    private val photoFailed = MutableStateFlow(false)
 
-    val uiState: StateFlow<PlantInfoUiState> = combine(plantRepository.plant(plantId), edit) { plant, edit ->
-        if (plant != null) PlantInfoUiState.Success(plant, edit) else PlantInfoUiState.Error
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), PlantInfoUiState.Loading)
+    val uiState: StateFlow<PlantInfoUiState> =
+        combine(plantRepository.plant(plantId), edit, photoFailed) { plant, edit, photoFailed ->
+            if (plant != null) PlantInfoUiState.Success(plant, edit, photoFailed) else PlantInfoUiState.Error
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), PlantInfoUiState.Loading)
+
+    /** The user picked an image to add to the plant. */
+    fun onPhotoPicked(uri: String) {
+        photoFailed.value = false
+        viewModelScope.launch {
+            try {
+                addPlantPhoto(plantId, uri)
+            } catch (e: IOException) {
+                photoFailed.value = true
+            }
+        }
+    }
+
+    fun onPhotoDelete(photo: PlantPhoto) {
+        photoFailed.value = false
+        viewModelScope.launch { deletePlantPhoto(photo) }
+    }
 
     fun onEditRequest(field: PlantField) {
         edit.value = PlantEdit(field)
@@ -96,7 +126,14 @@ class PlantInfoViewModel(
         private const val StopTimeoutMillis = 5_000L
 
         val Factory = viewModelFactory {
-            initializer { PlantInfoViewModel(appContainer.plantRepository, createSavedStateHandle()) }
+            initializer {
+                PlantInfoViewModel(
+                    appContainer.plantRepository,
+                    appContainer.addPlantPhotoUseCase,
+                    appContainer.deletePlantPhotoUseCase,
+                    createSavedStateHandle()
+                )
+            }
         }
     }
 }

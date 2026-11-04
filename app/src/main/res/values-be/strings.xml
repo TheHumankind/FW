@@ -67,4 +67,9 @@
     <string name="edit">Рэдагаваць</string>
     <string name="save">Захаваць</string>
     <string name="cancel">Скасаваць</string>
+    <string name="add_photo">Дадаць фота</string>
+    <string name="delete_photo">Выдаліць фота</string>
+    <string name="delete_photo_title">Выдаліць гэта фота?</string>
+    <string name="delete_photo_text">Фота будзе незваротна выдалена з гэтай расліны.</string>
+    <string name="delete">Выдаліць</string>
 </resources>

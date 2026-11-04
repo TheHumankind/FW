@@ -5,7 +5,7 @@ interface PhotoStorage {
     /**
      * Compresses the image behind [sourceUri] (e.g. a picked gallery image) into app storage.
      *
-     * @return path of the stored photo, to be saved in [com.example.flowerworld.domain.model.Plant.photos].
+     * @return path of the stored photo, to be saved in [com.example.flowerworld.domain.model.PlantPhoto.path].
      * @throws java.io.IOException if the source cannot be read or the photo cannot be written.
      */
     suspend fun import(sourceUri: String): String

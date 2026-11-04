@@ -2,7 +2,9 @@ package com.example.flowerworld.data.fake
 
 import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantPhoto
 import java.time.LocalDate
+import java.time.ZoneOffset
 
 // TEST DATA: made up, not real user content. Remove together with the test photos
 // (res/drawable-nodpi/test_plant_*) once the fake repository is replaced by Room.
@@ -10,6 +12,12 @@ import java.time.LocalDate
 private const val ResourceUriPrefix = "android.resource://com.example.flowerworld/"
 
 private fun drawableUri(resId: Int): String = ResourceUriPrefix + resId
+
+private fun photo(id: Int, date: LocalDate, resId: Int) = PlantPhoto(
+    id = "10000000-0000-4000-8000-%012d".format(id),
+    path = drawableUri(resId),
+    takenAt = date.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli(),
+)
 
 /** Plants for rendering the UI before real data exists. */
 val TestPlants: List<Plant> = listOf(
@@ -19,9 +27,9 @@ val TestPlants: List<Plant> = listOf(
         notes = "A young sprout that grows near the kitchen window.",
         name = "Sprout",
         wateringIntervalHours = 48,
-        photos = mapOf(
-            LocalDate.of(2026, 10, 1) to drawableUri(R.drawable.test_plant_1),
-            LocalDate.of(2026, 10, 20) to drawableUri(R.drawable.test_plant_2),
+        photos = listOf(
+            photo(1, LocalDate.of(2026, 10, 1), R.drawable.test_plant_1),
+            photo(2, LocalDate.of(2026, 10, 20), R.drawable.test_plant_2),
         ),
     ),
     Plant(
@@ -30,8 +38,8 @@ val TestPlants: List<Plant> = listOf(
         notes = "Likes bright light, water when the top soil is dry.",
         name = "Lindy",
         wateringIntervalHours = 72,
-        photos = mapOf(
-            LocalDate.of(2026, 10, 15) to drawableUri(R.drawable.test_plant_2),
+        photos = listOf(
+            photo(3, LocalDate.of(2026, 10, 15), R.drawable.test_plant_2),
         ),
     ),
     Plant(
@@ -40,9 +48,9 @@ val TestPlants: List<Plant> = listOf(
         notes = "Two bulbs in a wicker pot, waiting for the flowers.",
         name = "Jacinta",
         wateringIntervalHours = 168,
-        photos = mapOf(
-            LocalDate.of(2026, 9, 28) to drawableUri(R.drawable.test_plant_3),
-            LocalDate.of(2026, 10, 25) to drawableUri(R.drawable.test_plant_3),
+        photos = listOf(
+            photo(4, LocalDate.of(2026, 9, 28), R.drawable.test_plant_3),
+            photo(5, LocalDate.of(2026, 10, 25), R.drawable.test_plant_3),
         ),
     ),
     Plant(
@@ -51,6 +59,6 @@ val TestPlants: List<Plant> = listOf(
         notes = "",
         name = "Mystery",
         wateringIntervalHours = 96,
-        photos = emptyMap(),
+        photos = emptyList(),
     ),
 )
