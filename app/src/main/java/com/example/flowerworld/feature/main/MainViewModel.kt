@@ -36,7 +36,8 @@ class MainViewModel(
     ) { tab, plants, hintShown ->
         MainUiState(
             selectedTab = tab,
-            plants = plants,
+            // the plant that needs watering first (overdue ones included) goes to the top
+            plants = plants.sortedBy { it.nextWateringAt },
             showReminderHint = plants.isNotEmpty() && !hintShown
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), MainUiState())
