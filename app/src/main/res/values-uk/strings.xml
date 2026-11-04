@@ -8,4 +8,27 @@
     <string name="confirm">Підтвердити</string>
     <string name="show_password">Показати</string>
     <string name="hide_password">Сховати</string>
+    <string name="footer_plants">Рослини</string>
+    <string name="footer_profile">Профіль</string>
+    <string name="plant_viewer_placeholder">Перегляд рослин</string>
+    <string name="account_viewer_placeholder">Поки не реалізовано</string>
+    <string name="add_plant">Додати рослину</string>
+    <string name="edit_plant">Редагувати рослину</string>
+    <plurals name="watering_interval_hours">
+        <item quantity="one">Поливати кожну %1$d годину</item>
+        <item quantity="few">Поливати кожні %1$d години</item>
+        <item quantity="many">Поливати кожні %1$d годин</item>
+        <item quantity="other">Поливати кожні %1$d години</item>
+    </plurals>
+    <string name="back">Назад</string>
+    <string name="choose_photo">Обрати фото</string>
+    <string name="change_photo">Змінити фото</string>
+    <string name="field_title">Назва</string>
+    <string name="field_description">Опис</string>
+    <string name="field_name">Імʼя</string>
+    <string name="field_watering_interval">Інтервал поливу (години)</string>
+    <string name="add">Додати</string>
+    <string name="error_required">Обовʼязкове поле</string>
+    <string name="error_invalid_number">Введіть ціле число більше 0</string>
+    <string name="error_save_failed">Не вдалося зберегти фото. Оберіть інше.</string>
 </resources>

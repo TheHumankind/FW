@@ -1,19 +1,11 @@
 package com.example.flowerworld.feature.login
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -23,6 +15,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
 import com.example.flowerworld.ui.components.AppButton
+import com.example.flowerworld.ui.components.AppCenteredScreen
 import com.example.flowerworld.ui.components.AppPasswordField
 import com.example.flowerworld.ui.components.AppTextField
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
@@ -51,16 +44,7 @@ private fun LoginContent(
     onConfirmClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .statusBarsPadding()
-            .imePadding()
-            .padding(horizontal = 32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+    AppCenteredScreen(modifier = modifier.imePadding()) {
         AppTextField(
             value = state.login,
             onValueChange = onLoginChange,

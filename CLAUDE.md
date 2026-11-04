@@ -40,6 +40,12 @@ Do not assume every target user has them: newer Huawei/Honor devices may not.
 - MVVM + unidirectional data flow: Compose screen -> `ViewModel` with `StateFlow<UiState>` -> repository.
 - Layers: `ui`, `data`, and `domain` when needed. Packages by feature (`feature/<name>/`).
 - A single `app` module until there is a reason to split it.
+- Packages: `domain/` (models, repository and storage interfaces, use cases; no Android types), `data/` (implementations: repositories, file storage, fake data), `di/` (manual `AppContainer`, ViewModel factories), `feature/<name>/`, `ui/components`, `navigation/`.
+- Navigation: Navigation Compose with string routes (`navigation/AppNavigation.kt`); every route has its own ViewModels.
+- ViewModels get dependencies from `AppContainer` through `containerViewModelFactory` (see `MainViewModel.Factory`); `FlowerWorldApp` owns the container.
+- Photos: picked with the system photo picker (no permission), compressed by `PhotoStorage` (`FilePhotoStorage`: JPEG, max 800 px, `files/photos/`); a plant keeps only the path.
+- Plants live behind `PlantRepository`; `RoomPlantRepository` stores them in Room (`data/local/`: entities `plants` + `plant_photos`, DAO, mappers; sync fields `createdAt`/`updatedAt`/`isDeleted`). The database starts empty; `TestPlants` is only for previews.
+- Room schemas are exported to `app/schemas/` (commit them). Changing an entity needs a new database version and a migration.
 - Theme, colors, fonts and spacing live in `ui/theme`; strings live in `strings.xml`.
 - Dependency versions live in `libs.versions.toml`. Add libraries only when needed.
 
@@ -73,6 +79,10 @@ Firebase, any server or networking, Google services. The backend choice is postp
 (Room, screens, reminders) works. Keep all server access behind repository interfaces (e.g. `SyncRepository`)
 so any backend can be plugged in later by one new class; do not tie the code to Firestore-specific features.
 
+## Test data
+- `data/fake/TestPlants.kt` and `app/src/main/res/drawable-nodpi/test_plant_1..3.webp`: made-up plants and photos (800 px wide, WebP q75), used only by previews.
+  They are not real user content.
+
 ## Checkpoints
 - [x] Android Studio and SDK installed, `adb` works
 - [x] Project created (Empty Activity, Compose), `assembleDebug` passes
@@ -80,10 +90,10 @@ so any backend can be plugged in later by one new class; do not tie the code to 
 - [x] Git repository created, first commit, remote added
 - [x] Feature branch `claude/android-app-first-feature-9ead0f` pushed to GitHub (not merged into `main` yet)
 - [x] Theme (palette, font, light by default), localization (5 languages)
-- [x] Components: `AppButton`, `AppTextButton`, `AppTextField`, `AppPasswordField`, `AppRoundButton`, `AppFooter`
+- [x] Components: `AppButton`, `AppTextButton`, `AppTextField`, `AppPasswordField`, `AppFooter`, `AppIconButton`, `AppTopBar`, `AppPhotoPicker`, `PlantCard`
 - [x] Screens: welcome, login form, main (footer only); state-based navigation
 - [x] User describes the app idea (plant tracker, see "App idea")
-- [ ] Skeleton: fake repository, real navigation
-- [ ] Room and local data
+- [x] Skeleton: repository interface + in-memory implementation, Navigation Compose, add-plant flow with photo storage
+- [x] Room and local data (plants and photo paths survive restarts)
 - [ ] Backend choice and server integration (later)
 - [ ] Emulator system image (download was interrupted; optional, a phone is available)

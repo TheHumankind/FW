@@ -8,4 +8,27 @@
     <string name="confirm">Подтвердить</string>
     <string name="show_password">Показать</string>
     <string name="hide_password">Скрыть</string>
+    <string name="footer_plants">Растения</string>
+    <string name="footer_profile">Профиль</string>
+    <string name="plant_viewer_placeholder">Просмотр растений</string>
+    <string name="account_viewer_placeholder">Пока не реализовано</string>
+    <string name="add_plant">Добавить растение</string>
+    <string name="edit_plant">Редактировать растение</string>
+    <plurals name="watering_interval_hours">
+        <item quantity="one">Поливать каждый %1$d час</item>
+        <item quantity="few">Поливать каждые %1$d часа</item>
+        <item quantity="many">Поливать каждые %1$d часов</item>
+        <item quantity="other">Поливать каждые %1$d часа</item>
+    </plurals>
+    <string name="back">Назад</string>
+    <string name="choose_photo">Выбрать фото</string>
+    <string name="change_photo">Изменить фото</string>
+    <string name="field_title">Название</string>
+    <string name="field_description">Описание</string>
+    <string name="field_name">Имя</string>
+    <string name="field_watering_interval">Интервал полива (часы)</string>
+    <string name="add">Добавить</string>
+    <string name="error_required">Обязательное поле</string>
+    <string name="error_invalid_number">Введите целое число больше 0</string>
+    <string name="error_save_failed">Не удалось сохранить фото. Выберите другое.</string>
 </resources>

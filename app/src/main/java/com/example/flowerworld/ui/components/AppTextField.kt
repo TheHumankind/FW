@@ -2,6 +2,7 @@ package com.example.flowerworld.ui.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -13,8 +14,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
-import com.example.flowerworld.ui.theme.HunterGreen
-import com.example.flowerworld.ui.theme.Sage
+import com.example.flowerworld.ui.theme.Dimens
 
 @Composable
 fun AppTextField(
@@ -25,15 +25,22 @@ fun AppTextField(
     imeAction: ImeAction = ImeAction.Next,
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    trailingContent: (@Composable () -> Unit)? = null
+    trailingContent: (@Composable () -> Unit)? = null,
+    singleLine: Boolean = true,
+    minLines: Int = 1,
+    // Error text under the field; null means the field is valid
+    errorText: String? = null
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier,
         label = { Text(label) },
-        singleLine = true,
-        shape = RoundedCornerShape(2.dp),
+        singleLine = singleLine,
+        minLines = minLines,
+        isError = errorText != null,
+        supportingText = errorText?.let { { Text(it) } },
+        shape = RoundedCornerShape(Dimens.ControlCornerRadius),
         visualTransformation = visualTransformation,
         trailingIcon = trailingContent,
         keyboardOptions = KeyboardOptions(
@@ -41,10 +48,10 @@ fun AppTextField(
             imeAction = imeAction
         ),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = HunterGreen,
-            unfocusedBorderColor = Sage,
-            focusedLabelColor = HunterGreen,
-            cursorColor = HunterGreen
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
+            focusedLabelColor = MaterialTheme.colorScheme.primary,
+            cursorColor = MaterialTheme.colorScheme.primary
         )
     )
 }

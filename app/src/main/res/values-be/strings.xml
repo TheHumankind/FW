@@ -8,4 +8,27 @@
     <string name="confirm">Пацвердзіць</string>
     <string name="show_password">Паказаць</string>
     <string name="hide_password">Схаваць</string>
+    <string name="footer_plants">Расліны</string>
+    <string name="footer_profile">Профіль</string>
+    <string name="plant_viewer_placeholder">Прагляд раслін</string>
+    <string name="account_viewer_placeholder">Пакуль не рэалізавана</string>
+    <string name="add_plant">Дадаць расліну</string>
+    <string name="edit_plant">Рэдагаваць расліну</string>
+    <plurals name="watering_interval_hours">
+        <item quantity="one">Паліваць кожную %1$d гадзіну</item>
+        <item quantity="few">Паліваць кожныя %1$d гадзіны</item>
+        <item quantity="many">Паліваць кожныя %1$d гадзін</item>
+        <item quantity="other">Паліваць кожныя %1$d гадзіны</item>
+    </plurals>
+    <string name="back">Назад</string>
+    <string name="choose_photo">Абраць фота</string>
+    <string name="change_photo">Змяніць фота</string>
+    <string name="field_title">Назва</string>
+    <string name="field_description">Апісанне</string>
+    <string name="field_name">Імя</string>
+    <string name="field_watering_interval">Інтэрвал паліву (гадзіны)</string>
+    <string name="add">Дадаць</string>
+    <string name="error_required">Абавязковае поле</string>
+    <string name="error_invalid_number">Увядзіце цэлы лік больш за 0</string>
+    <string name="error_save_failed">Не атрымалася захаваць фота. Абярыце іншае.</string>
 </resources>
