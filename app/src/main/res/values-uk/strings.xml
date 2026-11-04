@@ -63,4 +63,5 @@
     <string name="settings_card_time_unit">Час до поливу</string>
     <string name="settings_cards_section">Картки рослин</string>
     <string name="settings_card_heading">Заголовок рослини, що відображається</string>
+    <string name="settings_general_section">Загальні</string>
 </resources>

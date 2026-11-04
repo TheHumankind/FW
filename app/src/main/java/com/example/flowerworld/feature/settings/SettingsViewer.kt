@@ -71,15 +71,17 @@ private fun SettingsContent(
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
-                AppDropdown(
-                    items = AppLanguage.entries,
-                    selected = state.language,
-                    onSelect = onLanguageSelect,
-                    label = stringResource(R.string.settings_language),
-                    itemLabel = { stringResource(it.nameRes) },
-                    itemLeading = { Text(it.flag) },
-                    modifier = Modifier.fillMaxWidth()
-                )
+                AppSettingsSection(title = stringResource(R.string.settings_general_section)) {
+                    AppDropdown(
+                        items = AppLanguage.entries,
+                        selected = state.language,
+                        onSelect = onLanguageSelect,
+                        label = stringResource(R.string.settings_language),
+                        itemLabel = { stringResource(it.nameRes) },
+                        itemLeading = { Text(it.flag) },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
         }
     }

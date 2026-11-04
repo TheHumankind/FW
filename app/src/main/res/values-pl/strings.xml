@@ -63,4 +63,5 @@
     <string name="settings_card_time_unit">Czas do podlewania</string>
     <string name="settings_cards_section">Karty roślin</string>
     <string name="settings_card_heading">Wyświetlany tytuł rośliny</string>
+    <string name="settings_general_section">Ogólne</string>
 </resources>

@@ -63,4 +63,5 @@
     <string name="settings_card_time_unit">Время до полива</string>
     <string name="settings_cards_section">Карточки растений</string>
     <string name="settings_card_heading">Отображаемый заголовок растения</string>
+    <string name="settings_general_section">Общие</string>
 </resources>
