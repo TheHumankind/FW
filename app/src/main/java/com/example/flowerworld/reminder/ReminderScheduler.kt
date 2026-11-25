@@ -9,15 +9,15 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.getSystemService
 import com.example.flowerworld.domain.model.Plant
 import java.time.Clock
-import java.util.concurrent.TimeUnit
+import java.time.LocalTime
+import java.time.ZonedDateTime
 
 /**
- * Sets one alarm per plant that fires at the plant's next watering time.
+ * Keeps one repeating daily alarm that shows the watering summary (see [WateringSummary]).
  *
- * Alarms are exact (`setExactAndAllowWhileIdle`) when the system allows it, because Honor/Huawei
- * firmwares delay inexact background work; otherwise they fall back to the inexact variant.
- * Re-setting an alarm for the same plant replaces the previous one. A plant that is missing from
- * the list passed to [sync] (deleted) has its alarm and notification cancelled.
+ * The alarm is exact (`setExactAndAllowWhileIdle`) when the system allows it, because Honor/Huawei
+ * firmwares delay inexact background work; otherwise it falls back to the inexact variant.
+ * Every firing plans the next day, so a missed or ignored notification is simply repeated tomorrow.
  */
 class ReminderScheduler(
     private val context: Context,
@@ -25,61 +25,23 @@ class ReminderScheduler(
 ) {
     private val alarmManager = context.getSystemService<AlarmManager>()!!
 
-    /**
-     * Makes the alarms match [plants]. An overdue plant keeps its pending repeat alarm; if there
-     * is none (e.g. after a reboot cleared all alarms) it is reminded soon.
-     */
+    fun nowMillis(): Long = clock.millis()
+
+    /** Makes sure the daily alarm is set and hides the summary once nothing needs watering any more. */
     fun sync(plants: List<Plant>) {
-        val now = clock.millis()
-        val currentIds = plants.mapTo(mutableSetOf()) { it.id }
-        // plants that were deleted since the last sync lose their alarm and notification
-        for (removedId in scheduledIds() - currentIds) cancel(removedId)
-        saveScheduledIds(currentIds)
-        for (plant in plants) {
-            when {
-                plant.nextWateringAt > now -> {
-                    scheduleAt(plant.id, plant.nextWateringAt)
-                    prefs.edit().putLong(syncedAtKey(plant.id), plant.nextWateringAt).apply()
-                    // watered (in the app or from the notification): the old reminder is obsolete
-                    dismissNotification(plant.id)
-                }
-                // the interval was shortened: the alarm from an earlier sync is still waiting for a later time
-                prefs.getLong(syncedAtKey(plant.id), 0L) > now -> {
-                    prefs.edit().remove(syncedAtKey(plant.id)).apply()
-                    scheduleAt(plant.id, now + OverdueDelayMillis)
-                }
-                !hasAlarm(plant.id) -> scheduleAt(plant.id, now + OverdueDelayMillis)
-            }
+        scheduleNextDaily()
+        if (WateringSummary.of(plants, nowMillis()).isEmpty) {
+            NotificationManagerCompat.from(context).cancel(ReminderReceiver.SummaryNotificationId)
         }
     }
 
-    private fun dismissNotification(plantId: String) {
-        NotificationManagerCompat.from(context).cancel(ReminderReceiver.plantIntId(plantId))
-    }
-
-    private fun cancel(plantId: String) {
-        pendingIntent(plantId, PendingIntent.FLAG_NO_CREATE)?.let {
-            alarmManager.cancel(it)
-            it.cancel()
-        }
-        dismissNotification(plantId)
-    }
-
-    // ids of the plants that had alarms at the last sync; kept on disk so a restart does not forget them
-    private val prefs = context.getSharedPreferences(PrefsName, Context.MODE_PRIVATE)
-
-    // when the alarm set by the last sync is due (not the repeat ones set after a reminder)
-    private fun syncedAtKey(plantId: String) = "syncedAt_$plantId"
-
-    private fun scheduledIds(): Set<String> = prefs.getStringSet(KeyScheduledIds, emptySet()).orEmpty()
-
-    private fun saveScheduledIds(ids: Set<String>) {
-        prefs.edit().putStringSet(KeyScheduledIds, ids).apply()
-    }
-
-    /** Sets (or replaces) the alarm of the plant with [plantId] to fire at [atMillis]. */
-    fun scheduleAt(plantId: String, atMillis: Long) {
-        val intent = pendingIntent(plantId, PendingIntent.FLAG_UPDATE_CURRENT) ?: return
+    /** Sets (or replaces) the alarm for the next [NotifyAt] in the device time zone. */
+    fun scheduleNextDaily() {
+        val now = ZonedDateTime.now(clock)
+        var next = now.with(NotifyAt)
+        if (!next.isAfter(now)) next = next.plusDays(1)
+        val atMillis = next.toInstant().toEpochMilli()
+        val intent = dailyIntent()
         val canBeExact = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || alarmManager.canScheduleExactAlarms()
         if (canBeExact) {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, atMillis, intent)
@@ -88,32 +50,15 @@ class ReminderScheduler(
         }
     }
 
-    /** Schedules the next reminder for a plant that was not watered after a reminder. */
-    fun scheduleRepeat(plantId: String) = scheduleAt(plantId, clock.millis() + RepeatDelayMillis)
-
-    private fun hasAlarm(plantId: String): Boolean =
-        pendingIntent(plantId, PendingIntent.FLAG_NO_CREATE) != null
-
-    private fun pendingIntent(plantId: String, flag: Int): PendingIntent? {
-        val intent = Intent(context, ReminderReceiver::class.java)
-            .setAction(ReminderReceiver.ActionRemind)
-            .putExtra(ReminderReceiver.ExtraPlantId, plantId)
-        return PendingIntent.getBroadcast(
-            context,
-            ReminderReceiver.plantIntId(plantId),
-            intent,
-            flag or PendingIntent.FLAG_IMMUTABLE,
-        )
-    }
+    private fun dailyIntent(): PendingIntent = PendingIntent.getBroadcast(
+        context,
+        0,
+        Intent(context, ReminderReceiver::class.java).setAction(ReminderReceiver.ActionDaily),
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+    )
 
     private companion object {
-        const val PrefsName = "reminders"
-        const val KeyScheduledIds = "scheduledPlantIds"
-
-        /** Delay before the first reminder for an already overdue plant that has no alarm. */
-        const val OverdueDelayMillis = 60_000L
-
-        /** How long to wait before reminding again if the user did not water the plant. */
-        val RepeatDelayMillis = TimeUnit.HOURS.toMillis(6)
+        /** Local time of the daily notification. */
+        val NotifyAt: LocalTime = LocalTime.of(9, 0)
     }
 }

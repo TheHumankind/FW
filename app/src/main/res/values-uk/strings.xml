@@ -40,8 +40,10 @@
     <string name="error_invalid_number">Введіть ціле число більше 0</string>
     <string name="error_save_failed">Не вдалося зберегти фото. Оберіть інше.</string>
     <string name="notification_channel_name">Нагадування про полив</string>
-    <string name="notification_channel_description">Нагадує, коли рослину потрібно полити</string>
-    <string name="reminder_text">Час полити цю рослину</string>
+    <string name="notification_channel_description">Щоденне зведення: скільки рослин потрібно полити</string>
+    <string name="reminder_title">Час поливати рослини</string>
+    <string name="reminder_due_today">Полити сьогодні: %1$d</string>
+    <string name="reminder_overdue">Прострочено: %1$d</string>
     <string name="action_watered">Полито</string>
     <string name="info_last_watered">Останній полив</string>
     <string name="info_next_watering">Наступний полив</string>

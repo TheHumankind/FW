@@ -36,8 +36,10 @@
     <string name="error_invalid_number">Enter a whole number above 0</string>
     <string name="error_save_failed">Could not save the photo. Choose another one.</string>
     <string name="notification_channel_name">Watering reminders</string>
-    <string name="notification_channel_description">Reminds you when a plant needs watering</string>
-    <string name="reminder_text">Time to water this plant</string>
+    <string name="notification_channel_description">Daily summary of plants to water</string>
+    <string name="reminder_title">Time to water your plants</string>
+    <string name="reminder_due_today">To water today: %1$d</string>
+    <string name="reminder_overdue">Overdue: %1$d</string>
     <string name="action_watered">Watered</string>
     <string name="info_last_watered">Last watered</string>
     <string name="info_next_watering">Next watering</string>

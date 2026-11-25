@@ -40,8 +40,10 @@
     <string name="error_invalid_number">Podaj liczbę całkowitą większą od 0</string>
     <string name="error_save_failed">Nie udało się zapisać zdjęcia. Wybierz inne.</string>
     <string name="notification_channel_name">Przypomnienia o podlewaniu</string>
-    <string name="notification_channel_description">Przypomina, kiedy roślina wymaga podlania</string>
-    <string name="reminder_text">Czas podlać tę roślinę</string>
+    <string name="notification_channel_description">Codzienne podsumowanie roślin do podlania</string>
+    <string name="reminder_title">Czas podlać rośliny</string>
+    <string name="reminder_due_today">Do podlania dziś: %1$d</string>
+    <string name="reminder_overdue">Zaległe: %1$d</string>
     <string name="action_watered">Podlano</string>
     <string name="info_last_watered">Ostatnie podlewanie</string>
     <string name="info_next_watering">Następne podlewanie</string>

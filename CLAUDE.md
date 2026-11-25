@@ -43,7 +43,7 @@ Do not assume every target user has them: newer Huawei/Honor devices may not.
 - Packages: `domain/` (models, repository and storage interfaces, use cases; no Android types), `data/` (implementations: repositories, file storage, fake data), `di/` (manual `AppContainer`, ViewModel factories), `feature/<name>/`, `ui/components`, `navigation/`.
 - Navigation: Navigation Compose with string routes (`navigation/AppNavigation.kt`); every route has its own ViewModels.
 - ViewModels get dependencies from `AppContainer` through `containerViewModelFactory` (see `MainViewModel.Factory`); `FlowerWorldApp` owns the container.
-- Reminders: `reminder/` (`ReminderScheduler` sets one exact alarm per plant; `ReminderReceiver` shows the notification and re-arms a 6 h repeat; `WateredReceiver`; `BootReceiver`). `FlowerWorldApp` keeps alarms in sync with the database.
+- Reminders: `reminder/` (`ReminderScheduler` keeps one exact daily alarm at 09:00; `ReminderReceiver` shows one summary notification "to water today / overdue" (`WateringSummary`) and re-arms the next day; `BootReceiver`). `FlowerWorldApp` keeps alarms in sync with the database.
 - Settings and one-time flags live behind `SettingsRepository` (`PrefsSettingsRepository`, SharedPreferences for now; move to DataStore when real settings arrive).
 - Photos: picked with the system photo picker (no permission), compressed by `PhotoStorage` (`FilePhotoStorage`: JPEG, max 800 px, `files/photos/`); a plant keeps only the path.
 - Plants live behind `PlantRepository`; `RoomPlantRepository` stores them in Room (`data/local/`: entities `plants` + `plant_photos`, DAO, mappers; sync fields `createdAt`/`updatedAt`/`isDeleted`). The database starts empty; `TestPlants` is only for previews.

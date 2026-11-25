@@ -40,8 +40,10 @@
     <string name="error_invalid_number">Увядзіце цэлы лік больш за 0</string>
     <string name="error_save_failed">Не атрымалася захаваць фота. Абярыце іншае.</string>
     <string name="notification_channel_name">Нагадванні пра паліў</string>
-    <string name="notification_channel_description">Нагадвае, калі расліну трэба паліць</string>
-    <string name="reminder_text">Пара паліць гэтую расліну</string>
+    <string name="notification_channel_description">Штодзённая зводка: колькі раслін трэба паліць</string>
+    <string name="reminder_title">Час паліваць расліны</string>
+    <string name="reminder_due_today">Паліць сёння: %1$d</string>
+    <string name="reminder_overdue">Пратэрмінавана: %1$d</string>
     <string name="action_watered">Паліта</string>
     <string name="info_last_watered">Апошні паліў</string>
     <string name="info_next_watering">Наступны паліў</string>

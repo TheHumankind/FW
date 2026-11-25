@@ -37,21 +37,25 @@ internal fun BroadcastReceiver.launchAsync(context: Context, block: suspend (App
     }
 }
 
-/** Fires when a plant needs watering: shows the notification and plans a repeat in case it is ignored. */
+/** Fires once a day: shows how many plants are to be watered today and how many are overdue. */
 class ReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action != ActionRemind) return
-        val plantId = intent.getStringExtra(ExtraPlantId) ?: return
+        // alarms of the old per-plant reminders carry another action and are ignored
+        if (intent.action != ActionDaily) return
         launchAsync(context) { container ->
-            val plant = container.plantRepository.plants.first().firstOrNull { it.id == plantId }
-                ?: return@launchAsync
-            // reminded again later until the user taps "Watered"
-            container.reminderScheduler.scheduleRepeat(plantId)
-            showNotification(context, plantId, plant.name)
+            // the next day's summary is planned first, so a failure below cannot break the chain
+            container.reminderScheduler.scheduleNextDaily()
+            val plants = container.plantRepository.plants.first()
+            val summary = WateringSummary.of(plants, container.reminderScheduler.nowMillis())
+            if (summary.isEmpty) {
+                NotificationManagerCompat.from(context).cancel(SummaryNotificationId)
+            } else {
+                showNotification(context, summary)
+            }
         }
     }
 
-    private fun showNotification(context: Context, plantId: String, plantName: String) {
+    private fun showNotification(context: Context, summary: WateringSummary) {
         val canNotify = ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) ==
             PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
         if (!canNotify) return
@@ -59,41 +63,33 @@ class ReminderReceiver : BroadcastReceiver() {
         // strings in the language chosen in the settings, not the device one
         val localized = context.withAppLanguage()
 
-        val requestCode = plantIntId(plantId)
         val open = PendingIntent.getActivity(
             context,
-            requestCode,
+            0,
             Intent(context, MainActivity::class.java),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
-        val watered = PendingIntent.getBroadcast(
-            context,
-            requestCode,
-            Intent(context, WateredReceiver::class.java)
-                .setAction(WateredReceiver.ActionWatered)
-                .putExtra(ExtraPlantId, plantId),
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-        )
+        val lines = buildList {
+            if (summary.dueToday > 0) add(localized.getString(R.string.reminder_due_today, summary.dueToday))
+            if (summary.overdue > 0) add(localized.getString(R.string.reminder_overdue, summary.overdue))
+        }
         val notification: Notification = NotificationCompat.Builder(context, ChannelId)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(plantName)
-            .setContentText(localized.getString(R.string.reminder_text))
+            .setContentTitle(localized.getString(R.string.reminder_title))
+            .setContentText(lines.joinToString(", "))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(lines.joinToString("\n")))
             .setContentIntent(open)
             .setAutoCancel(true)
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .addAction(0, localized.getString(R.string.action_watered), watered)
             .build()
-        NotificationManagerCompat.from(context).notify(plantIntId(plantId), notification)
+        NotificationManagerCompat.from(context).notify(SummaryNotificationId, notification)
     }
 
     companion object {
-        const val ActionRemind = "com.example.flowerworld.action.REMIND"
-        const val ExtraPlantId = "plantId"
+        const val ActionDaily = "com.example.flowerworld.action.DAILY_SUMMARY"
         const val ChannelId = "watering"
-
-        /** Int derived from the plant id: the notification id and the request code of its PendingIntents. */
-        fun plantIntId(plantId: String): Int = plantId.hashCode()
+        const val SummaryNotificationId = 1
 
         /** Creates the notification channel; safe to call many times. */
         fun createChannel(context: Context) {
@@ -107,24 +103,7 @@ class ReminderReceiver : BroadcastReceiver() {
     }
 }
 
-/** The "Watered" button of the notification: records the watering and plans the next reminder. */
-class WateredReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action != ActionWatered) return
-        val plantId = intent.getStringExtra(ReminderReceiver.ExtraPlantId) ?: return
-        NotificationManagerCompat.from(context).cancel(ReminderReceiver.plantIntId(plantId))
-        launchAsync(context) { container ->
-            container.plantRepository.markWatered(plantId)
-            container.reminderScheduler.sync(container.plantRepository.plants.first())
-        }
-    }
-
-    companion object {
-        const val ActionWatered = "com.example.flowerworld.action.WATERED"
-    }
-}
-
-/** Alarms are lost on reboot: sets them again. */
+/** Alarms are lost on reboot: sets the daily one again. */
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != Intent.ACTION_BOOT_COMPLETED) return
