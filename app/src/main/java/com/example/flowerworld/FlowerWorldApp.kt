@@ -6,6 +6,7 @@ import com.example.flowerworld.reminder.ReminderReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class FlowerWorldApp : Application() {
@@ -18,7 +19,9 @@ class FlowerWorldApp : Application() {
         ReminderReceiver.createChannel(this)
         // keep the watering alarms in step with the database (new plants, waterings)
         appScope.launch {
-            container.plantRepository.plants.collect { container.reminderScheduler.sync(it) }
+            // also re-planned when the user changes the notification time
+            combine(container.plantRepository.plants, container.settingsRepository.reminderTime) { plants, _ -> plants }
+                .collect { container.reminderScheduler.sync(it) }
         }
     }
 }

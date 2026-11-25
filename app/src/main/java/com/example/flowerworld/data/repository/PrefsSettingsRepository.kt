@@ -9,6 +9,7 @@ import com.example.flowerworld.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.time.LocalTime
 
 /**
  * Keeps settings in SharedPreferences. Good enough for a couple of flags; move to DataStore
@@ -26,6 +27,12 @@ class PrefsSettingsRepository(context: Context) : SettingsRepository {
     private val cardHeadingState = MutableStateFlow(
         PlantHeading.entries.firstOrNull { it.name == prefs.getString(KeyCardHeading, null) } ?: PlantHeading.Title
     )
+
+    private val reminderTimeState = MutableStateFlow(
+        LocalTime.ofSecondOfDay(prefs.getInt(KeyReminderMinutes, DefaultReminderMinutes) * 60L)
+    )
+
+    override val reminderTime: Flow<LocalTime> = reminderTimeState.asStateFlow()
 
     override val reminderHintShown: Flow<Boolean> = hintShown.asStateFlow()
 
@@ -55,7 +62,16 @@ class PrefsSettingsRepository(context: Context) : SettingsRepository {
         cardHeadingState.value = heading
     }
 
+    override suspend fun setReminderTime(time: LocalTime) {
+        val minutes = time.hour * 60 + time.minute
+        prefs.edit { putInt(KeyReminderMinutes, minutes) }
+        reminderTimeState.value = LocalTime.of(time.hour, time.minute)
+    }
+
     companion object {
+        /** The daily notification is shown at 09:00 until the user chooses another time. */
+        private const val DefaultReminderMinutes = 9 * 60
+        private const val KeyReminderMinutes = "reminderMinutes"
         private const val PrefsName = "settings"
         private const val KeyReminderHintShown = "reminderHintShown"
         private const val KeyLanguage = "language"

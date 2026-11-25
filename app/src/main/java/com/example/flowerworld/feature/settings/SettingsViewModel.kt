@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.LocalTime
 
 /** What the settings screen shows. */
 sealed interface SettingsUiState {
@@ -19,7 +20,8 @@ sealed interface SettingsUiState {
     data class Success(
         val language: AppLanguage,
         val cardTimeUnit: IntervalUnit,
-        val cardHeading: PlantHeading
+        val cardHeading: PlantHeading,
+        val reminderTime: LocalTime
     ) : SettingsUiState
 }
 
@@ -28,9 +30,10 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) : Vi
         combine(
             settingsRepository.language,
             settingsRepository.cardTimeUnit,
-            settingsRepository.cardHeading
-        ) { language, cardTimeUnit, cardHeading ->
-            SettingsUiState.Success(language, cardTimeUnit, cardHeading)
+            settingsRepository.cardHeading,
+            settingsRepository.reminderTime
+        ) { language, cardTimeUnit, cardHeading, reminderTime ->
+            SettingsUiState.Success(language, cardTimeUnit, cardHeading, reminderTime)
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), SettingsUiState.Loading)
 
     fun onLanguageSelect(language: AppLanguage) {
@@ -43,6 +46,10 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) : Vi
 
     fun onCardHeadingSelect(heading: PlantHeading) {
         viewModelScope.launch { settingsRepository.setCardHeading(heading) }
+    }
+
+    fun onReminderTimeSelect(time: LocalTime) {
+        viewModelScope.launch { settingsRepository.setReminderTime(time) }
     }
 
     companion object {

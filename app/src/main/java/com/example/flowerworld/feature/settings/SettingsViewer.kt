@@ -20,6 +20,8 @@ import com.example.flowerworld.ui.components.AppSettingsSection
 import com.example.flowerworld.ui.nameRes
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppListScreen
+import com.example.flowerworld.ui.components.AppTimeField
+import java.time.LocalTime
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
@@ -35,6 +37,7 @@ fun SettingsViewer(
         onLanguageSelect = viewModel::onLanguageSelect,
         onCardTimeUnitSelect = viewModel::onCardTimeUnitSelect,
         onCardHeadingSelect = viewModel::onCardHeadingSelect,
+        onReminderTimeSelect = viewModel::onReminderTimeSelect,
         modifier = modifier
     )
 }
@@ -45,6 +48,7 @@ private fun SettingsContent(
     onLanguageSelect: (AppLanguage) -> Unit,
     onCardTimeUnitSelect: (IntervalUnit) -> Unit,
     onCardHeadingSelect: (PlantHeading) -> Unit,
+    onReminderTimeSelect: (LocalTime) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AppListScreen(title = stringResource(R.string.settings_header), modifier = modifier) {
@@ -81,6 +85,12 @@ private fun SettingsContent(
                         itemLeading = { Text(it.flag) },
                         modifier = Modifier.fillMaxWidth()
                     )
+                    AppTimeField(
+                        time = state.reminderTime,
+                        onTimeSelect = onReminderTimeSelect,
+                        label = stringResource(R.string.settings_reminder_time),
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
             }
         }
@@ -91,10 +101,11 @@ private fun SettingsContent(
 @Composable
 private fun SettingsContentPreview() {
     FlowerWorldTheme {
-        SettingsContent(state = SettingsUiState.Success(AppLanguage.English, IntervalUnit.Days, PlantHeading.Title),
+        SettingsContent(state = SettingsUiState.Success(AppLanguage.English, IntervalUnit.Days, PlantHeading.Title, LocalTime.of(9, 0)),
             onLanguageSelect = {},
             onCardTimeUnitSelect = {},
-            onCardHeadingSelect = {}
+            onCardHeadingSelect = {},
+            onReminderTimeSelect = {}
         )
     }
 }

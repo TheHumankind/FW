@@ -32,7 +32,7 @@ class AppContainer(context: Context) {
     }
 
     val plantRepository: PlantRepository by lazy { RoomPlantRepository(database.plantDao()) }
-    val reminderScheduler: ReminderScheduler by lazy { ReminderScheduler(appContext) }
+    val reminderScheduler: ReminderScheduler by lazy { ReminderScheduler(appContext, settingsRepository) }
     val settingsRepository: SettingsRepository by lazy { PrefsSettingsRepository(appContext) }
     val photoStorage: PhotoStorage by lazy { FilePhotoStorage(appContext) }
     val addPlantUseCase: AddPlantUseCase by lazy { AddPlantUseCase(plantRepository, photoStorage) }

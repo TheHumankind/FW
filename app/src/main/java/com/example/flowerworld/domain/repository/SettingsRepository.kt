@@ -4,6 +4,7 @@ import com.example.flowerworld.domain.model.AppLanguage
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.PlantHeading
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalTime
 
 /** User-level settings and one-time flags of the app. */
 interface SettingsRepository {
@@ -19,6 +20,9 @@ interface SettingsRepository {
     /** Which name of a plant is its heading on the cards. */
     val cardHeading: Flow<PlantHeading>
 
+    /** Local time of day when the daily watering summary notification is shown. */
+    val reminderTime: Flow<LocalTime>
+
     suspend fun markReminderHintShown()
 
     suspend fun setLanguage(language: AppLanguage)
@@ -26,4 +30,6 @@ interface SettingsRepository {
     suspend fun setCardTimeUnit(unit: IntervalUnit)
 
     suspend fun setCardHeading(heading: PlantHeading)
+
+    suspend fun setReminderTime(time: LocalTime)
 }

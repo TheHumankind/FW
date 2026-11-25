@@ -8,8 +8,9 @@ import android.os.Build
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.getSystemService
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.repository.SettingsRepository
+import kotlinx.coroutines.flow.first
 import java.time.Clock
-import java.time.LocalTime
 import java.time.ZonedDateTime
 
 /**
@@ -21,6 +22,7 @@ import java.time.ZonedDateTime
  */
 class ReminderScheduler(
     private val context: Context,
+    private val settings: SettingsRepository,
     private val clock: Clock = Clock.systemDefaultZone(),
 ) {
     private val alarmManager = context.getSystemService<AlarmManager>()!!
@@ -28,17 +30,17 @@ class ReminderScheduler(
     fun nowMillis(): Long = clock.millis()
 
     /** Makes sure the daily alarm is set and hides the summary once nothing needs watering any more. */
-    fun sync(plants: List<Plant>) {
+    suspend fun sync(plants: List<Plant>) {
         scheduleNextDaily()
         if (WateringSummary.of(plants, nowMillis()).isEmpty) {
             NotificationManagerCompat.from(context).cancel(ReminderReceiver.SummaryNotificationId)
         }
     }
 
-    /** Sets (or replaces) the alarm for the next [NotifyAt] in the device time zone. */
-    fun scheduleNextDaily() {
+    /** Sets (or replaces) the alarm for the next occurrence of the time chosen in the settings (device time zone). */
+    suspend fun scheduleNextDaily() {
         val now = ZonedDateTime.now(clock)
-        var next = now.with(NotifyAt)
+        var next = now.with(settings.reminderTime.first())
         if (!next.isAfter(now)) next = next.plusDays(1)
         val atMillis = next.toInstant().toEpochMilli()
         val intent = dailyIntent()
@@ -56,9 +58,4 @@ class ReminderScheduler(
         Intent(context, ReminderReceiver::class.java).setAction(ReminderReceiver.ActionDaily),
         PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
     )
-
-    private companion object {
-        /** Local time of the daily notification. */
-        val NotifyAt: LocalTime = LocalTime.of(9, 0)
-    }
 }
