@@ -143,7 +143,7 @@
     <string name="species_growth">Рост</string>
     <string name="species_origin">Паходжанне</string>
     <string name="species_care_tips">Парады па доглядзе</string>
-    <string name="species_english_only">Апісанні пакуль на англійскай.</string>
+    <string name="species_english_only">Частка тэксту пакуль не перакладзена.</string>
     <string name="species_add">Дадаць у мае расліны</string>
     <string name="species_not_found">Расліна не знойдзена</string>
     <string name="species_attribution">Даныя па доглядзе: plantfolio-common-plants (CC BY-NC-SA 4.0)</string>

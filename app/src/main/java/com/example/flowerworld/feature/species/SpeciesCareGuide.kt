@@ -21,6 +21,7 @@ import com.example.flowerworld.domain.model.Season
 import com.example.flowerworld.domain.model.SpeciesGroup
 import com.example.flowerworld.domain.model.SpeciesGrowthRate
 import com.example.flowerworld.domain.model.ToxicityLevel
+import com.example.flowerworld.feature.search.appLanguageCode
 import com.example.flowerworld.feature.search.nameRes
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 import java.time.LocalDate
@@ -32,9 +33,12 @@ import java.time.LocalDate
  */
 @Composable
 fun SpeciesCareGuide(species: PlantSpecies, modifier: Modifier = Modifier) {
+    val language = appLanguageCode()
     val currentSeason = Season.of(LocalDate.now().month)
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        if (species.description.isNotBlank()) Text(species.description, style = MaterialTheme.typography.bodyLarge)
+        if (species.description.isNotBlank()) {
+            Text(species.descriptionFor(language), style = MaterialTheme.typography.bodyLarge)
+        }
         if (species.examples.isNotBlank()) Text(species.examples, style = MaterialTheme.typography.bodySmall)
 
         GuideSection(stringResource(R.string.species_watering)) {
@@ -61,13 +65,15 @@ fun SpeciesCareGuide(species: PlantSpecies, modifier: Modifier = Modifier) {
         }
         if (species.careTips.isNotBlank()) {
             GuideSection(stringResource(R.string.species_care_tips)) {
-                Text(species.careTips, style = MaterialTheme.typography.bodyMedium)
+                Text(species.careTipsFor(language), style = MaterialTheme.typography.bodyMedium)
             }
         }
-        Text(
-            text = stringResource(R.string.species_english_only) + "\n" + stringResource(R.string.species_attribution),
-            style = MaterialTheme.typography.bodySmall
-        )
+        val note = if (species.isFullyTranslated(language)) {
+            stringResource(R.string.species_attribution)
+        } else {
+            stringResource(R.string.species_english_only) + "\n" + stringResource(R.string.species_attribution)
+        }
+        Text(text = note, style = MaterialTheme.typography.bodySmall)
     }
 }
 

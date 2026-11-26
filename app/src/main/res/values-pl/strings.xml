@@ -143,7 +143,7 @@
     <string name="species_growth">Wzrost</string>
     <string name="species_origin">Pochodzenie</string>
     <string name="species_care_tips">Wskazówki dotyczące pielęgnacji</string>
-    <string name="species_english_only">Opisy są na razie po angielsku.</string>
+    <string name="species_english_only">Część tekstu nie została jeszcze przetłumaczona.</string>
     <string name="species_add">Dodaj do moich roślin</string>
     <string name="species_not_found">Nie znaleziono rośliny</string>
     <string name="species_attribution">Dane o pielęgnacji: plantfolio-common-plants (CC BY-NC-SA 4.0)</string>

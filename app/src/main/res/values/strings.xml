@@ -145,7 +145,7 @@
     <string name="species_growth">Growth</string>
     <string name="species_origin">Origin</string>
     <string name="species_care_tips">Care tips</string>
-    <string name="species_english_only">Descriptions are in English for now.</string>
+    <string name="species_english_only">Part of the text is not translated yet.</string>
     <string name="species_add">Add to my plants</string>
     <string name="species_not_found">Plant not found</string>
     <string name="species_attribution">Care data: plantfolio-common-plants (CC BY-NC-SA 4.0)</string>

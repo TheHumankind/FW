@@ -42,6 +42,9 @@ data class PlantSpecies(
     val name: String,
     val names: Map<String, String>,
     val aliases: List<String> = emptyList(),
+    val descriptionsByLanguage: Map<String, String> = emptyMap(),
+    val careTipsByLanguage: Map<String, String> = emptyMap(),
+    val fullyTranslated: Set<String> = emptySet(),
     val description: String,
     val examples: String,
     val careTips: String,
@@ -55,6 +58,15 @@ data class PlantSpecies(
     val group: SpeciesGroup,
     val isHouseplant: Boolean,
 ) {
+    /** The description in [languageCode] when there is a translation (a part of it may still be English), else English. */
+    fun descriptionFor(languageCode: String): String = descriptionsByLanguage[languageCode] ?: description
+
+    /** The care tips in [languageCode]: the sentences that have a translation are translated, the rest stay English. */
+    fun careTipsFor(languageCode: String): String = careTipsByLanguage[languageCode] ?: careTips
+
+    /** True when the description and all care tips are available in [languageCode]. */
+    fun isFullyTranslated(languageCode: String): Boolean = languageCode == "en" || languageCode in fullyTranslated
+
     /** The name in [languageCode] when the catalog has one, otherwise the English name. */
     fun displayName(languageCode: String): String = names[languageCode] ?: name
 
