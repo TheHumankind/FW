@@ -1,7 +1,7 @@
 """Builds app/src/main/assets/plant_names.json: localized names of the bundled plant catalog.
 
 The catalog (assets/plant_catalog.json) is English. This script writes names in Russian, Ukrainian, Polish and
-Belarusian for the houseplant entries. Format of the output: {"<id>": {"ru": "Main name|alias|alias", ...}};
+Belarusian for the all entries. Format of the output: {"<id>": {"ru": "Main name|alias|alias", ...}};
 the part before the first "|" is shown, the aliases are only searched ("щучий хвост", "money tree", ...).
 
 Names are written by hand from general plant knowledge, not copied from a source, and are NOT reviewed by a
@@ -321,12 +321,24 @@ EXPLICIT = {
 def main() -> None:
     root = Path(__file__).resolve().parent.parent
     catalog = json.loads((root / "app/src/main/assets/plant_catalog.json").read_text(encoding="utf-8"))
-    ids = [p["id"] for p in catalog if p["category"].startswith("Houseplants")
-           or p["category"] in ("Specialty - Carnivorous", "Specialty - Epiphytes & Moss")]
+    ids = [p["id"] for p in catalog]
     names: dict[str, dict[str, str]] = {}
+    # the other plants (garden, edible, ...) live in a plain text table: "id = ru ; uk ; pl ; be"
+    other: dict[str, tuple[str, ...]] = {}
+    for line in (root / "tools" / "plant_names_other.txt").read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        key, _, rest = line.partition(" = ")
+        parts = tuple(part.strip() for part in rest.split(" ; "))
+        assert len(parts) == 4, line
+        other[key.strip()] = parts
+    unknown = [k for k in other if k not in {p["id"] for p in catalog}]
+    assert not unknown, f"ids not in the catalog: {unknown}"
     for plant_id in ids:
         if plant_id in EXPLICIT:
             values = EXPLICIT[plant_id]
+        elif plant_id in other:
+            values = other[plant_id]
         else:
             prefix, _, rest = plant_id.partition("-")
             genus = GENUS.get(prefix)
