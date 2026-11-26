@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit
  * @property wateringIntervalHours hours between waterings, set by the user per plant.
  * @property photos photo history, in any order (see [photosNewestFirst]); empty if there are none.
  * @property lastWateredAt epoch millis of the last watering; for a new plant, the time it was added.
+ * @property speciesId id of the plant guide entry (`PlantSpecies`) this plant is an example of, or null.
  * @property diedAt epoch millis when the user marked the plant as dead (it lives in the graveyard then); null while alive.
  */
 data class Plant(
@@ -25,6 +26,7 @@ data class Plant(
     val photos: List<PlantPhoto>,
     val lastWateredAt: Long = 0L,
     val diedAt: Long? = null,
+    val speciesId: String? = null,
 ) {
     /** Epoch millis when the plant needs its next watering. */
     val nextWateringAt: Long get() = lastWateredAt + TimeUnit.HOURS.toMillis(wateringIntervalHours.toLong())

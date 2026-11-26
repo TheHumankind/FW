@@ -45,6 +45,10 @@ interface PlantDao {
         updatedAt: Long,
     )
 
+    /** Links the plant to a plant guide entry, or unlinks it when [speciesId] is null; also bumps the sync time. */
+    @Query("UPDATE plants SET speciesId = :speciesId, updatedAt = :updatedAt WHERE id = :id AND isDeleted = 0")
+    suspend fun setSpecies(id: String, speciesId: String?, updatedAt: Long)
+
     /** Records a watering at [wateredAt] (epoch millis); also bumps the sync modification time. */
     @Query("UPDATE plants SET lastWateredAt = :wateredAt, updatedAt = :wateredAt WHERE id = :id AND isDeleted = 0")
     suspend fun markWatered(id: String, wateredAt: Long)

@@ -10,6 +10,9 @@ import com.example.flowerworld.di.appContainer
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantPhoto
+import com.example.flowerworld.domain.model.PlantSpecies
+import com.example.flowerworld.domain.model.Season
+import com.example.flowerworld.domain.repository.SpeciesCatalogRepository
 import com.example.flowerworld.domain.model.parseIntervalHours
 import com.example.flowerworld.domain.usecase.AddPlantPhotoUseCase
 import com.example.flowerworld.domain.usecase.DeletePlantPhotoUseCase
@@ -19,9 +22,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.IOException
+import java.time.LocalDate
 
 /** The details of a plant the user can edit; the other rows of the screen are system data. */
 enum class PlantField { Name, Title, Notes, WateringInterval }
@@ -36,7 +41,11 @@ sealed interface PlantInfoUiState {
         val plant: Plant,
         val edit: PlantEdit? = null,
         /** The last photo could not be stored. */
-        val photoFailed: Boolean = false
+        val photoFailed: Boolean = false,
+        /** The plant guide entry the plant is linked to, if any. */
+        val species: PlantSpecies? = null,
+        /** The dialog to link the plant to a guide entry is open. */
+        val pickingSpecies: Boolean = false
     ) : PlantInfoUiState
 
     /** There is no (non-deleted) plant with the requested id. */
@@ -46,6 +55,7 @@ sealed interface PlantInfoUiState {
 /** Observes one plant, chosen by the [PlantIdArg] navigation argument, and edits its details. */
 class PlantInfoViewModel(
     private val plantRepository: PlantRepository,
+    private val speciesCatalog: SpeciesCatalogRepository,
     private val addPlantPhoto: AddPlantPhotoUseCase,
     private val deletePlantPhoto: DeletePlantPhotoUseCase,
     savedStateHandle: SavedStateHandle
@@ -53,10 +63,26 @@ class PlantInfoViewModel(
     private val plantId: String = checkNotNull(savedStateHandle[PlantIdArg])
     private val edit = MutableStateFlow<PlantEdit?>(null)
     private val photoFailed = MutableStateFlow(false)
+    private val pickingSpecies = MutableStateFlow(false)
+
+    // the plant together with its guide entry, so the screen is one source of truth for both
+    private val plantWithSpecies = plantRepository.plant(plantId).map { plant ->
+        plant to plant?.speciesId?.let { id ->
+            try {
+                speciesCatalog.find(id)
+            } catch (e: IOException) {
+                null
+            }
+        }
+    }
 
     val uiState: StateFlow<PlantInfoUiState> =
-        combine(plantRepository.plant(plantId), edit, photoFailed) { plant, edit, photoFailed ->
-            if (plant != null) PlantInfoUiState.Success(plant, edit, photoFailed) else PlantInfoUiState.Error
+        combine(plantWithSpecies, edit, photoFailed, pickingSpecies) { (plant, species), edit, photoFailed, picking ->
+            if (plant != null) {
+                PlantInfoUiState.Success(plant, edit, photoFailed, species, picking)
+            } else {
+                PlantInfoUiState.Error
+            }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(StopTimeoutMillis), PlantInfoUiState.Loading)
 
     /** The user picked an image to add to the plant. */
@@ -74,6 +100,34 @@ class PlantInfoViewModel(
     fun onPhotoDelete(photo: PlantPhoto) {
         photoFailed.value = false
         viewModelScope.launch { deletePlantPhoto(photo) }
+    }
+
+    fun onSpeciesPickRequest() {
+        pickingSpecies.value = true
+    }
+
+    fun onSpeciesPickDismiss() {
+        pickingSpecies.value = false
+    }
+
+    /** The user chose the guide entry that describes this plant. */
+    fun onSpeciesPicked(species: PlantSpecies) {
+        pickingSpecies.value = false
+        viewModelScope.launch { plantRepository.setSpecies(plantId, species.id) }
+    }
+
+    fun onSpeciesUnlink() {
+        viewModelScope.launch { plantRepository.setSpecies(plantId, null) }
+    }
+
+    /** Sets the watering interval to what the guide recommends for the current season. */
+    fun onUseRecommendedWatering() {
+        val state = uiState.value as? PlantInfoUiState.Success ?: return
+        val days = state.species?.wateringDaysFor(Season.of(LocalDate.now().month)) ?: return
+        viewModelScope.launch {
+            val plant = state.plant
+            plantRepository.updateDetails(plant.id, plant.title, plant.name, plant.notes, days * HoursInDay)
+        }
     }
 
     fun onEditRequest(field: PlantField) {
@@ -124,11 +178,13 @@ class PlantInfoViewModel(
     companion object {
         const val PlantIdArg = "plantId"
         private const val StopTimeoutMillis = 5_000L
+        private const val HoursInDay = 24
 
         val Factory = viewModelFactory {
             initializer {
                 PlantInfoViewModel(
                     appContainer.plantRepository,
+                    appContainer.speciesCatalog,
                     appContainer.addPlantPhotoUseCase,
                     appContainer.deletePlantPhotoUseCase,
                     createSavedStateHandle()

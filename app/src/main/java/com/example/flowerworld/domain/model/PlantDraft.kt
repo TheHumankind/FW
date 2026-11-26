@@ -3,6 +3,7 @@ package com.example.flowerworld.domain.model
 /**
  * Validated user input for a plant that does not exist yet.
  *
+ * @property speciesId the plant guide entry the user picked, or null.
  * @property photoSourceUri URI of the picked photo that is not in app storage yet, or null.
  */
 data class PlantDraft(
@@ -11,4 +12,5 @@ data class PlantDraft(
     val name: String,
     val wateringIntervalHours: Int,
     val photoSourceUri: String?,
+    val speciesId: String? = null,
 )

@@ -153,4 +153,11 @@
         <item quantity="many">Раз у %d дзён</item>
         <item quantity="other">Раз у %d дня</item>
     </plurals>
+    <string name="plant_type">Від расліны</string>
+    <string name="guide_link">Знайсці ў даведніку</string>
+    <string name="guide_change">Змяніць</string>
+    <string name="guide_unlink">Адвязаць</string>
+    <string name="guide_recommended">Рэкамендаваны паліў цяпер</string>
+    <string name="guide_use_recommended">Выкарыстаць рэкамендаваны інтэрвал</string>
+    <string name="picker_title">Абярыце расліну</string>
 </resources>

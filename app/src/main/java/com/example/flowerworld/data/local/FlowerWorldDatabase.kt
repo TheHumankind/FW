@@ -8,7 +8,7 @@ import androidx.sqlite.execSQL
 
 @Database(
     entities = [PlantEntity::class, PlantPhotoEntity::class],
-    version = 4,
+    version = 5,
     exportSchema = true,
 )
 abstract class FlowerWorldDatabase : RoomDatabase() {
@@ -16,6 +16,13 @@ abstract class FlowerWorldDatabase : RoomDatabase() {
 
     companion object {
         const val Name = "flowerworld.db"
+
+        /** Links a plant to a plant guide entry (null = not linked). */
+        val Migration4To5 = object : Migration(4, 5) {
+            override fun migrate(connection: SQLiteConnection) {
+                connection.execSQL("ALTER TABLE plants ADD COLUMN speciesId TEXT")
+            }
+        }
 
         /**
          * Photos get their own id and the time they were added instead of one photo per day, so a plant

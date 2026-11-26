@@ -12,6 +12,7 @@ fun PlantWithPhotos.toDomain(): Plant = Plant(
     wateringIntervalHours = plant.wateringIntervalHours,
     lastWateredAt = plant.lastWateredAt,
     diedAt = plant.diedAt,
+    speciesId = plant.speciesId,
     photos = photos
         .filterNot { it.isDeleted }
         .map { PlantPhoto(id = it.id, path = it.path, takenAt = it.takenAt) },
@@ -26,6 +27,7 @@ fun Plant.toEntity(nowMillis: Long): PlantEntity = PlantEntity(
     wateringIntervalHours = wateringIntervalHours,
     lastWateredAt = lastWateredAt,
     diedAt = diedAt,
+    speciesId = speciesId,
     createdAt = nowMillis,
     updatedAt = nowMillis,
 )

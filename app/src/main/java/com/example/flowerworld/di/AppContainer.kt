@@ -31,7 +31,8 @@ class AppContainer(context: Context) {
             .addMigrations(
                 FlowerWorldDatabase.Migration1To2,
                 FlowerWorldDatabase.Migration2To3,
-                FlowerWorldDatabase.Migration3To4
+                FlowerWorldDatabase.Migration3To4,
+                FlowerWorldDatabase.Migration4To5
             )
             .build()
     }

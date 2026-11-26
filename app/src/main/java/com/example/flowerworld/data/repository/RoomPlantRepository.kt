@@ -42,6 +42,10 @@ class RoomPlantRepository(
         plantDao.updateDetails(plantId, title, name, notes, wateringIntervalHours, clock.millis())
     }
 
+    override suspend fun setSpecies(plantId: String, speciesId: String?) {
+        plantDao.setSpecies(plantId, speciesId, clock.millis())
+    }
+
     override suspend fun addPhoto(plantId: String, photo: PlantPhoto) {
         plantDao.insertPhoto(photo.toEntity(plantId, clock.millis()))
     }

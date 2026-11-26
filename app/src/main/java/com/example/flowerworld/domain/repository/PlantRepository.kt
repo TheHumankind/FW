@@ -20,6 +20,9 @@ interface PlantRepository {
     /** Replaces the details the user can edit; the next watering time follows from [wateringIntervalHours]. */
     suspend fun updateDetails(plantId: String, title: String, name: String, notes: String, wateringIntervalHours: Int)
 
+    /** Links the plant to a plant guide entry, or unlinks it when [speciesId] is null. */
+    suspend fun setSpecies(plantId: String, speciesId: String?)
+
     /** Adds [photo] to the plant with [plantId]. */
     suspend fun addPhoto(plantId: String, photo: PlantPhoto)
 

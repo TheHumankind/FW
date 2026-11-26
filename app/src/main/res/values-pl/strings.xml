@@ -153,4 +153,11 @@
         <item quantity="many">Co %d dni</item>
         <item quantity="other">Co %d dnia</item>
     </plurals>
+    <string name="plant_type">Gatunek rośliny</string>
+    <string name="guide_link">Znajdź w poradniku</string>
+    <string name="guide_change">Zmień</string>
+    <string name="guide_unlink">Odłącz</string>
+    <string name="guide_recommended">Zalecane podlewanie teraz</string>
+    <string name="guide_use_recommended">Użyj zalecanego odstępu</string>
+    <string name="picker_title">Wybierz roślinę</string>
 </resources>

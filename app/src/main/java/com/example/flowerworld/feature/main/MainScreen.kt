@@ -10,7 +10,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.data.fake.TestPlants
-import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantSpecies
 import com.example.flowerworld.feature.search.SearchViewer
@@ -28,7 +27,6 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 fun MainScreen(
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
-    onCatalogPlantClick: (CatalogPlant) -> Unit,
     onSpeciesClick: (PlantSpecies) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
@@ -51,7 +49,6 @@ fun MainScreen(
         onFooterSelect = viewModel::onFooterSelect,
         onAddPlantClick = onAddPlantClick,
         onPlantClick = onPlantClick,
-        onCatalogPlantClick = onCatalogPlantClick,
         onSpeciesClick = onSpeciesClick,
         onWaterPlant = viewModel::onWaterPlant,
         onPlantDied = viewModel::onPlantDied,
@@ -66,7 +63,6 @@ private fun MainContent(
     onFooterSelect: (FooterTab) -> Unit,
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
-    onCatalogPlantClick: (CatalogPlant) -> Unit,
     onSpeciesClick: (PlantSpecies) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
@@ -95,7 +91,6 @@ private fun MainContent(
             )
             FooterTab.Search -> SearchViewer(
                 onSpeciesClick = onSpeciesClick,
-                onPlantClick = onCatalogPlantClick,
                 modifier = Modifier.weight(1f)
             )
             FooterTab.Settings -> SettingsViewer(Modifier.weight(1f))
@@ -116,7 +111,6 @@ private fun MainContentPreview() {
             onFooterSelect = {},
             onAddPlantClick = {},
             onPlantClick = {},
-            onCatalogPlantClick = {},
             onSpeciesClick = {},
             onWaterPlant = {},
             onPlantDied = {},

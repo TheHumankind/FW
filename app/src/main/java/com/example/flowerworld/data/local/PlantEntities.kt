@@ -23,6 +23,8 @@ data class PlantEntity(
     val wateringIntervalHours: Int,
     val lastWateredAt: Long,
     val diedAt: Long? = null,
+    // id of the plant guide entry this plant is an example of; null when it is not linked to one
+    val speciesId: String? = null,
     val createdAt: Long,
     val updatedAt: Long,
     val isDeleted: Boolean = false,

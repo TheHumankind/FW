@@ -30,6 +30,7 @@ class AddPlantUseCase(
             wateringIntervalHours = draft.wateringIntervalHours,
             photos = photos,
             lastWateredAt = clock.millis(),
+            speciesId = draft.speciesId,
         )
         try {
             plantRepository.add(plant)

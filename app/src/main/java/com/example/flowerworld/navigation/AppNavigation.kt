@@ -22,7 +22,7 @@ private object Routes {
     const val Welcome = "welcome"
     const val Login = "login"
     const val Main = "main"
-    const val AddPlant = "add_plant?title={${AddPlantViewModel.TitleArg}}&interval={${AddPlantViewModel.IntervalArg}}"
+    const val AddPlant = "add_plant?title={${AddPlantViewModel.TitleArg}}&interval={${AddPlantViewModel.IntervalArg}}&species={${AddPlantViewModel.SpeciesArg}}"
     const val Species = "species/{${SpeciesDetailViewModel.SpeciesIdArg}}"
     const val PlantInfo = "plant_info/{${PlantInfoViewModel.PlantIdArg}}"
 
@@ -31,8 +31,8 @@ private object Routes {
     fun species(id: String) = "species/$id"
 
     /** The add-plant form, optionally with the title and watering interval (days) filled in. */
-    fun addPlant(title: String? = null, intervalDays: Int? = null) =
-        "add_plant?title=${Uri.encode(title.orEmpty())}&interval=${intervalDays ?: 0}"
+    fun addPlant(title: String? = null, intervalDays: Int? = null, speciesId: String? = null) =
+        "add_plant?title=${Uri.encode(title.orEmpty())}&interval=${intervalDays ?: 0}&species=${Uri.encode(speciesId.orEmpty())}"
 }
 
 // TODO: switch back to Routes.Welcome once login and sign up are really used
@@ -60,8 +60,6 @@ fun AppNavigation() {
         composable(Routes.Main) {
             MainScreen(
                 onAddPlantClick = { navController.navigate(Routes.addPlant()) },
-                // the plant picked in the catalog goes into the new plant's species field
-                onCatalogPlantClick = { plant -> navController.navigate(Routes.addPlant(plant.displayName)) },
                 onSpeciesClick = { species -> navController.navigate(Routes.species(species.id)) },
                 onPlantClick = { plant -> navController.navigate(Routes.plantInfo(plant.id)) }
             )
@@ -78,7 +76,7 @@ fun AppNavigation() {
         ) {
             SpeciesDetailScreen(
                 onBackClick = { navController.popBackStack() },
-                onAddClick = { title, days -> navController.navigate(Routes.addPlant(title, days)) }
+                onAddClick = { title, days, speciesId -> navController.navigate(Routes.addPlant(title, days, speciesId)) }
             )
         }
         composable(
@@ -91,6 +89,10 @@ fun AppNavigation() {
                 navArgument(AddPlantViewModel.IntervalArg) {
                     type = NavType.IntType
                     defaultValue = 0
+                },
+                navArgument(AddPlantViewModel.SpeciesArg) {
+                    type = NavType.StringType
+                    defaultValue = ""
                 }
             )
         ) {

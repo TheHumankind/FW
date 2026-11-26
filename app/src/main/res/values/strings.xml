@@ -153,4 +153,11 @@
         <item quantity="one">Every %d day</item>
         <item quantity="other">Every %d days</item>
     </plurals>
+    <string name="plant_type">Plant type</string>
+    <string name="guide_link">Find in plant guide</string>
+    <string name="guide_change">Change</string>
+    <string name="guide_unlink">Unlink</string>
+    <string name="guide_recommended">Recommended watering now</string>
+    <string name="guide_use_recommended">Use recommended interval</string>
+    <string name="picker_title">Choose a plant</string>
 </resources>

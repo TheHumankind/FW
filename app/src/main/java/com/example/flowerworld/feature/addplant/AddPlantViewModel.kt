@@ -23,6 +23,8 @@ data class AddPlantUiState(
     val wateringInterval: String = "",
     val intervalUnit: IntervalUnit = IntervalUnit.Days,
     val photoUri: String? = null,
+    // the plant guide entry the form was filled from, if any
+    val speciesId: String? = null,
     val titleError: FieldError? = null,
     val nameError: FieldError? = null,
     val intervalError: FieldError? = null,
@@ -38,7 +40,8 @@ class AddPlantViewModel(
     // a plant picked in a catalog arrives as the prefilled species and watering interval (days)
     AddPlantUiState(
         title = savedStateHandle.get<String>(TitleArg).orEmpty(),
-        wateringInterval = savedStateHandle.get<Int>(IntervalArg)?.takeIf { it > 0 }?.toString().orEmpty()
+        wateringInterval = savedStateHandle.get<Int>(IntervalArg)?.takeIf { it > 0 }?.toString().orEmpty(),
+        speciesId = savedStateHandle.get<String>(SpeciesArg)?.takeIf { it.isNotEmpty() }
     )
 ) {
     fun onTitleChange(value: String) = updateState { copy(title = value, titleError = null) }
@@ -78,7 +81,8 @@ class AddPlantViewModel(
             notes = state.notes.trim(),
             name = name,
             wateringIntervalHours = interval,
-            photoSourceUri = state.photoUri
+            photoSourceUri = state.photoUri,
+            speciesId = state.speciesId
         )
         viewModelScope.launch {
             updateState { copy(isSaving = true, saveFailed = false) }
@@ -94,6 +98,7 @@ class AddPlantViewModel(
     companion object {
         const val TitleArg = "title"
         const val IntervalArg = "interval"
+        const val SpeciesArg = "species"
 
         val Factory = viewModelFactory {
             initializer { AddPlantViewModel(appContainer.addPlantUseCase, createSavedStateHandle()) }

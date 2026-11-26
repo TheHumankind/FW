@@ -50,47 +50,21 @@ import com.example.flowerworld.ui.components.PhotoBox
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
-/** How the search tab looks for plants. */
-private enum class SearchMode { Guide, Online }
-
 /**
- * Footer tab for finding plants: the bundled plant guide (works offline, has care data) or the online
- * catalog. [onSpeciesClick] gets a guide entry, [onPlantClick] an online one.
+ * Footer tab for finding plants: the bundled plant guide (works offline, has care data).
+ * [onSpeciesClick] gets the entry the user picked.
+ *
+ * The online catalog search ([OnlineSearch], Trefle) is built and kept, but not shown for now: the
+ * guide fits the app better. To bring it back, show [OnlineSearch] again next to [GuideSearch].
  */
 @Composable
 fun SearchViewer(
     onSpeciesClick: (PlantSpecies) -> Unit,
-    onPlantClick: (CatalogPlant) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var mode by rememberSaveable { mutableStateOf(SearchMode.Guide) }
     AppListScreen(title = stringResource(R.string.search_title), modifier = modifier) {
-        Column(Modifier.fillMaxSize()) {
-            Row(
-                modifier = Modifier.padding(horizontal = Dimens.ListPadding),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                ModeChip(stringResource(R.string.search_mode_guide), mode == SearchMode.Guide) { mode = SearchMode.Guide }
-                ModeChip(stringResource(R.string.search_mode_online), mode == SearchMode.Online) { mode = SearchMode.Online }
-            }
-            Box(Modifier.weight(1f).fillMaxWidth()) {
-                when (mode) {
-                    SearchMode.Guide -> GuideSearch(onSpeciesClick = onSpeciesClick)
-                    SearchMode.Online -> OnlineSearch(onPlantClick = onPlantClick)
-                }
-            }
-        }
+        GuideSearch(onSpeciesClick = onSpeciesClick)
     }
-}
-
-@Composable
-private fun ModeChip(text: String, selected: Boolean, onClick: () -> Unit) {
-    FilterChip(
-        selected = selected,
-        onClick = onClick,
-        label = { Text(text) },
-        colors = selectableChipColors()
-    )
 }
 
 /** Colors of a chip that must be easy to see when it is on. */
@@ -100,9 +74,9 @@ internal fun selectableChipColors() = FilterChipDefaults.filterChipColors(
     selectedLabelColor = MaterialTheme.colorScheme.onPrimary
 )
 
-/** The online catalog (Trefle): by name, flower and leaf color, edibility. */
+/** The online catalog (Trefle): by name, flower and leaf color, edibility. Not shown for now, see [SearchViewer]. */
 @Composable
-private fun OnlineSearch(
+internal fun OnlineSearch(
     onPlantClick: (CatalogPlant) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = viewModel(factory = SearchViewModel.Factory)

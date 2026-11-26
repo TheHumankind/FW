@@ -3,6 +3,7 @@ package com.example.flowerworld.feature.plantinfo
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +39,11 @@ import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantPhoto
+import com.example.flowerworld.domain.model.PlantSpecies
+import com.example.flowerworld.domain.model.Season
+import com.example.flowerworld.feature.search.appLanguageCode
+import com.example.flowerworld.feature.species.SpeciesCareGuide
+import com.example.flowerworld.feature.species.SpeciesPickerDialog
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
 import com.example.flowerworld.ui.components.AppScreen
@@ -50,6 +56,7 @@ import com.example.flowerworld.ui.components.rememberPhotoPicker
 import com.example.flowerworld.ui.formatDateTime
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
+import java.time.LocalDate
 
 private val PhotoHeight = 240.dp
 private val BackButtonSize = 36.dp
@@ -73,6 +80,11 @@ fun PlantInfoScreen(
         onEditInput = viewModel::onEditInput,
         onEditDismiss = viewModel::onEditDismiss,
         onEditSave = viewModel::onEditSave,
+        onSpeciesPickRequest = viewModel::onSpeciesPickRequest,
+        onSpeciesPicked = viewModel::onSpeciesPicked,
+        onSpeciesPickDismiss = viewModel::onSpeciesPickDismiss,
+        onSpeciesUnlink = viewModel::onSpeciesUnlink,
+        onUseRecommendedWatering = viewModel::onUseRecommendedWatering,
         modifier = modifier
     )
 }
@@ -87,6 +99,11 @@ private fun PlantInfoContent(
     onEditInput: () -> Unit,
     onEditDismiss: () -> Unit,
     onEditSave: (text: String, unit: IntervalUnit) -> Unit,
+    onSpeciesPickRequest: () -> Unit,
+    onSpeciesPicked: (PlantSpecies) -> Unit,
+    onSpeciesPickDismiss: () -> Unit,
+    onSpeciesUnlink: () -> Unit,
+    onUseRecommendedWatering: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     AppScreen(modifier = modifier) {
@@ -95,7 +112,20 @@ private fun PlantInfoContent(
                 PlantInfoUiState.Loading -> Unit
                 PlantInfoUiState.Error -> AppCenteredMessage(text = stringResource(R.string.plant_not_found))
                 is PlantInfoUiState.Success -> {
-                    PlantDetails(state.plant, state.photoFailed, onAddPhotoClick, onDeletePhoto, onEditRequest)
+                    PlantDetails(
+                        plant = state.plant,
+                        species = state.species,
+                        photoFailed = state.photoFailed,
+                        onAddPhotoClick = onAddPhotoClick,
+                        onDeletePhoto = onDeletePhoto,
+                        onEditRequest = onEditRequest,
+                        onSpeciesPickRequest = onSpeciesPickRequest,
+                        onSpeciesUnlink = onSpeciesUnlink,
+                        onUseRecommendedWatering = onUseRecommendedWatering
+                    )
+                    if (state.pickingSpecies) {
+                        SpeciesPickerDialog(onPicked = onSpeciesPicked, onDismiss = onSpeciesPickDismiss)
+                    }
                     state.edit?.let { edit ->
                         EditPlantFieldDialog(
                             plant = state.plant,
@@ -125,10 +155,14 @@ private fun PlantInfoContent(
 @Composable
 private fun PlantDetails(
     plant: Plant,
+    species: PlantSpecies?,
     photoFailed: Boolean,
     onAddPhotoClick: () -> Unit,
     onDeletePhoto: (PlantPhoto) -> Unit,
-    onEditRequest: (PlantField) -> Unit
+    onEditRequest: (PlantField) -> Unit,
+    onSpeciesPickRequest: () -> Unit,
+    onSpeciesUnlink: () -> Unit,
+    onUseRecommendedWatering: () -> Unit
 ) {
     val photos = plant.photosNewestFirst
     val pagerState = rememberPagerState { photoPageCount(photos.size) }
@@ -220,7 +254,48 @@ private fun PlantDetails(
             plant.diedAt
                 ?.let { InfoRow(stringResource(R.string.info_died), formatDateTime(it)) }
                 ?: InfoRow(stringResource(R.string.info_next_watering), formatDateTime(plant.nextWateringAt))
+            SpeciesBlock(
+                plant = plant,
+                species = species,
+                onFindClick = onSpeciesPickRequest,
+                onUnlinkClick = onSpeciesUnlink,
+                onUseRecommendedClick = onUseRecommendedWatering
+            )
         }
+    }
+}
+
+/**
+ * What the plant guide says about this plant: its type, the recommended watering (with a button to use it)
+ * and the whole care guide; or a button to link the plant to a guide entry when it has none.
+ */
+@Composable
+private fun SpeciesBlock(
+    plant: Plant,
+    species: PlantSpecies?,
+    onFindClick: () -> Unit,
+    onUnlinkClick: () -> Unit,
+    onUseRecommendedClick: () -> Unit
+) {
+    if (species == null) {
+        AppTextButton(text = stringResource(R.string.guide_link), onClick = onFindClick)
+        return
+    }
+    val recommended = species.wateringDaysFor(Season.of(LocalDate.now().month))
+    InfoRow(stringResource(R.string.plant_type), species.displayName(appLanguageCode()))
+    if (recommended != null) {
+        InfoRow(
+            stringResource(R.string.guide_recommended),
+            pluralStringResource(R.plurals.every_n_days, recommended, recommended)
+        )
+        if (plant.wateringIntervalHours != recommended * HoursInDay) {
+            AppTextButton(text = stringResource(R.string.guide_use_recommended), onClick = onUseRecommendedClick)
+        }
+    }
+    SpeciesCareGuide(species)
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        AppTextButton(text = stringResource(R.string.guide_change), onClick = onFindClick)
+        AppTextButton(text = stringResource(R.string.guide_unlink), onClick = onUnlinkClick)
     }
 }
 
@@ -281,7 +356,12 @@ private fun PlantInfoContentPreview() {
             onEditRequest = {},
             onEditInput = {},
             onEditDismiss = {},
-            onEditSave = { _, _ -> }
+            onEditSave = { _, _ -> },
+            onSpeciesPickRequest = {},
+            onSpeciesPicked = {},
+            onSpeciesPickDismiss = {},
+            onSpeciesUnlink = {},
+            onUseRecommendedWatering = {}
         )
     }
 }
