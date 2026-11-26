@@ -35,8 +35,11 @@ class AddPlantViewModel(
     private val addPlant: AddPlantUseCase,
     savedStateHandle: SavedStateHandle
 ) : UiStateViewModel<AddPlantUiState>(
-    // a plant picked in the catalog arrives as the prefilled species
-    AddPlantUiState(title = savedStateHandle.get<String>(TitleArg).orEmpty())
+    // a plant picked in a catalog arrives as the prefilled species and watering interval (days)
+    AddPlantUiState(
+        title = savedStateHandle.get<String>(TitleArg).orEmpty(),
+        wateringInterval = savedStateHandle.get<Int>(IntervalArg)?.takeIf { it > 0 }?.toString().orEmpty()
+    )
 ) {
     fun onTitleChange(value: String) = updateState { copy(title = value, titleError = null) }
 
@@ -90,6 +93,7 @@ class AddPlantViewModel(
 
     companion object {
         const val TitleArg = "title"
+        const val IntervalArg = "interval"
 
         val Factory = viewModelFactory {
             initializer { AddPlantViewModel(appContainer.addPlantUseCase, createSavedStateHandle()) }

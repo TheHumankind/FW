@@ -11,6 +11,8 @@ import com.example.flowerworld.feature.plantinfo.PlantInfoScreen
 import com.example.flowerworld.feature.plantinfo.PlantInfoViewModel
 import com.example.flowerworld.feature.addplant.AddPlantScreen
 import com.example.flowerworld.feature.addplant.AddPlantViewModel
+import com.example.flowerworld.feature.species.SpeciesDetailScreen
+import com.example.flowerworld.feature.species.SpeciesDetailViewModel
 import com.example.flowerworld.feature.login.LoginScreen
 import com.example.flowerworld.feature.main.MainScreen
 import com.example.flowerworld.feature.welcome.WelcomeScreen
@@ -20,12 +22,17 @@ private object Routes {
     const val Welcome = "welcome"
     const val Login = "login"
     const val Main = "main"
-    const val AddPlant = "add_plant?title={${AddPlantViewModel.TitleArg}}"
+    const val AddPlant = "add_plant?title={${AddPlantViewModel.TitleArg}}&interval={${AddPlantViewModel.IntervalArg}}"
+    const val Species = "species/{${SpeciesDetailViewModel.SpeciesIdArg}}"
     const val PlantInfo = "plant_info/{${PlantInfoViewModel.PlantIdArg}}"
 
     fun plantInfo(plantId: String) = "plant_info/$plantId"
 
-    fun addPlant(title: String? = null) = if (title == null) "add_plant" else "add_plant?title=${Uri.encode(title)}"
+    fun species(id: String) = "species/$id"
+
+    /** The add-plant form, optionally with the title and watering interval (days) filled in. */
+    fun addPlant(title: String? = null, intervalDays: Int? = null) =
+        "add_plant?title=${Uri.encode(title.orEmpty())}&interval=${intervalDays ?: 0}"
 }
 
 // TODO: switch back to Routes.Welcome once login and sign up are really used
@@ -55,6 +62,7 @@ fun AppNavigation() {
                 onAddPlantClick = { navController.navigate(Routes.addPlant()) },
                 // the plant picked in the catalog goes into the new plant's species field
                 onCatalogPlantClick = { plant -> navController.navigate(Routes.addPlant(plant.displayName)) },
+                onSpeciesClick = { species -> navController.navigate(Routes.species(species.id)) },
                 onPlantClick = { plant -> navController.navigate(Routes.plantInfo(plant.id)) }
             )
         }
@@ -65,12 +73,24 @@ fun AppNavigation() {
             PlantInfoScreen(onBackClick = { navController.popBackStack() })
         }
         composable(
+            route = Routes.Species,
+            arguments = listOf(navArgument(SpeciesDetailViewModel.SpeciesIdArg) { type = NavType.StringType })
+        ) {
+            SpeciesDetailScreen(
+                onBackClick = { navController.popBackStack() },
+                onAddClick = { title, days -> navController.navigate(Routes.addPlant(title, days)) }
+            )
+        }
+        composable(
             route = Routes.AddPlant,
             arguments = listOf(
                 navArgument(AddPlantViewModel.TitleArg) {
                     type = NavType.StringType
-                    nullable = true
-                    defaultValue = null
+                    defaultValue = ""
+                },
+                navArgument(AddPlantViewModel.IntervalArg) {
+                    type = NavType.IntType
+                    defaultValue = 0
                 }
             )
         ) {

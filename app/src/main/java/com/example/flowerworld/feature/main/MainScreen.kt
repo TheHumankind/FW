@@ -12,6 +12,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.domain.model.PlantSpecies
 import com.example.flowerworld.feature.search.SearchViewer
 import com.example.flowerworld.feature.settings.SettingsViewer
 import com.example.flowerworld.feature.graveyard.GraveyardViewer
@@ -28,6 +29,7 @@ fun MainScreen(
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
     onCatalogPlantClick: (CatalogPlant) -> Unit,
+    onSpeciesClick: (PlantSpecies) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
 ) {
@@ -50,6 +52,7 @@ fun MainScreen(
         onAddPlantClick = onAddPlantClick,
         onPlantClick = onPlantClick,
         onCatalogPlantClick = onCatalogPlantClick,
+        onSpeciesClick = onSpeciesClick,
         onWaterPlant = viewModel::onWaterPlant,
         onPlantDied = viewModel::onPlantDied,
         onRevivePlant = viewModel::onRevivePlant,
@@ -64,6 +67,7 @@ private fun MainContent(
     onAddPlantClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
     onCatalogPlantClick: (CatalogPlant) -> Unit,
+    onSpeciesClick: (PlantSpecies) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
     onRevivePlant: (Plant) -> Unit,
@@ -89,7 +93,11 @@ private fun MainContent(
                 heading = state.cardHeading,
                 modifier = Modifier.weight(1f)
             )
-            FooterTab.Search -> SearchViewer(onPlantClick = onCatalogPlantClick, modifier = Modifier.weight(1f))
+            FooterTab.Search -> SearchViewer(
+                onSpeciesClick = onSpeciesClick,
+                onPlantClick = onCatalogPlantClick,
+                modifier = Modifier.weight(1f)
+            )
             FooterTab.Settings -> SettingsViewer(Modifier.weight(1f))
         }
         AppFooter(
@@ -109,6 +117,7 @@ private fun MainContentPreview() {
             onAddPlantClick = {},
             onPlantClick = {},
             onCatalogPlantClick = {},
+            onSpeciesClick = {},
             onWaterPlant = {},
             onPlantDied = {},
             onRevivePlant = {}

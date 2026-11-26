@@ -21,6 +21,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +41,7 @@ import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.CatalogFilters
 import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.model.PlantColor
+import com.example.flowerworld.domain.model.PlantSpecies
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppListScreen
@@ -46,9 +50,59 @@ import com.example.flowerworld.ui.components.PhotoBox
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
-/** Footer tab that searches the online plant catalog. Calls [onPlantClick] with the plant the user picked. */
+/** How the search tab looks for plants. */
+private enum class SearchMode { Guide, Online }
+
+/**
+ * Footer tab for finding plants: the bundled plant guide (works offline, has care data) or the online
+ * catalog. [onSpeciesClick] gets a guide entry, [onPlantClick] an online one.
+ */
 @Composable
 fun SearchViewer(
+    onSpeciesClick: (PlantSpecies) -> Unit,
+    onPlantClick: (CatalogPlant) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var mode by rememberSaveable { mutableStateOf(SearchMode.Guide) }
+    AppListScreen(title = stringResource(R.string.search_title), modifier = modifier) {
+        Column(Modifier.fillMaxSize()) {
+            Row(
+                modifier = Modifier.padding(horizontal = Dimens.ListPadding),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                ModeChip(stringResource(R.string.search_mode_guide), mode == SearchMode.Guide) { mode = SearchMode.Guide }
+                ModeChip(stringResource(R.string.search_mode_online), mode == SearchMode.Online) { mode = SearchMode.Online }
+            }
+            Box(Modifier.weight(1f).fillMaxWidth()) {
+                when (mode) {
+                    SearchMode.Guide -> GuideSearch(onSpeciesClick = onSpeciesClick)
+                    SearchMode.Online -> OnlineSearch(onPlantClick = onPlantClick)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ModeChip(text: String, selected: Boolean, onClick: () -> Unit) {
+    FilterChip(
+        selected = selected,
+        onClick = onClick,
+        label = { Text(text) },
+        colors = selectableChipColors()
+    )
+}
+
+/** Colors of a chip that must be easy to see when it is on. */
+@Composable
+internal fun selectableChipColors() = FilterChipDefaults.filterChipColors(
+    selectedContainerColor = MaterialTheme.colorScheme.primary,
+    selectedLabelColor = MaterialTheme.colorScheme.onPrimary
+)
+
+/** The online catalog (Trefle): by name, flower and leaf color, edibility. */
+@Composable
+private fun OnlineSearch(
     onPlantClick: (CatalogPlant) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = viewModel(factory = SearchViewModel.Factory)
@@ -86,8 +140,7 @@ private fun SearchContent(
     onPlantClick: (CatalogPlant) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    AppListScreen(title = stringResource(R.string.search_title), modifier = modifier) {
-      Column(Modifier.fillMaxSize()) {
+    Column(modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.ListPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -118,10 +171,7 @@ private fun SearchContent(
                 selected = state.filters.edibleOnly,
                 onClick = onEdibleToggle,
                 label = { Text(stringResource(R.string.search_edible)) },
-                colors = FilterChipDefaults.filterChipColors(
-                    selectedContainerColor = MaterialTheme.colorScheme.primary,
-                    selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-                )
+                colors = selectableChipColors()
             )
         }
         Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
@@ -132,7 +182,6 @@ private fun SearchContent(
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.fillMaxWidth().padding(8.dp)
         )
-      }
     }
 }
 

@@ -15,7 +15,9 @@ import com.example.flowerworld.domain.usecase.DeletePlantPhotoUseCase
 import com.example.flowerworld.reminder.ReminderScheduler
 import com.example.flowerworld.BuildConfig
 import com.example.flowerworld.data.remote.TreflePlantCatalog
+import com.example.flowerworld.data.catalog.AssetSpeciesCatalog
 import com.example.flowerworld.domain.repository.PlantCatalogRepository
+import com.example.flowerworld.domain.repository.SpeciesCatalogRepository
 
 /**
  * Manual dependency container: creates the app-wide singletons once and hands them to ViewModels.
@@ -38,6 +40,7 @@ class AppContainer(context: Context) {
     val reminderScheduler: ReminderScheduler by lazy { ReminderScheduler(appContext, settingsRepository) }
     val settingsRepository: SettingsRepository by lazy { PrefsSettingsRepository(appContext) }
     val plantCatalog: PlantCatalogRepository by lazy { TreflePlantCatalog(BuildConfig.TREFLE_TOKEN) }
+    val speciesCatalog: SpeciesCatalogRepository by lazy { AssetSpeciesCatalog(appContext) }
     val photoStorage: PhotoStorage by lazy { FilePhotoStorage(appContext) }
     val addPlantUseCase: AddPlantUseCase by lazy { AddPlantUseCase(plantRepository, photoStorage) }
     val addPlantPhotoUseCase: AddPlantPhotoUseCase by lazy { AddPlantPhotoUseCase(plantRepository, photoStorage) }

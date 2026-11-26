@@ -12,6 +12,8 @@ A plant tracker. The user adds their own plants and the app reminds them when a 
 - Photos are stored as compressed files in app storage; the database keeps only the path/id. This keeps backup simple.
 - Stage 1 (first): the app works fully offline; the only server feature is **backup/restore** of the user's data (accounts exist only for that).
 - Stage 2 (much later): a social part. Users connect by direct invitation (QR code or direct link, i.e. App Links on our own domain) and can view each other's plants and care history. This needs per-user access rules between accounts.
+- Local plant catalog (in progress): a bundled read-only database of common plants (houseplants first) with care data (watering per season, light, humidity, toxicity, descriptions, localized names), searchable offline and used to prefill the watering interval when adding a plant. Source: Luminoid/plantfolio-common-plants (CC BY-NC-SA 4.0, personal non-commercial use only; the data must be replaced before any Play Store release).
+- Future, ON PAUSE (do not start without the user's command): identifying a plant by photo directly on the device (TFLite model for the catalog species). It needs a training set of houseplant photos with usable licences (iNaturalist/GBIF/Commons) and training on a GPU; accuracy must be tested on the user's real photos. Interim idea: the online Pl@ntNet API (free, 500 identifications/day).
 - The backend is not chosen yet (see below). Candidates: Supabase (relational model + RLS fits the social stage), Firebase (cheapest for photos at small scale, has FCM), or self-hosted Supabase/PocketBase on a VPS later.
 
 ## Environment
