@@ -3,12 +3,14 @@ package com.example.flowerworld.feature.plants
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +37,7 @@ private val AddButtonPadding = 16.dp
 fun PlantViewer(
     plants: List<Plant>,
     onAddPlantClick: () -> Unit,
+    onSearchClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
@@ -48,15 +51,25 @@ fun PlantViewer(
         } else {
             PlantList(plants, timeUnit, heading, onPlantClick, onWaterPlant, onPlantDied)
         }
-        AppIconButton(
-            icon = Icons.Filled.AddCircle,
-            contentDescription = stringResource(R.string.add_plant),
-            onClick = onAddPlantClick,
-            size = AddButtonSize,
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(AddButtonPadding),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = AddButtonPadding)
-        )
+        ) {
+            AppIconButton(
+                icon = Icons.Filled.AddCircle,
+                contentDescription = stringResource(R.string.add_plant),
+                onClick = onAddPlantClick,
+                size = AddButtonSize
+            )
+            AppIconButton(
+                icon = Icons.Filled.Search,
+                contentDescription = stringResource(R.string.search_title),
+                onClick = onSearchClick,
+                size = AddButtonSize
+            )
+        }
     }
 }
 
@@ -97,7 +110,7 @@ private fun BoxScope.PlantList(
 @Composable
 private fun PlantViewerPreview() {
     FlowerWorldTheme {
-        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onPlantClick = {}, onWaterPlant = {}, onPlantDied = {},
+        PlantViewer(plants = TestPlants, onAddPlantClick = {}, onSearchClick = {}, onPlantClick = {}, onWaterPlant = {}, onPlantDied = {},
             timeUnit = IntervalUnit.Days,
             heading = PlantHeading.Title
         )

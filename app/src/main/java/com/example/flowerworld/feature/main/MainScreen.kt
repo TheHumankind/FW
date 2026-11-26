@@ -23,6 +23,7 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 @Composable
 fun MainScreen(
     onAddPlantClick: () -> Unit,
+    onSearchClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
@@ -44,6 +45,7 @@ fun MainScreen(
         state = state,
         onFooterSelect = viewModel::onFooterSelect,
         onAddPlantClick = onAddPlantClick,
+        onSearchClick = onSearchClick,
         onPlantClick = onPlantClick,
         onWaterPlant = viewModel::onWaterPlant,
         onPlantDied = viewModel::onPlantDied,
@@ -57,6 +59,7 @@ private fun MainContent(
     state: MainUiState,
     onFooterSelect: (FooterTab) -> Unit,
     onAddPlantClick: () -> Unit,
+    onSearchClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
@@ -68,6 +71,7 @@ private fun MainContent(
             FooterTab.Plants -> PlantViewer(
                 plants = state.plants,
                 onAddPlantClick = onAddPlantClick,
+        onSearchClick = onSearchClick,
                 onPlantClick = onPlantClick,
                 onWaterPlant = onWaterPlant,
                 onPlantDied = onPlantDied,
@@ -99,6 +103,7 @@ private fun MainContentPreview() {
             state = MainUiState(plants = TestPlants),
             onFooterSelect = {},
             onAddPlantClick = {},
+            onSearchClick = {},
             onPlantClick = {},
             onWaterPlant = {},
             onPlantDied = {},

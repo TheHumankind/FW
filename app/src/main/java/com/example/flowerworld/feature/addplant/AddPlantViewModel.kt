@@ -1,7 +1,11 @@
 package com.example.flowerworld.feature.addplant
 
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.example.flowerworld.di.containerViewModelFactory
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.flowerworld.di.appContainer
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.PlantDraft
 import com.example.flowerworld.domain.model.parseIntervalHours
@@ -28,8 +32,12 @@ data class AddPlantUiState(
 )
 
 class AddPlantViewModel(
-    private val addPlant: AddPlantUseCase
-) : UiStateViewModel<AddPlantUiState>(AddPlantUiState()) {
+    private val addPlant: AddPlantUseCase,
+    savedStateHandle: SavedStateHandle
+) : UiStateViewModel<AddPlantUiState>(
+    // a plant picked in the catalog arrives as the prefilled species
+    AddPlantUiState(title = savedStateHandle.get<String>(TitleArg).orEmpty())
+) {
     fun onTitleChange(value: String) = updateState { copy(title = value, titleError = null) }
 
     fun onNotesChange(value: String) = updateState { copy(notes = value) }
@@ -81,6 +89,10 @@ class AddPlantViewModel(
     }
 
     companion object {
-        val Factory = containerViewModelFactory { AddPlantViewModel(it.addPlantUseCase) }
+        const val TitleArg = "title"
+
+        val Factory = viewModelFactory {
+            initializer { AddPlantViewModel(appContainer.addPlantUseCase, createSavedStateHandle()) }
+        }
     }
 }

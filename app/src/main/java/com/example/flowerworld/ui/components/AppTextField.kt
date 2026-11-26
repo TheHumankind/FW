@@ -1,6 +1,7 @@
 package com.example.flowerworld.ui.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -27,6 +28,8 @@ fun AppTextField(
     trailingContent: (@Composable () -> Unit)? = null,
     singleLine: Boolean = true,
     minLines: Int = 1,
+    // Called when the keyboard action button (search, done, ...) is pressed
+    onImeAction: (() -> Unit)? = null,
     // Error text under the field; null means the field is valid
     errorText: String? = null
 ) {
@@ -46,6 +49,7 @@ fun AppTextField(
             keyboardType = keyboardType,
             imeAction = imeAction
         ),
+        keyboardActions = if (onImeAction != null) KeyboardActions(onAny = { onImeAction() }) else KeyboardActions.Default,
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
             unfocusedBorderColor = MaterialTheme.colorScheme.primaryContainer,

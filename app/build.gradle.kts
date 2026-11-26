@@ -18,6 +18,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Personal Trefle access token (free, from trefle.io). Put TREFLE_TOKEN=... into ~/.gradle/gradle.properties
+        // (works for every worktree) or into the environment; it must never be committed to the repository.
+        val trefleToken = providers.gradleProperty("TREFLE_TOKEN")
+            .orElse(providers.environmentVariable("TREFLE_TOKEN"))
+            .orElse("")
+            .get()
+        buildConfigField("String", "TREFLE_TOKEN", "\"$trefleToken\"")
     }
 
     buildTypes {
@@ -34,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -51,6 +60,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.room.ktx)

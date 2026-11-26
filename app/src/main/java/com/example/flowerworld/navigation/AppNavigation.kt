@@ -1,5 +1,6 @@
 package com.example.flowerworld.navigation
 
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -9,6 +10,8 @@ import androidx.navigation.navArgument
 import com.example.flowerworld.feature.plantinfo.PlantInfoScreen
 import com.example.flowerworld.feature.plantinfo.PlantInfoViewModel
 import com.example.flowerworld.feature.addplant.AddPlantScreen
+import com.example.flowerworld.feature.addplant.AddPlantViewModel
+import com.example.flowerworld.feature.search.SearchScreen
 import com.example.flowerworld.feature.login.LoginScreen
 import com.example.flowerworld.feature.main.MainScreen
 import com.example.flowerworld.feature.welcome.WelcomeScreen
@@ -18,10 +21,13 @@ private object Routes {
     const val Welcome = "welcome"
     const val Login = "login"
     const val Main = "main"
-    const val AddPlant = "add_plant"
+    const val Search = "search"
+    const val AddPlant = "add_plant?title={${AddPlantViewModel.TitleArg}}"
     const val PlantInfo = "plant_info/{${PlantInfoViewModel.PlantIdArg}}"
 
     fun plantInfo(plantId: String) = "plant_info/$plantId"
+
+    fun addPlant(title: String? = null) = if (title == null) "add_plant" else "add_plant?title=${Uri.encode(title)}"
 }
 
 // TODO: switch back to Routes.Welcome once login and sign up are really used
@@ -48,7 +54,8 @@ fun AppNavigation() {
         }
         composable(Routes.Main) {
             MainScreen(
-                onAddPlantClick = { navController.navigate(Routes.AddPlant) },
+                onAddPlantClick = { navController.navigate(Routes.addPlant()) },
+                onSearchClick = { navController.navigate(Routes.Search) },
                 onPlantClick = { plant -> navController.navigate(Routes.plantInfo(plant.id)) }
             )
         }
@@ -58,7 +65,23 @@ fun AppNavigation() {
         ) {
             PlantInfoScreen(onBackClick = { navController.popBackStack() })
         }
-        composable(Routes.AddPlant) {
+        composable(Routes.Search) {
+            SearchScreen(
+                onBackClick = { navController.popBackStack() },
+                // the picked plant's name goes into the new plant's species field
+                onPlantClick = { plant -> navController.navigate(Routes.addPlant(plant.displayName)) }
+            )
+        }
+        composable(
+            route = Routes.AddPlant,
+            arguments = listOf(
+                navArgument(AddPlantViewModel.TitleArg) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) {
             AddPlantScreen(onClose = { navController.popBackStack() })
         }
     }
