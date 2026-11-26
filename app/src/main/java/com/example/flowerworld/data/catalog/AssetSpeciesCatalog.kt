@@ -31,10 +31,10 @@ class AssetSpeciesCatalog(private val context: Context) : SpeciesCatalogReposito
     /** A species with the text it is searched by, lower-cased and without accents. */
     private class Entry(val species: PlantSpecies) {
         val searchText: String = normalize(
-            (listOf(species.name, species.id.replace('-', ' '), species.examples) + species.names.values)
+            (listOf(species.name, species.id.replace('-', ' '), species.examples) + species.names.values + species.aliases)
                 .joinToString(" ")
         )
-        val nameTexts: List<String> = (listOf(species.name) + species.names.values).map(::normalize)
+        val nameTexts: List<String> = (listOf(species.name) + species.names.values + species.aliases).map(::normalize)
     }
 
     override suspend fun search(query: String, filters: SpeciesFilters): List<PlantSpecies> {
@@ -80,10 +80,13 @@ class AssetSpeciesCatalog(private val context: Context) : SpeciesCatalogReposito
         val id = json.getString("id")
         val category = json.optString("category")
         val localized = allNames?.optJSONObject(id)
+        // a localized value is "Main name|alias|alias": the main name is shown, the aliases are only searched
+        val rawNames = localized?.keys()?.asSequence()?.associateWith { localized.getString(it) }.orEmpty()
         return PlantSpecies(
             id = id,
             name = json.getString("typeName"),
-            names = localized?.keys()?.asSequence()?.associateWith { localized.getString(it) }.orEmpty(),
+            names = rawNames.mapValues { it.value.substringBefore('|') },
+            aliases = rawNames.values.flatMap { it.split('|').drop(1) },
             description = json.optString("description"),
             examples = json.optString("commonExamples"),
             careTips = json.optString("careTips"),

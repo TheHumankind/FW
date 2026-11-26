@@ -1,0 +1,1928 @@
+{
+"aglaonema":{
+"ru":"Аглаонема|китайское вечнозелёное",
+"uk":"Аглаонема",
+"pl":"Aglaonema",
+"be":"Аглаанема"
+},
+"aglaonema-pink-star":{
+"ru":"Аглаонема Pink Star",
+"uk":"Аглаонема Pink Star",
+"pl":"Aglaonema Pink Star",
+"be":"Аглаанема Pink Star"
+},
+"aglaonema-red-valentine":{
+"ru":"Аглаонема Red Valentine",
+"uk":"Аглаонема Red Valentine",
+"pl":"Aglaonema Red Valentine",
+"be":"Аглаанема Red Valentine"
+},
+"aglaonema-sparkling-sarah":{
+"ru":"Аглаонема Sparkling Sarah",
+"uk":"Аглаонема Sparkling Sarah",
+"pl":"Aglaonema Sparkling Sarah",
+"be":"Аглаанема Sparkling Sarah"
+},
+"aralia-ming":{
+"ru":"Аралия Минг",
+"uk":"Аралія Мінг",
+"pl":"Aralia Ming",
+"be":"Аралія Мінг"
+},
+"aspidistra-variegated":{
+"ru":"Аспидистра пёстролистная",
+"uk":"Аспідістра строката",
+"pl":"Aspidistra pstra",
+"be":"Аспідыстра стракатая"
+},
+"cast-iron-plant":{
+"ru":"Аспидистра|чугунное растение",
+"uk":"Аспідістра",
+"pl":"Aspidistra|aspidistra wyniosła",
+"be":"Аспідыстра"
+},
+"dracaena-fragrans":{
+"ru":"Драцена душистая|Драцена фрагранс",
+"uk":"Драцена запашна",
+"pl":"Dracena wonna",
+"be":"Драцэна духмяная"
+},
+"dracaena-goldieana":{
+"ru":"Драцена Goldieana",
+"uk":"Драцена Goldieana",
+"pl":"Dracena Goldieana",
+"be":"Драцэна Goldieana"
+},
+"dracaena-limelight":{
+"ru":"Драцена Limelight",
+"uk":"Драцена Limelight",
+"pl":"Dracena Limelight",
+"be":"Драцэна Limelight"
+},
+"dracaena-marginata":{
+"ru":"Драцена окаймлённая|Драцена маргината",
+"uk":"Драцена облямована",
+"pl":"Dracena obrzeżona",
+"be":"Драцэна аблямаваная"
+},
+"dracaena-song-of-india":{
+"ru":"Драцена Song of India",
+"uk":"Драцена Song of India",
+"pl":"Dracena Song of India",
+"be":"Драцэна Song of India"
+},
+"dracaena-warneckii":{
+"ru":"Драцена Warneckii",
+"uk":"Драцена Warneckii",
+"pl":"Dracena Warneckii",
+"be":"Драцэна Warneckii"
+},
+"false-aralia":{
+"ru":"Ложная аралия|Схефлера изящная",
+"uk":"Хибна аралія",
+"pl":"Aralia fałszywa",
+"be":"Хлусная аралія"
+},
+"peace-lily-sensation":{
+"ru":"Спатифиллум Sensation|женское счастье",
+"uk":"Спатіфілум Sensation",
+"pl":"Skrzydłokwiat Sensation",
+"be":"Спатыфілум Sensation"
+},
+"peperomia-ginny":{
+"ru":"Пеперомия Ginny",
+"uk":"Пеперомія Ginny",
+"pl":"Peperomia Ginny",
+"be":"Пеперомія Ginny"
+},
+"philodendron-congo":{
+"ru":"Филодендрон Congo",
+"uk":"Філодендрон Congo",
+"pl":"Filodendron Congo",
+"be":"Філадэндран Congo"
+},
+"pilea-glauca":{
+"ru":"Пилея сизая|Silver Sparkle",
+"uk":"Пілея сиза",
+"pl":"Pilea sina",
+"be":"Пілея сіва"
+},
+"pothos":{
+"ru":"Эпипремнум|Потос|Сциндапсус золотистый",
+"uk":"Епіпремнум|Потос",
+"pl":"Epipremnum|Potos",
+"be":"Эпіпрэмнум|Потас"
+},
+"pothos-cebu-blue":{
+"ru":"Потос Cebu Blue",
+"uk":"Потос Cebu Blue",
+"pl":"Potos Cebu Blue",
+"be":"Потас Cebu Blue"
+},
+"pothos-jade":{
+"ru":"Потос Jade",
+"uk":"Потос Jade",
+"pl":"Potos Jade",
+"be":"Потас Jade"
+},
+"sansevieria-cylindrica":{
+"ru":"Сансевиерия цилиндрическая|щучий хвост",
+"uk":"Сансевієрія циліндрична|щучий хвіст",
+"pl":"Sansewieria cylindryczna|wężownica",
+"be":"Сансевіерыя цыліндрычная|шчуч хвост"
+},
+"sansevieria-hahnii":{
+"ru":"Сансевиерия Хана|Гнездо птицы",
+"uk":"Сансевієрія Хана",
+"pl":"Sansewieria Hahnii",
+"be":"Сансевіерыя Хана"
+},
+"sansevieria-moonshine":{
+"ru":"Сансевиерия Moonshine",
+"uk":"Сансевієрія Moonshine",
+"pl":"Sansewieria Moonshine",
+"be":"Сансевіерыя Moonshine"
+},
+"schefflera":{
+"ru":"Шеффлера|зонтичное дерево",
+"uk":"Шеффлера|парасолькове дерево",
+"pl":"Szeflera|drzewo parasolowe",
+"be":"Шэфлера"
+},
+"schefflera-dwarf":{
+"ru":"Шеффлера карликовая",
+"uk":"Шеффлера карликова",
+"pl":"Szeflera karłowata",
+"be":"Шэфлера карлікавая"
+},
+"shangri-la-pothos":{
+"ru":"Эпипремнум Shangri La",
+"uk":"Епіпремнум Shangri La",
+"pl":"Epipremnum Shangri La",
+"be":"Эпіпрэмнум Shangri La"
+},
+"snake-plants":{
+"ru":"Сансевиерия|щучий хвост|тёщин язык|змеиное растение",
+"uk":"Сансевієрія|щучий хвіст|тещин язик",
+"pl":"Sansewieria|wężownica|język teściowej",
+"be":"Сансевіерыя|шчуч хвост|цешчын язык"
+},
+"spathiphyllum-domino":{
+"ru":"Спатифиллум Domino|женское счастье",
+"uk":"Спатіфілум Domino",
+"pl":"Skrzydłokwiat Domino",
+"be":"Спатыфілум Domino"
+},
+"spider-plants":{
+"ru":"Хлорофитум|хлорофитум хохлатый",
+"uk":"Хлорофітум",
+"pl":"Zielistka|zielistka Sternberga",
+"be":"Хларафітум"
+},
+"yucca":{
+"ru":"Юкка",
+"uk":"Юка",
+"pl":"Juka|juka palmowa",
+"be":"Юка"
+},
+"zz-plant":{
+"ru":"Замиокулькас|ЗЗ|долларовое дерево",
+"uk":"Замійокулькас|долярове дерево",
+"pl":"Zamiokulkas|zamiokulkas zamiolistny",
+"be":"Замиякулькас"
+},
+"zz-plant-raven":{
+"ru":"Замиокулькас Raven|чёрный",
+"uk":"Замійокулькас Raven",
+"pl":"Zamiokulkas Raven",
+"be":"Замиякулькас Raven"
+},
+"zz-plant-zenzi":{
+"ru":"Замиокулькас Zenzi",
+"uk":"Замійокулькас Zenzi",
+"pl":"Zamiokulkas Zenzi",
+"be":"Замиякулькас Zenzi"
+},
+"alocasia-amazonica":{
+"ru":"Алоказия Amazonica",
+"uk":"Алоказія Amazonica",
+"pl":"Alokazja Amazonica",
+"be":"Алаказія Amazonica"
+},
+"alocasia-black-velvet":{
+"ru":"Алоказия Black Velvet",
+"uk":"Алоказія Black Velvet",
+"pl":"Alokazja Black Velvet",
+"be":"Алаказія Black Velvet"
+},
+"alocasia-cuprea":{
+"ru":"Алоказия Cuprea",
+"uk":"Алоказія Cuprea",
+"pl":"Alokazja Cuprea",
+"be":"Алаказія Cuprea"
+},
+"alocasia-dragon-scale":{
+"ru":"Алоказия Dragon Scale",
+"uk":"Алоказія Dragon Scale",
+"pl":"Alokazja Dragon Scale",
+"be":"Алаказія Dragon Scale"
+},
+"alocasia-frydek":{
+"ru":"Алоказия Frydek",
+"uk":"Алоказія Frydek",
+"pl":"Alokazja Frydek",
+"be":"Алаказія Frydek"
+},
+"alocasia-maharani":{
+"ru":"Алоказия Maharani",
+"uk":"Алоказія Maharani",
+"pl":"Alokazja Maharani",
+"be":"Алаказія Maharani"
+},
+"alocasia-polly":{
+"ru":"Алоказия Полли|Alocasia Polly|Амазонская алоказия",
+"uk":"Алоказія Поллі",
+"pl":"Alokazja Polly",
+"be":"Алаказія Полі"
+},
+"alocasia-silver-dragon":{
+"ru":"Алоказия Silver Dragon",
+"uk":"Алоказія Silver Dragon",
+"pl":"Alokazja Silver Dragon",
+"be":"Алаказія Silver Dragon"
+},
+"alocasia-stingray":{
+"ru":"Алоказия Stingray",
+"uk":"Алоказія Stingray",
+"pl":"Alokazja Stingray",
+"be":"Алаказія Stingray"
+},
+"alocasia-zebrina":{
+"ru":"Алоказия зебрина",
+"uk":"Алоказія зебрина",
+"pl":"Alokazja zebrina",
+"be":"Алаказія зебрына"
+},
+"alocasias":{
+"ru":"Алоказии",
+"uk":"Алоказії",
+"pl":"Alokazje",
+"be":"Алаказіі"
+},
+"anthurium-bird-nest":{
+"ru":"Антуриум Птичье гнездо",
+"uk":"Антуріум Пташине гніздо",
+"pl":"Anturium Gniazdo ptaka",
+"be":"Антурыум Птушынае гняздо"
+},
+"anthurium-clarinervium":{
+"ru":"Антуриум кларинервиум",
+"uk":"Антуріум кларинервіум",
+"pl":"Anturium clarinervium",
+"be":"Антурыум кларынервіум"
+},
+"anthurium-crystallinum":{
+"ru":"Антуриум Crystallinum",
+"uk":"Антуріум Crystallinum",
+"pl":"Anturium Crystallinum",
+"be":"Антурыум Crystallinum"
+},
+"anthurium-magnificum":{
+"ru":"Антуриум Magnificum",
+"uk":"Антуріум Magnificum",
+"pl":"Anturium Magnificum",
+"be":"Антурыум Magnificum"
+},
+"anthurium-veitchii":{
+"ru":"Антуриум Veitchii",
+"uk":"Антуріум Veitchii",
+"pl":"Anturium Veitchii",
+"be":"Антурыум Veitchii"
+},
+"anthurium-vittarifolium":{
+"ru":"Антуриум полосатолистный",
+"uk":"Антуріум смугастолистий",
+"pl":"Anturium wąskolistne",
+"be":"Антурыум палосаталісты"
+},
+"anthurium-warocqueanum":{
+"ru":"Антуриум Варока|Королева",
+"uk":"Антуріум Вароке",
+"pl":"Anturium Warocque'a",
+"be":"Антурыум Варока"
+},
+"anthuriums":{
+"ru":"Антуриумы",
+"uk":"Антуріуми",
+"pl":"Anturium",
+"be":"Антурыумы"
+},
+"aroids":{
+"ru":"Ароидные|Ароиды",
+"uk":"Ароїдні|Ароїди",
+"pl":"Obrazkowate|aroidy",
+"be":"Араідныя"
+},
+"arrowhead-plant":{
+"ru":"Сингониум ножколистный|Сингониум",
+"uk":"Сингоніум|Наконечник стріли",
+"pl":"Syngonium|Strzałka",
+"be":"Сінганіум"
+},
+"burle-marx-philodendron":{
+"ru":"Филодендрон Бурле Маркс",
+"uk":"Філодендрон Бурле Маркс",
+"pl":"Filodendron Burle Marx",
+"be":"Філадэндран Бурле Маркс"
+},
+"caladium":{
+"ru":"Каладиум",
+"uk":"Каладіум",
+"pl":"Kaladium|kolokazja",
+"be":"Каладыум"
+},
+"colocasia":{
+"ru":"Колоказия|Таро",
+"uk":"Колоказія|Таро",
+"pl":"Kolokazja|Taro",
+"be":"Калаказія|Таро"
+},
+"dieffenbachia":{
+"ru":"Диффенбахия",
+"uk":"Діффенбахія",
+"pl":"Difenbachia",
+"be":"Дыфенбахія"
+},
+"dieffenbachia-compact":{
+"ru":"Диффенбахия компакта",
+"uk":"Діффенбахія компакта",
+"pl":"Difenbachia Compacta",
+"be":"Дыфенбахія кампакта"
+},
+"epipremnum-pinnatum-albo":{
+"ru":"Эпипремнум перистый Albo",
+"uk":"Епіпремнум перистий Albo",
+"pl":"Epipremnum pierzaste Albo",
+"be":"Эпіпрэмнум перыстый Albo"
+},
+"golden-pothos":{
+"ru":"Эпипремнум золотистый|Золотой потос|Потос",
+"uk":"Епіпремнум золотистий|Золотий потос",
+"pl":"Epipremnum złociste|Złoty potos",
+"be":"Эпіпрэмнум залацісты|Залаты потас"
+},
+"marble-queen-pothos":{
+"ru":"Эпипремнум Marble Queen|Потос Marble Queen",
+"uk":"Епіпремнум Marble Queen",
+"pl":"Epipremnum Marble Queen",
+"be":"Эпіпрэмнум Marble Queen"
+},
+"monstera-adansonii":{
+"ru":"Монстера адансона|Монстера Адансони",
+"uk":"Монстера Адансона",
+"pl":"Monstera Adansona",
+"be":"Манстэра Адансона"
+},
+"monstera-albo":{
+"ru":"Монстера Альбо|пёстрая",
+"uk":"Монстера Альбо",
+"pl":"Monstera Albo",
+"be":"Манстэра Альбо"
+},
+"monstera-aurea":{
+"ru":"Монстера Aurea",
+"uk":"Монстера Aurea",
+"pl":"Monstera Aurea",
+"be":"Манстэра Aurea"
+},
+"monstera-esqueleto":{
+"ru":"Монстера Esqueleto",
+"uk":"Монстера Esqueleto",
+"pl":"Monstera Esqueleto",
+"be":"Манстэра Esqueleto"
+},
+"monstera-lechleriana":{
+"ru":"Монстера Lechleriana",
+"uk":"Монстера Lechleriana",
+"pl":"Monstera Lechleriana",
+"be":"Манстэра Lechleriana"
+},
+"monstera-peru":{
+"ru":"Монстера Peru",
+"uk":"Монстера Peru",
+"pl":"Monstera Peru",
+"be":"Манстэра Peru"
+},
+"monstera-siltepecana":{
+"ru":"Монстера Siltepecana",
+"uk":"Монстера Siltepecana",
+"pl":"Monstera Siltepecana",
+"be":"Манстэра Siltepecana"
+},
+"monstera-standleyana":{
+"ru":"Монстера Standleyana",
+"uk":"Монстера Standleyana",
+"pl":"Monstera Standleyana",
+"be":"Манстэра Standleyana"
+},
+"monstera-thai-constellation":{
+"ru":"Монстера Тайское созвездие|Thai Constellation",
+"uk":"Монстера Thai Constellation",
+"pl":"Monstera Thai Constellation",
+"be":"Манстэра Thai Constellation"
+},
+"neon-pothos":{
+"ru":"Эпипремнум Neon|Потос Neon",
+"uk":"Епіпремнум Neon",
+"pl":"Epipremnum Neon",
+"be":"Эпіпрэмнум Neon"
+},
+"philodendron-birkin":{
+"ru":"Филодендрон Birkin",
+"uk":"Філодендрон Birkin",
+"pl":"Filodendron Birkin",
+"be":"Філадэндран Birkin"
+},
+"philodendron-brandtianum":{
+"ru":"Филодендрон Брандта|серебристый",
+"uk":"Філодендрон Брандта",
+"pl":"Filodendron Brandta",
+"be":"Філадэндран Брандта"
+},
+"philodendron-florida-ghost":{
+"ru":"Филодендрон Florida Ghost",
+"uk":"Філодендрон Florida Ghost",
+"pl":"Filodendron Florida Ghost",
+"be":"Філадэндран Florida Ghost"
+},
+"philodendron-gloriosum":{
+"ru":"Филодендрон Gloriosum",
+"uk":"Філодендрон Gloriosum",
+"pl":"Filodendron Gloriosum",
+"be":"Філадэндран Gloriosum"
+},
+"philodendron-heartleaf":{
+"ru":"Филодендрон лазающий|сердцелистный",
+"uk":"Філодендрон лазячий",
+"pl":"Filodendron pnący",
+"be":"Філадэндран ліяністы"
+},
+"philodendron-jose-buono":{
+"ru":"Филодендрон Jose Buono",
+"uk":"Філодендрон Jose Buono",
+"pl":"Filodendron Jose Buono",
+"be":"Філадэндран Jose Buono"
+},
+"philodendron-mamei":{
+"ru":"Филодендрон Mamei",
+"uk":"Філодендрон Mamei",
+"pl":"Filodendron Mamei",
+"be":"Філадэндран Mamei"
+},
+"philodendron-melanochrysum":{
+"ru":"Филодендрон Melanochrysum",
+"uk":"Філодендрон Melanochrysum",
+"pl":"Filodendron Melanochrysum",
+"be":"Філадэндран Melanochrysum"
+},
+"philodendron-micans":{
+"ru":"Филодендрон Micans",
+"uk":"Філодендрон Micans",
+"pl":"Filodendron Micans",
+"be":"Філадэндран Micans"
+},
+"philodendron-pink-princess":{
+"ru":"Филодендрон Pink Princess",
+"uk":"Філодендрон Pink Princess",
+"pl":"Filodendron Pink Princess",
+"be":"Філадэндран Pink Princess"
+},
+"philodendron-plowmanii":{
+"ru":"Филодендрон Plowmanii",
+"uk":"Філодендрон Plowmanii",
+"pl":"Filodendron Plowmanii",
+"be":"Філадэндран Plowmanii"
+},
+"philodendron-prince-of-orange":{
+"ru":"Филодендрон Prince of Orange",
+"uk":"Філодендрон Prince of Orange",
+"pl":"Filodendron Prince of Orange",
+"be":"Філадэндран Prince of Orange"
+},
+"philodendron-red-moon":{
+"ru":"Филодендрон Red Moon",
+"uk":"Філодендрон Red Moon",
+"pl":"Filodendron Red Moon",
+"be":"Філадэндран Red Moon"
+},
+"philodendron-ring-of-fire":{
+"ru":"Филодендрон Ring of Fire",
+"uk":"Філодендрон Ring of Fire",
+"pl":"Filodendron Ring of Fire",
+"be":"Філадэндран Ring of Fire"
+},
+"philodendron-selloum":{
+"ru":"Филодендрон селлоум|древовидный",
+"uk":"Філодендрон селлоум",
+"pl":"Filodendron Selloum",
+"be":"Філадэндран селоўм"
+},
+"philodendron-silver":{
+"ru":"Филодендрон серебристый",
+"uk":"Філодендрон сріблястий",
+"pl":"Filodendron srebrzysty",
+"be":"Філадэндран серабрысты"
+},
+"philodendron-verrucosum":{
+"ru":"Филодендрон Verrucosum",
+"uk":"Філодендрон Verrucosum",
+"pl":"Filodendron Verrucosum",
+"be":"Філадэндран Verrucosum"
+},
+"philodendron-white-knight":{
+"ru":"Филодендрон White Knight",
+"uk":"Філодендрон White Knight",
+"pl":"Filodendron White Knight",
+"be":"Філадэндран White Knight"
+},
+"philodendron-white-princess":{
+"ru":"Филодендрон White Princess",
+"uk":"Філодендрон White Princess",
+"pl":"Filodendron White Princess",
+"be":"Філадэндран White Princess"
+},
+"philodendron-xanadu":{
+"ru":"Филодендрон Xanadu",
+"uk":"Філодендрон Xanadu",
+"pl":"Filodendron Xanadu",
+"be":"Філадэндран Xanadu"
+},
+"rhaphidophora-tetrasperma":{
+"ru":"Рафидофора четырёхсемянная|Мини-монстера",
+"uk":"Рафідофора чотирисім'янкова|Міні-монстера",
+"pl":"Rafidofora|Mini monstera",
+"be":"Рафідафора|Міні-манстэра"
+},
+"swiss-cheese-plant":{
+"ru":"Монстера деликатесная|Монстера|Швейцарский сыр",
+"uk":"Монстера ласуна|Монстера",
+"pl":"Monstera dziurawa|Monstera",
+"be":"Манстэра|Швейцарскі сыр"
+},
+"syngonium-albo":{
+"ru":"Сингониум Альбо",
+"uk":"Сингоніум Альбо",
+"pl":"Syngonium Albo",
+"be":"Сінганіум Альбо"
+},
+"syngonium-pink":{
+"ru":"Сингониум розовый|Pink",
+"uk":"Сингоніум рожевий",
+"pl":"Syngonium różowe",
+"be":"Сінганіум ружовы"
+},
+"syngonium-white":{
+"ru":"Сингониум белая бабочка|White Butterfly",
+"uk":"Сингоніум Біла метелик",
+"pl":"Syngonium White Butterfly",
+"be":"Сінганіум Белы матыль"
+},
+"trailing-aroids":{
+"ru":"Вьющиеся ароидные",
+"uk":"Ампельні ароїдні",
+"pl":"Pnące obrazkowate",
+"be":"Ліяністыя араідныя"
+},
+"xanthosoma":{
+"ru":"Ксантосома",
+"uk":"Ксантосома",
+"pl":"Ksantosoma",
+"be":"Ксантасома"
+},
+"asparagus-setaceus":{
+"ru":"Аспарагус перистый|Спаржа",
+"uk":"Аспарагус перистий|Спаржа",
+"pl":"Szparag pierzasty",
+"be":"Аспарагус перыстый"
+},
+"birds-nest-fern":{
+"ru":"Асплений гнездовой|Птичье гнездо",
+"uk":"Асплений гніздовий",
+"pl":"Zanokcica gniazdowa",
+"be":"Асплен гняздовы"
+},
+"blechnum":{
+"ru":"Блехнум|Древовидный папоротник",
+"uk":"Блехнум",
+"pl":"Blechnum|Żebrowiec",
+"be":"Блехнум"
+},
+"boston-ferns":{
+"ru":"Нефролепис|Нефролепис возвышенный|Бостонский папоротник",
+"uk":"Нефролепіс",
+"pl":"Nefrolepis|Paproć bostońska",
+"be":"Нефралепіс"
+},
+"button-fern":{
+"ru":"Пеллея круглолистная|Пуговичный папоротник",
+"uk":"Пеллея круглолиста",
+"pl":"Pellaea okrągłolistna",
+"be":"Пелея кругласталістая"
+},
+"ferns":{
+"ru":"Папоротники|Папоротник",
+"uk":"Папороті|Папороть",
+"pl":"Paprocie|Paproć",
+"be":"Папараць|Папараці"
+},
+"maidenhair-ferns":{
+"ru":"Адиантум|Венерин волос",
+"uk":"Адіантум|Венерине волосся",
+"pl":"Adiantum|Orlica",
+"be":"Адыянтум"
+},
+"microsorum-diversifolium":{
+"ru":"Микросорум разнолистный|Лапа кенгуру",
+"uk":"Мікросорум",
+"pl":"Microsorum różnolistne|Łapa kangura",
+"be":"Мікрасорум"
+},
+"microsorum-musifolium":{
+"ru":"Микросорум крокодил|Крокодиловый папоротник",
+"uk":"Мікросорум крокодил",
+"pl":"Microsorum Crocodyllus",
+"be":"Мікрасорум кракадзіл"
+},
+"nephrolepis-cordifolia":{
+"ru":"Нефролепис сердцелистный|Лимонная пуговка",
+"uk":"Нефролепіс серцелистий",
+"pl":"Nefrolepis sercolistny",
+"be":"Нефралепіс сэрцалісты"
+},
+"phlebodium":{
+"ru":"Флебодиум|Голубая звезда",
+"uk":"Флебодіум",
+"pl":"Phlebodium",
+"be":"Флебодыум"
+},
+"pteris":{
+"ru":"Птерис|Птерис критский",
+"uk":"Птерис",
+"pl":"Pteris|Orlica",
+"be":"Птэрыс"
+},
+"rabbits-foot-fern":{
+"ru":"Даваллия|Заячья лапка",
+"uk":"Давалія|Заяча лапка",
+"pl":"Dawalia|Zajęcza łapka",
+"be":"Давалія"
+},
+"staghorn-fern":{
+"ru":"Платицериум|Олений рог",
+"uk":"Платицеріум|Олений ріг",
+"pl":"Platycerium|Jelenie rogi",
+"be":"Платыцэрыум|Аленевы рог"
+},
+"areca-palm":{
+"ru":"Арека|Хризалидокарпус|Пальма арека",
+"uk":"Арека|Хризалідокарпус",
+"pl":"Areka|Palma areka",
+"be":"Арэка"
+},
+"bamboo-palm":{
+"ru":"Хамедорея изящная|Бамбуковая пальма",
+"uk":"Хамедорея|Бамбукова пальма",
+"pl":"Chamedora|Palma bambusowa",
+"be":"Хамедарэя"
+},
+"chamaedorea-radicalis":{
+"ru":"Хамедорея корневая",
+"uk":"Хамедорея",
+"pl":"Chamedora",
+"be":"Хамедарэя"
+},
+"cycas-revoluta":{
+"ru":"Цикас|Саговая пальма|Цикас поникающий",
+"uk":"Цикас|Саговая пальма",
+"pl":"Cykas|Sagowiec odwinięty",
+"be":"Цыкас|Сагавая пальма"
+},
+"european-fan-palm":{
+"ru":"Хамеропс|Европейская веерная пальма",
+"uk":"Хамеропс",
+"pl":"Chamerops|Palma wachlarzowa",
+"be":"Хамеропс"
+},
+"kentia-palm":{
+"ru":"Ховея|Кентия",
+"uk":"Ховея|Кентія",
+"pl":"Hovea|Kentia",
+"be":"Ховея|Кентыя"
+},
+"lady-palm":{
+"ru":"Раписа|Рапис|Дамская пальма",
+"uk":"Раписа|Рапіс",
+"pl":"Raphis|Palma damska",
+"be":"Рапіс"
+},
+"majesty-palm":{
+"ru":"Равенея|Королевская пальма",
+"uk":"Равенея",
+"pl":"Ravenea|Palma majesty",
+"be":"Равенея"
+},
+"palms":{
+"ru":"Пальмы|Пальма",
+"uk":"Пальми|Пальма",
+"pl":"Palmy|Palma",
+"be":"Пальмы|Пальма"
+},
+"parlor-palm":{
+"ru":"Хамедорея|Комнатная пальма",
+"uk":"Хамедорея|Кімнатна пальма",
+"pl":"Chamedora|Palma pokojowa",
+"be":"Хамедарэя"
+},
+"phoenix-roebelenii":{
+"ru":"Финик Рёбелена|Финиковая пальма",
+"uk":"Фінік Рьобелена|Фінікова пальма",
+"pl":"Daktylowiec Roebelena|Palma daktylowa",
+"be":"Фінік Рэбелена"
+},
+"ponytail-palm":{
+"ru":"Бокарнея|Нолина|Бутылочная пальма",
+"uk":"Бокарнея|Ноліна",
+"pl":"Beaucarnea|Nolina|Palma butelkowa",
+"be":"Бокарнея|Ноліна"
+},
+"adenium":{
+"ru":"Адениум|Пустынная роза",
+"uk":"Аденіум|Пустельна троянда",
+"pl":"Adenium|Róża pustyni",
+"be":"Адэніум|Пустынная ружа"
+},
+"aeonium":{
+"ru":"Эониум",
+"uk":"Еоніум",
+"pl":"Eonium",
+"be":"Эоніум"
+},
+"agave":{
+"ru":"Агава",
+"uk":"Агава",
+"pl":"Agawa",
+"be":"Агава"
+},
+"aloe-vera":{
+"ru":"Алоэ вера|Алоэ настоящее",
+"uk":"Алое вера|Алое справжнє",
+"pl":"Aloes zwyczajny|Aloe vera",
+"be":"Алоэ вера"
+},
+"aloes":{
+"ru":"Алоэ",
+"uk":"Алое",
+"pl":"Aloes",
+"be":"Алоэ"
+},
+"bears-paw":{
+"ru":"Котиледон|Медвежья лапа",
+"uk":"Котиледон|Ведмежа лапа",
+"pl":"Cotyledon|Niedźwiedzia łapa",
+"be":"Катыледон|Мядзведжая лапа"
+},
+"burros-tail":{
+"ru":"Седум Моргана|Ослиный хвост",
+"uk":"Седум Моргана|Ослячий хвіст",
+"pl":"Sedum Morgana|Ośli ogon",
+"be":"Седум Моргана|Асліны хвост"
+},
+"crassula-ovata-minor":{
+"ru":"Толстянка овальная миниатюрная|Денежное дерево",
+"uk":"Товстянка овальна міні|Грошове дерево",
+"pl":"Grubosz jajowaty mini|Drzewko szczęścia",
+"be":"Тоўстанка авальная|Грашовае дрэва"
+},
+"crassulas":{
+"ru":"Толстянки|Крассула",
+"uk":"Товстянки|Красула",
+"pl":"Grubosze|Crassula",
+"be":"Тоўстанкі|Красула"
+},
+"echeveria":{
+"ru":"Эхеверия",
+"uk":"Ехеверія",
+"pl":"Eszeweria",
+"be":"Эхеверыя"
+},
+"euphorbia-tirucalli":{
+"ru":"Молочай тирукалли|Карандашный кактус",
+"uk":"Молочай тируклаллі",
+"pl":"Wilczomlecz tirucalli|Wilczomlecz ołówkowaty",
+"be":"Молачай тырукалі"
+},
+"euphorbia-trigona":{
+"ru":"Молочай трёхгранный|Африканское молочное дерево",
+"uk":"Молочай тригранний",
+"pl":"Wilczomlecz trójgraniasty",
+"be":"Молачай трохгранны"
+},
+"euphorbias":{
+"ru":"Молочаи|Молочай",
+"uk":"Молочаї|Молочай",
+"pl":"Wilczomlecze|Wilczomlecz",
+"be":"Молачаі|Молачай"
+},
+"gasteria":{
+"ru":"Гастерия",
+"uk":"Гастерія",
+"pl":"Gasteria",
+"be":"Гастэрыя"
+},
+"graptopetalum":{
+"ru":"Граптопеталум",
+"uk":"Граптопеталум",
+"pl":"Graptopetalum",
+"be":"Граптапеталум"
+},
+"graptoveria":{
+"ru":"Граптоверия",
+"uk":"Граптоверія",
+"pl":"Graptoveria",
+"be":"Граптаверыя"
+},
+"haworthia":{
+"ru":"Хавортия|Хавортия полосатая",
+"uk":"Хаворція|Хаворція смугаста",
+"pl":"Haworsja|Haworthia",
+"be":"Хаворція"
+},
+"jade-plant":{
+"ru":"Толстянка|Денежное дерево|Крассула|Крассула овальная",
+"uk":"Товстянка|Грошове дерево|Красула",
+"pl":"Grubosz|Drzewko szczęścia|Crassula",
+"be":"Тоўстанка|Грашовае дрэва|Красула"
+},
+"kalanchoe-luciae":{
+"ru":"Каланхоэ Люции|Каланхоэ веслоподобное",
+"uk":"Каланхое Люції",
+"pl":"Kalanchoe Luciae|Kalanchoe wiosłowate",
+"be":"Каланхое Люцыі"
+},
+"lithops":{
+"ru":"Литопс|Живые камни",
+"uk":"Літопс|Живе каміння",
+"pl":"Lithops|Żywe kamienie",
+"be":"Літопс|Жывыя камяні"
+},
+"pachyphytum":{
+"ru":"Пахифитум",
+"uk":"Пахіфітум",
+"pl":"Pachyphytum",
+"be":"Пахіфітум"
+},
+"portulacaria-afra":{
+"ru":"Портулакария|Слоновый куст|Денежное дерево",
+"uk":"Портулакарія|Слоновий кущ",
+"pl":"Portulakaria afrykańska|Krzew słoniowy",
+"be":"Партулакарыя"
+},
+"sedum":{
+"ru":"Седум|Очиток",
+"uk":"Седум|Очиток",
+"pl":"Rozchodnik|Sedum",
+"be":"Седум|Вялікі ачыток"
+},
+"sempervivum":{
+"ru":"Семпервивум|Молодило",
+"uk":"Семпервівум|Молодило",
+"pl":"Rojnik|Sempervivum",
+"be":"Сэмпервівум|Маладзіла"
+},
+"senecio":{
+"ru":"Крестовник|Сенецио",
+"uk":"Хрестовник|Сенеціо",
+"pl":"Starzec|Senecio",
+"be":"Сенэцыа|Крыжаўнік"
+},
+"split-rock":{
+"ru":"Раскалывающийся камень|Плейоспилос",
+"uk":"Розколений камінь",
+"pl":"Pęknięty kamień|Pleiospilos",
+"be":"Плейяспілас"
+},
+"string-of-bananas":{
+"ru":"Сенецио Ожерелье из бананов|Нитка бананов",
+"uk":"Сенеціо Нитка бананів",
+"pl":"Starzec Sznur bananów",
+"be":"Сенэцыя Нітка бананаў"
+},
+"string-of-dolphins":{
+"ru":"Сенецио Нитка дельфинов",
+"uk":"Сенеціо Нитка дельфінів",
+"pl":"Starzec Sznur delfinów",
+"be":"Сенэцыя Нітка дэльфінаў"
+},
+"string-of-hearts":{
+"ru":"Церопегия Вуда|Нитка сердец",
+"uk":"Церопегія Вуда|Нитка сердець",
+"pl":"Ceropegia Wooda|Sznur serc",
+"be":"Церапегія|Нітка сэрцаў"
+},
+"string-of-needles":{
+"ru":"Нитка игл",
+"uk":"Нитка голок",
+"pl":"Sznur igieł",
+"be":"Нітка іголак"
+},
+"string-of-pearls":{
+"ru":"Сенецио Роули|Нитка жемчуга|Жемчужная нить",
+"uk":"Сенеціо Роулі|Нитка перлів",
+"pl":"Starzec Rowleya|Sznur pereł",
+"be":"Сенэцыя Роўлі|Нітка жэмчугу"
+},
+"string-of-rubies":{
+"ru":"Нитка рубинов|Отонна",
+"uk":"Нитка рубінів",
+"pl":"Sznur rubinów",
+"be":"Нітка рубінаў"
+},
+"string-of-turtles":{
+"ru":"Пеперомия Нитка черепах|Нитка черепашек",
+"uk":"Пеперомія Нитка черепах",
+"pl":"Peperomia Sznur żółwi",
+"be":"Пеперомія Нітка чарапашак"
+},
+"succulent-aloe-v-black":{
+"ru":"Алоэ Black Gem",
+"uk":"Алое Black Gem",
+"pl":"Aloes Black Gem",
+"be":"Алоэ Black Gem"
+},
+"succulent-echeveria-lola":{
+"ru":"Эхеверия Lola",
+"uk":"Ехеверія Lola",
+"pl":"Eszeweria Lola",
+"be":"Эхеверыя Lola"
+},
+"succulent-echeveria-perle":{
+"ru":"Эхеверия Perle von Nürnberg|Жемчужина Нюрнберга",
+"uk":"Ехеверія Perle von Nürnberg",
+"pl":"Eszeweria Perle von Nürnberg",
+"be":"Эхеверыя Perle von Nürnberg"
+},
+"succulent-haworthia-cooperi":{
+"ru":"Хавортия Купера",
+"uk":"Хаворція Купера",
+"pl":"Haworsja Coopera",
+"be":"Хаворція Купера"
+},
+"succulents":{
+"ru":"Суккуленты|Суккулент",
+"uk":"Сукуленти|Сукулент",
+"pl":"Sukulenty|Sukulent",
+"be":"Сукуленты|Сукулент"
+},
+"barrel-cactus":{
+"ru":"Бочонковидный кактус|Эхинокактус|Бочка",
+"uk":"Бочкоподібний кактус|Ехінокактус",
+"pl":"Kaktus beczkowaty|Echinokaktus",
+"be":"Бочкападобны кактус|Эхінакактус"
+},
+"cacti":{
+"ru":"Кактусы|Кактус",
+"uk":"Кактуси|Кактус",
+"pl":"Kaktusy|Kaktus",
+"be":"Кактусы|Кактус"
+},
+"christmas-cactus":{
+"ru":"Декабрист|Шлюмбергера|Рождественский кактус|Зигокактус",
+"uk":"Декабрист|Шлюмбергера|Різдвяний кактус",
+"pl":"Szlumbergera|Kaktus bożonarodzeniowy|Grudnik",
+"be":"Дэкабрыст|Шлюмбергера|Калядны кактус"
+},
+"easter-cactus":{
+"ru":"Рипсалидопсис|Пасхальный кактус",
+"uk":"Ріпсалідопсис|Великодній кактус",
+"pl":"Rhipsalidopsis|Kaktus wielkanocny",
+"be":"Рыпсалідопсіс|Вялікодны кактус"
+},
+"echinopsis":{
+"ru":"Эхинопсис|Пасхальная лилия",
+"uk":"Ехінопсис",
+"pl":"Echinopsis|Lilia wielkanocna",
+"be":"Эхінапсіс"
+},
+"epiphyllum":{
+"ru":"Эпифиллум|Орхидейный кактус",
+"uk":"Епіфілум|Орхідейний кактус",
+"pl":"Epiphyllum|Kaktus orchidea",
+"be":"Эпіфілум"
+},
+"forest-cacti":{
+"ru":"Лесные кактусы",
+"uk":"Лісові кактуси",
+"pl":"Kaktusy leśne",
+"be":"Лясныя кактусы"
+},
+"gymnocalycium":{
+"ru":"Гимнокалициум",
+"uk":"Гімнокаліціум",
+"pl":"Gymnocalycium|Kaktus podbródkowy",
+"be":"Гімнакаліцыум"
+},
+"mammillaria":{
+"ru":"Маммиллярия",
+"uk":"Маміларія",
+"pl":"Mammillaria|Kaktus poduszkowy",
+"be":"Мамілярыя"
+},
+"old-lady-cactus":{
+"ru":"Маммиллярия длинная|Кактус старушка",
+"uk":"Маміларія довга|Кактус стара жінка",
+"pl":"Mammillaria|Kaktus Stara dama",
+"be":"Мамілярыя доўгая"
+},
+"opuntia-microdasys":{
+"ru":"Опунция мелковолосистая|Заячьи ушки",
+"uk":"Опунція дрібноволоса|Заячі вушка",
+"pl":"Opuncja drobnokolczasta|Uszy królika",
+"be":"Апунцыя"
+},
+"parodia":{
+"ru":"Пародия|Шаровидный кактус",
+"uk":"Пародія",
+"pl":"Parodia|Kaktus kulisty",
+"be":"Парадыя"
+},
+"prickly-pear":{
+"ru":"Опунция|Колючая груша",
+"uk":"Опунція|Колюча груша",
+"pl":"Opuncja|Figowiec",
+"be":"Апунцыя|Калючая груша"
+},
+"rat-tail-cactus":{
+"ru":"Апорокактус|Крысиный хвост",
+"uk":"Апорокактус|Щурячий хвіст",
+"pl":"Aporocactus|Kaktus szczurzy ogon",
+"be":"Апарокактус"
+},
+"rhipsalis":{
+"ru":"Рипсалис",
+"uk":"Ріпсаліс",
+"pl":"Rhipsalis|Rzęsiak",
+"be":"Рыпсаліс"
+},
+"saguaro":{
+"ru":"Сагуаро|Карнегия",
+"uk":"Сагуаро",
+"pl":"Saguaro|Karnegia",
+"be":"Сагуара"
+},
+"star-cactus":{
+"ru":"Астрофитум|Звёздчатый кактус",
+"uk":"Астрофітум",
+"pl":"Astrophytum|Kaktus gwiazda",
+"be":"Астрафітум"
+},
+"thanksgiving-cactus":{
+"ru":"Шлюмбергера усечённая|Декабрист|Кактус благодарения",
+"uk":"Шлюмбергера|Декабрист",
+"pl":"Szlumbergera ostrokątna|Grudnik",
+"be":"Шлюмбергера|Дэкабрыст"
+},
+"african-violets":{
+"ru":"Сенполия|Узамбарская фиалка|Фиалка",
+"uk":"Сенполія|Узамбарська фіалка|Фіалка",
+"pl":"Fiołek afrykański|Saintpaulia",
+"be":"Сэнпалія|Фіялка"
+},
+"anthurium-flamingo":{
+"ru":"Антуриум Фламинго|мужское счастье",
+"uk":"Антуріум Фламінго|чоловіче щастя",
+"pl":"Anturium Flamingo",
+"be":"Антурыум Фламінга|мужчынскае шчасце"
+},
+"begonia-angel-wing":{
+"ru":"Бегония Ангельские крылья|Бегония коралловая",
+"uk":"Бегонія Ангельські крила",
+"pl":"Begonia Anielskie skrzydła",
+"be":"Бегонія Анёльскія крылы"
+},
+"begonia-ferox":{
+"ru":"Бегония Ферокс",
+"uk":"Бегонія Ферокс",
+"pl":"Begonia Ferox",
+"be":"Бегонія Ферокс"
+},
+"begonia-maculata":{
+"ru":"Бегония пятнистая|Бегония Maculata",
+"uk":"Бегонія плямиста",
+"pl":"Begonia plamista|Begonia Maculata",
+"be":"Бегонія плямістая"
+},
+"begonia-rex":{
+"ru":"Бегония Рекс|Бегония королевская",
+"uk":"Бегонія Рекс|Бегонія королівська",
+"pl":"Begonia Rex|Begonia królewska",
+"be":"Бегонія Рэкс|Бегонія каралеўская"
+},
+"bromeliad-aechmea":{
+"ru":"Эхмея|Бромелия",
+"uk":"Ехмея|Бромелія",
+"pl":"Eszmea|Bromelia",
+"be":"Эхмея|Бромелія"
+},
+"bromeliad-guzmania":{
+"ru":"Гузмания|Бромелия",
+"uk":"Гузманія|Бромелія",
+"pl":"Guzmania|Bromelia",
+"be":"Гузманія|Бромелія"
+},
+"bromeliad-neoregelia":{
+"ru":"Неорегелия|Бромелия",
+"uk":"Неорегелія|Бромелія",
+"pl":"Neoregelia|Bromelia",
+"be":"Нэарэгелія|Бромелія"
+},
+"bromeliads":{
+"ru":"Бромелии|Бромелия",
+"uk":"Бромелії|Бромелія",
+"pl":"Bromelie|Bromelia",
+"be":"Бромеліі|Бромелія"
+},
+"clivia":{
+"ru":"Кливия|Клива",
+"uk":"Клівія",
+"pl":"Clivia|Kliwia",
+"be":"Клівія"
+},
+"coffee-plant":{
+"ru":"Кофейное дерево|Кофе",
+"uk":"Кавове дерево|Кава",
+"pl":"Kawowiec|Kawa",
+"be":"Кававае дрэва|Кава"
+},
+"crown-of-thorns":{
+"ru":"Молочай Миля|Терновый венец",
+"uk":"Молочай Мілія|Терновий вінець",
+"pl":"Wilczomlecz Milla|Korona cierniowa",
+"be":"Молачай Мілі|Церняваы вянок"
+},
+"cyclamen":{
+"ru":"Цикламен|Альпийская фиалка",
+"uk":"Цикламен|Альпійська фіалка",
+"pl":"Cyklamen|Fiołek alpejski",
+"be":"Цыкламен"
+},
+"cymbidium":{
+"ru":"Цимбидиум|Орхидея",
+"uk":"Цимбідіум|Орхідея",
+"pl":"Cymbidium|Storczyk",
+"be":"Цымбідыум|Архідэя"
+},
+"gardenia":{
+"ru":"Гардения",
+"uk":"Гарденія",
+"pl":"Gardenia|Gardenia jaśminowata",
+"be":"Гардэнія"
+},
+"gerbera-daisy":{
+"ru":"Гербера",
+"uk":"Гербера",
+"pl":"Gerbera",
+"be":"Гербера"
+},
+"gloxinia":{
+"ru":"Глоксиния|Синнингия",
+"uk":"Глоксинія|Сіннінгія",
+"pl":"Gloksynia|Synningia",
+"be":"Глаксінія"
+},
+"goldfish-plant":{
+"ru":"Колумнея|Золотая рыбка",
+"uk":"Колумнея|Золота рибка",
+"pl":"Kolumnea|Złota rybka",
+"be":"Калумнея"
+},
+"hibiscus-tropical":{
+"ru":"Гибискус|Китайская роза",
+"uk":"Гібіскус|Китайська троянда",
+"pl":"Hibiskus|Róża chińska",
+"be":"Гібіскус|Кітайская ружа"
+},
+"hoya-carnosa":{
+"ru":"Хойя мясистая|Восковой плющ|Хойя Carnosa",
+"uk":"Хоя м'ясиста|Воскова лоза",
+"pl":"Hoja gruboszowata|Woskowy bluszcz",
+"be":"Хоя мяхкая|Васковы плюшч"
+},
+"hoya-kerrii":{
+"ru":"Хойя Керри|Хойя сердечко|Сердце",
+"uk":"Хоя Керрі|Хоя серденько",
+"pl":"Hoja Kerra|Serce",
+"be":"Хоя Кэры|Сэрца"
+},
+"hoyas":{
+"ru":"Хойи|Хойя|Восковой плющ",
+"uk":"Хої|Хоя",
+"pl":"Hoje|Hoja",
+"be":"Хоі|Хоя"
+},
+"ixora":{
+"ru":"Иксора",
+"uk":"Іксора",
+"pl":"Ixora|Iksora",
+"be":"Іксора"
+},
+"jasmine":{
+"ru":"Жасмин",
+"uk":"Жасмин",
+"pl":"Jaśmin",
+"be":"Язмін|Жасмін"
+},
+"kalanchoe":{
+"ru":"Каланхоэ",
+"uk":"Каланхое",
+"pl":"Kalanchoe|Żyworódka",
+"be":"Каланхое"
+},
+"lipstick-plant":{
+"ru":"Эсхинантус|Помадное растение",
+"uk":"Ескінантус",
+"pl":"Eschynanthus|Szminka",
+"be":"Эсхінантус"
+},
+"mandevilla":{
+"ru":"Мандевилла|Диплодения",
+"uk":"Мандевілла|Діпладенія",
+"pl":"Mandevilla|Dipladenia",
+"be":"Мандэвіла"
+},
+"medinilla":{
+"ru":"Мединилла",
+"uk":"Медініла",
+"pl":"Medinilla",
+"be":"Мэдыніла"
+},
+"paphiopedilum":{
+"ru":"Пафиопедилум|Венерин башмачок|Орхидея",
+"uk":"Пафіопедилум|Венерин черевичок",
+"pl":"Paphiopedilum|Obuwik|Storczyk",
+"be":"Пафіяпедылум|Венерын чаравічак"
+},
+"peace-lilies":{
+"ru":"Спатифиллум|женское счастье",
+"uk":"Спатіфілум|жіноче щастя",
+"pl":"Skrzydłokwiat|skrzydłolist",
+"be":"Спатыфілум|жаночае шчасце"
+},
+"phalaenopsis-orchids":{
+"ru":"Фаленопсис|Орхидея|Орхидея фаленопсис",
+"uk":"Фаленопсис|Орхідея",
+"pl":"Falenopsis|Storczyk|Orchidea",
+"be":"Фаленопсіс|Архідэя"
+},
+"poinsettia":{
+"ru":"Пуансеттия|Рождественская звезда",
+"uk":"Пуансетія|Різдвяна зірка",
+"pl":"Poinsecja|Gwiazda betlejemska",
+"be":"Пуансетыя|Калядная зорка"
+},
+"stephanotis":{
+"ru":"Стефанотис|Мадагаскарский жасмин",
+"uk":"Стефанотіс",
+"pl":"Stefanotis|Jaśmin madagaskarski",
+"be":"Стэфанотыс"
+},
+"streptocarpus":{
+"ru":"Стрептокарпус|Капская примула",
+"uk":"Стрептокарпус",
+"pl":"Streptocarpus|Prymulka przylądkowa",
+"be":"Стрэптакарпус"
+},
+"tuberous-begonias":{
+"ru":"Клубневая бегония",
+"uk":"Бульбова бегонія",
+"pl":"Begonia bulwiasta",
+"be":"Клубневая бегонія"
+},
+"zebra-plant-aphelandra":{
+"ru":"Афеландра|Зебровое растение",
+"uk":"Афеландра",
+"pl":"Afelandra|Zebra",
+"be":"Афеландра"
+},
+"calathea-freddie":{
+"ru":"Калатея Freddie",
+"uk":"Калатея Freddie",
+"pl":"Kalatea Freddie",
+"be":"Калатэя Freddie"
+},
+"calathea-makoyana":{
+"ru":"Калатея Makoyana",
+"uk":"Калатея Makoyana",
+"pl":"Kalatea Makoyana",
+"be":"Калатэя Makoyana"
+},
+"calathea-medallion":{
+"ru":"Калатея Medallion",
+"uk":"Калатея Medallion",
+"pl":"Kalatea Medallion",
+"be":"Калатэя Medallion"
+},
+"calathea-musaica":{
+"ru":"Калатея Musaica",
+"uk":"Калатея Musaica",
+"pl":"Kalatea Musaica",
+"be":"Калатэя Musaica"
+},
+"calathea-orbifolia":{
+"ru":"Калатея Orbifolia",
+"uk":"Калатея Orbifolia",
+"pl":"Kalatea Orbifolia",
+"be":"Калатэя Orbifolia"
+},
+"calathea-ornata":{
+"ru":"Калатея украшенная|Калатея Орната",
+"uk":"Калатея прикрашена",
+"pl":"Kalatea ozdobna|Pin-stripe",
+"be":"Калатэя ўпрыгожаная"
+},
+"calathea-rattlesnake":{
+"ru":"Калатея лансифолия|Гремучая змея|Rattlesnake",
+"uk":"Калатея Гримуча змія",
+"pl":"Kalatea Grzechotnik",
+"be":"Калатэя Грымучая змяя"
+},
+"calathea-roseopicta":{
+"ru":"Калатея Roseopicta",
+"uk":"Калатея Roseopicta",
+"pl":"Kalatea Roseopicta",
+"be":"Калатэя Roseopicta"
+},
+"calathea-vittata":{
+"ru":"Калатея Vittata",
+"uk":"Калатея Vittata",
+"pl":"Kalatea Vittata",
+"be":"Калатэя Vittata"
+},
+"calathea-white-fusion":{
+"ru":"Калатея White Fusion",
+"uk":"Калатея White Fusion",
+"pl":"Kalatea White Fusion",
+"be":"Калатэя White Fusion"
+},
+"calathea-white-star":{
+"ru":"Калатея White Star",
+"uk":"Калатея White Star",
+"pl":"Kalatea White Star",
+"be":"Калатэя White Star"
+},
+"calathea-zebrina":{
+"ru":"Калатея зебровая|Зебрина",
+"uk":"Калатея зебровидна",
+"pl":"Kalatea zebrowata",
+"be":"Калатэя зебравая"
+},
+"ctenanthe":{
+"ru":"Ктенанта|Гребенник",
+"uk":"Ктенанта",
+"pl":"Ktenanta|Ctenanthe",
+"be":"Ктэнанта"
+},
+"maranta-prayer-plant":{
+"ru":"Маранта|Маранта трёхцветная|Молящееся растение",
+"uk":"Маранта|Молитовна рослина",
+"pl":"Maranta|Roślina modląca się",
+"be":"Маранта"
+},
+"prayer-plants":{
+"ru":"Маранты|Маранта|Молящиеся растения",
+"uk":"Маранти|Маранта",
+"pl":"Marantowate|Maranta",
+"be":"Маранты|Маранта"
+},
+"stromanthe":{
+"ru":"Строманта|Тритостар",
+"uk":"Строманта",
+"pl":"Stromanthe|Stromanta",
+"be":"Стромантэ"
+},
+"babys-tears":{
+"ru":"Солейролия|Детские слёзы",
+"uk":"Солейролія",
+"pl":"Soleirolia|Łzy dziecka",
+"be":"Солейролія"
+},
+"cissus-discolor":{
+"ru":"Циссус разноцветный|Бегониевый виноград",
+"uk":"Цисус різнобарвний",
+"pl":"Cissus dwubarwny",
+"be":"Цысус рознакаляровы"
+},
+"dischidia":{
+"ru":"Дисхидия",
+"uk":"Дісхідія",
+"pl":"Dischidia",
+"be":"Дыхідыя"
+},
+"english-ivy":{
+"ru":"Плющ обыкновенный|Английский плющ|Хедера",
+"uk":"Плющ звичайний|Хедера",
+"pl":"Bluszcz pospolity|Hedera",
+"be":"Плюшч звычайны|Хедэра"
+},
+"grape-ivy":{
+"ru":"Циссус ромболистный|Виноградный плющ|Березка",
+"uk":"Цисус ромболистий|Березка",
+"pl":"Cissus rombolistny|Winorośl",
+"be":"Цысус|Бярозка"
+},
+"hoya-australis":{
+"ru":"Хойя южная|Хойя Australis",
+"uk":"Хоя південна",
+"pl":"Hoja południowa",
+"be":"Хоя паўднёвая"
+},
+"hoya-bella":{
+"ru":"Хойя Bella",
+"uk":"Хоя Bella",
+"pl":"Hoja Bella",
+"be":"Хоя Bella"
+},
+"hoya-callistophylla":{
+"ru":"Хойя Callistophylla",
+"uk":"Хоя Callistophylla",
+"pl":"Hoja Callistophylla",
+"be":"Хоя Callistophylla"
+},
+"hoya-compacta":{
+"ru":"Хойя Compacta",
+"uk":"Хоя Compacta",
+"pl":"Hoja Compacta",
+"be":"Хоя Compacta"
+},
+"hoya-cumingiana":{
+"ru":"Хойя Cumingiana",
+"uk":"Хоя Cumingiana",
+"pl":"Hoja Cumingiana",
+"be":"Хоя Cumingiana"
+},
+"hoya-curtisii":{
+"ru":"Хойя Curtisii",
+"uk":"Хоя Curtisii",
+"pl":"Hoja Curtisii",
+"be":"Хоя Curtisii"
+},
+"hoya-krimson-queen":{
+"ru":"Хойя Krimson Queen|Хойя Королева",
+"uk":"Хоя Krimson Queen",
+"pl":"Hoja Krimson Queen",
+"be":"Хоя Krimson Queen"
+},
+"hoya-linearis":{
+"ru":"Хойя Linearis",
+"uk":"Хоя Linearis",
+"pl":"Hoja Linearis",
+"be":"Хоя Linearis"
+},
+"hoya-mathilde":{
+"ru":"Хойя Mathilde",
+"uk":"Хоя Mathilde",
+"pl":"Hoja Mathilde",
+"be":"Хоя Mathilde"
+},
+"hoya-obovata":{
+"ru":"Хойя Obovata",
+"uk":"Хоя Obovata",
+"pl":"Hoja Obovata",
+"be":"Хоя Obovata"
+},
+"hoya-pubicalyx":{
+"ru":"Хойя Pubicalyx",
+"uk":"Хоя Pubicalyx",
+"pl":"Hoja Pubicalyx",
+"be":"Хоя Pubicalyx"
+},
+"hoya-wayetii":{
+"ru":"Хойя Wayetii",
+"uk":"Хоя Wayetii",
+"pl":"Hoja Wayetii",
+"be":"Хоя Wayetii"
+},
+"philodendron-brasil":{
+"ru":"Филодендрон Бразилия|Brasil",
+"uk":"Філодендрон Бразилія",
+"pl":"Filodendron Brasil",
+"be":"Філадэндран Бразілія"
+},
+"purple-passion-plant":{
+"ru":"Гинура плетистая|Пурпурный бархат",
+"uk":"Гінура|Пурпурний оксамит",
+"pl":"Gynura|Purpurowy aksamit",
+"be":"Гінура"
+},
+"scindapsus":{
+"ru":"Сциндапсус",
+"uk":"Сциндапсус",
+"pl":"Scindapsus",
+"be":"Сцындапсус"
+},
+"scindapsus-pictus":{
+"ru":"Сциндапсус пёстрый|Сатиновый потос|Pictus",
+"uk":"Сциндапсус строкатий",
+"pl":"Scindapsus pstry",
+"be":"Сцындапсус стракаты"
+},
+"swedish-ivy":{
+"ru":"Плектрантус|Шведский плющ|Комнатная мята",
+"uk":"Плектрантус|Шведський плющ",
+"pl":"Plektrantus|Szwedzki bluszcz",
+"be":"Плектрантус"
+},
+"tradescantia":{
+"ru":"Традесканция",
+"uk":"Традесканція",
+"pl":"Trzykrotka",
+"be":"Традэсканцыя"
+},
+"tradescantia-nanouk":{
+"ru":"Традесканция Nanouk",
+"uk":"Традесканція Nanouk",
+"pl":"Trzykrotka Nanouk",
+"be":"Традэсканцыя Nanouk"
+},
+"tradescantia-purple-heart":{
+"ru":"Сеткреазия пурпурная|Пурпурное сердце",
+"uk":"Сеткреазія пурпурова",
+"pl":"Setcreasea|Fioletowe serce",
+"be":"Сеткрэазія"
+},
+"vines-trailing":{
+"ru":"Вьющиеся и ампельные растения|Лианы",
+"uk":"Ліани та ампельні рослини",
+"pl":"Pnącza i rośliny zwisające",
+"be":"Ліяны і ампельныя расліны"
+},
+"ficus-altissima":{
+"ru":"Фикус Altissima",
+"uk":"Фікус Altissima",
+"pl":"Fikus Altissima",
+"be":"Фікус Altissima"
+},
+"ficus-audrey":{
+"ru":"Фикус Audrey",
+"uk":"Фікус Audrey",
+"pl":"Fikus Audrey",
+"be":"Фікус Audrey"
+},
+"ficus-benjamina":{
+"ru":"Фикус Бенджамина|Фикус бенджамина|Плакучий фикус",
+"uk":"Фікус Бенджаміна|Плакучий фікус",
+"pl":"Fikus Beniamina|Figowiec benjamina",
+"be":"Фікус Бенджаміна"
+},
+"ficus-elastica-tineke":{
+"ru":"Фикус каучуконосный Тинеке|Тинеке",
+"uk":"Фікус каучуконосний Тінеке",
+"pl":"Fikus sprężysty Tineke",
+"be":"Фікус каўчуканосны Цінэке"
+},
+"ficus-microcarpa":{
+"ru":"Фикус микрокарпа|Женьшеневый фикус|Китайский баньян",
+"uk":"Фікус мікрокарпа|Женьшеневий фікус",
+"pl":"Fikus mikrokarpa|Figowiec mikrokarpa",
+"be":"Фікус мікракарпа"
+},
+"fiddle-leaf-fig":{
+"ru":"Фикус лировидный|Фикус Лирата",
+"uk":"Фікус ліроподібний|Фікус Ліата",
+"pl":"Figowiec lirolistny|Fikus lirata",
+"be":"Фікус ліраідны"
+},
+"rubber-plant":{
+"ru":"Фикус каучуконосный|Фикус эластика|Каучуковое дерево",
+"uk":"Фікус каучуконосний|Фікус еластика",
+"pl":"Figowiec sprężysty|Fikus elastica|Kauczukowiec",
+"be":"Фікус каўчуканосны|Фікус эластыка"
+},
+"rubber-plant-burgundy":{
+"ru":"Фикус эластика Бургунди|Burgundy",
+"uk":"Фікус еластика Бургунді",
+"pl":"Fikus sprężysty Burgundy",
+"be":"Фікус эластыка Бургундзі"
+},
+"rubber-plant-ruby":{
+"ru":"Фикус эластика Руби|Ruby",
+"uk":"Фікус еластика Рубі",
+"pl":"Fikus sprężysty Ruby",
+"be":"Фікус эластыка Рубі"
+},
+"bird-of-paradise":{
+"ru":"Стрелиция|Райская птица",
+"uk":"Стрелітція|Райський птах",
+"pl":"Strelicja|Rajski ptak",
+"be":"Стрэліцыя|Райская птушка"
+},
+"bird-of-paradise-white":{
+"ru":"Стрелиция белая|Райская птица белая",
+"uk":"Стрелітція біла",
+"pl":"Strelicja biała",
+"be":"Стрэліцыя белая"
+},
+"bonsai":{
+"ru":"Бонсай",
+"uk":"Бонсай",
+"pl":"Bonsai",
+"be":"Бонсай"
+},
+"coleus":{
+"ru":"Колеус|Плектрантус|Крапива комнатная",
+"uk":"Колеус|Кімнатна кропива",
+"pl":"Pokrzywa|Koleus",
+"be":"Калеус"
+},
+"cordyline":{
+"ru":"Кордилина",
+"uk":"Кордиліна",
+"pl":"Cordyline|Buzułka",
+"be":"Кардыліна"
+},
+"corpse-flower":{
+"ru":"Аморфофаллус|Трупный цветок",
+"uk":"Аморфофалус",
+"pl":"Amorphophallus|Kwiat trupi",
+"be":"Амарфафалус"
+},
+"croton":{
+"ru":"Кротон|Кодиеум",
+"uk":"Кротон|Кодіеум",
+"pl":"Kroton|Kodiaeum",
+"be":"Кратон|Кадыеум"
+},
+"croton-mammy":{
+"ru":"Кротон Mammy|Кодиеум Мамми",
+"uk":"Кротон Mammy",
+"pl":"Kroton Mammy",
+"be":"Кратон Mammy"
+},
+"cycads":{
+"ru":"Саговники|Цикасы",
+"uk":"Саговники",
+"pl":"Sagowce|Cykasy",
+"be":"Сагоўнікі|Цыкасы"
+},
+"fatsia":{
+"ru":"Фатсия|Японская аралия",
+"uk":"Фатсія|Японська арлія",
+"pl":"Fatsja japońska|Aralia japońska",
+"be":"Фатсія"
+},
+"geogenanthus":{
+"ru":"Геогенантус|Серебряная змея",
+"uk":"Геогенантус",
+"pl":"Geogenanthus",
+"be":"Геагенантус"
+},
+"heliconia":{
+"ru":"Геликонии|Лобстер клешня",
+"uk":"Геліконія",
+"pl":"Heliconia|Helikonia",
+"be":"Геліконія"
+},
+"lemon-cypress":{
+"ru":"Кипарис лимонный|Купрессус",
+"uk":"Кипарис лимонний",
+"pl":"Cyprys cytrynowy",
+"be":"Кіпарыс цытрынавы"
+},
+"lucky-bamboo":{
+"ru":"Драцена Сандера|Бамбук счастья|Лаки бамбук",
+"uk":"Драцена Сандера|Бамбук щастя",
+"pl":"Dracena Sandera|Bambus szczęścia",
+"be":"Драцэна Сандэра|Бамбук шчасця"
+},
+"money-tree":{
+"ru":"Пахира|Денежное дерево",
+"uk":"Пахіра|Грошове дерево",
+"pl":"Pachira|Drzewko szczęścia|Kasztan wodny",
+"be":"Пахіра|Грашовае дрэва"
+},
+"nerve-plant":{
+"ru":"Фиттония|Нервюрное растение",
+"uk":"Фіттонія",
+"pl":"Fittonia|Roślina nerwowa",
+"be":"Фітонія"
+},
+"norfolk-island-pine":{
+"ru":"Араукария|Комнатная ель",
+"uk":"Араукарія|Кімнатна ялинка",
+"pl":"Araukaria|Choinka pokojowa",
+"be":"Араўкарыя|Пакаёвая елка"
+},
+"oxalis":{
+"ru":"Кислица|Оксалис",
+"uk":"Квасениця|Оксаліс",
+"pl":"Szczawik|Oxalis",
+"be":"Кісліца|Оксаліс"
+},
+"oxalis-triangularis":{
+"ru":"Кислица треугольная|Оксалис фиолетовый|Бабочка",
+"uk":"Квасениця трикутна|Оксаліс фіолетовий",
+"pl":"Szczawik trójkątny|Fioletowa koniczyna",
+"be":"Кісліца трохвугольная"
+},
+"peperomia":{
+"ru":"Пеперомия",
+"uk":"Пеперомія",
+"pl":"Peperomia",
+"be":"Пеперомія"
+},
+"peperomia-caperata":{
+"ru":"Пеперомия морщинистая|Изумрудная рябь",
+"uk":"Пеперомія зморшкувата",
+"pl":"Peperomia pomarszczona",
+"be":"Пеперомія маршчыністая"
+},
+"peperomia-obtusifolia":{
+"ru":"Пеперомия туполистная|Детское каучуковое",
+"uk":"Пеперомія тупоголова",
+"pl":"Peperomia tępolistna",
+"be":"Пеперомія тупалістая"
+},
+"peperomia-rosso":{
+"ru":"Пеперомия Rosso",
+"uk":"Пеперомія Rosso",
+"pl":"Peperomia Rosso",
+"be":"Пеперомія Rosso"
+},
+"peperomia-watermelon":{
+"ru":"Пеперомия арбузная|Watermelon",
+"uk":"Пеперомія кавунова",
+"pl":"Peperomia arbuzowa",
+"be":"Пеперомія кавунавая"
+},
+"pilea":{
+"ru":"Пилея",
+"uk":"Пілея",
+"pl":"Pilea",
+"be":"Пілея"
+},
+"pilea-chinese-money-plant":{
+"ru":"Пилея пеперомиевидная|Китайское денежное дерево|Денежное дерево",
+"uk":"Пілея пеперомієвидна|Грошове дерево",
+"pl":"Pilea peperomioides|Pilea Peperomiowata|Chińska roślina pieniężna",
+"be":"Пілея пепераміевідная|Грашовае дрэва"
+},
+"pilea-involucrata":{
+"ru":"Пилея кадье|Дружеское растение",
+"uk":"Пілея Кадьє",
+"pl":"Pilea okazała|Roślina przyjaźni",
+"be":"Пілея"
+},
+"podocarpus":{
+"ru":"Подокарпус|Буддийская сосна",
+"uk":"Подокарпус",
+"pl":"Podocarpus|Kroplik",
+"be":"Падакарпус"
+},
+"polka-dot-plant":{
+"ru":"Гипестес|Горошек|Веснушка",
+"uk":"Гіпестес",
+"pl":"Hipoestes|Kropkowata roślina",
+"be":"Гіпэстэс"
+},
+"welwitschia":{
+"ru":"Вельвичия",
+"uk":"Вельвічія",
+"pl":"Welwitschia",
+"be":"Вэльвічыя"
+},
+"butterwort":{
+"ru":"Жирянка",
+"uk":"Жирянка",
+"pl":"Tłustosz",
+"be":"Жыраўка"
+},
+"carnivorous-plant":{
+"ru":"Хищное растение|Насекомоядное растение",
+"uk":"Хижа рослина|Комахоїдна рослина",
+"pl":"Roślina owadożerna|Mięsożerna",
+"be":"Драпежная расліна"
+},
+"cobra-lily":{
+"ru":"Дарлингтония|Лилия кобры",
+"uk":"Дарлінгтонія",
+"pl":"Darlingtonia",
+"be":"Дарлінгтонія"
+},
+"drosera-capensis":{
+"ru":"Росянка капская",
+"uk":"Росичка капська",
+"pl":"Rosiczka przylądkowa",
+"be":"Расіца капская"
+},
+"nepenthes":{
+"ru":"Непентес|Кувшинник",
+"uk":"Непентес|Глечикоподібна рослина",
+"pl":"Nepenthes|Dzbanecznik",
+"be":"Непентэс"
+},
+"pitcher-plant":{
+"ru":"Саррацения|Кувшинник|Непентес",
+"uk":"Сараценія|Глечикоподібна",
+"pl":"Saracenia|Dzbanecznik",
+"be":"Сарацэнія"
+},
+"sarracenia":{
+"ru":"Саррацения",
+"uk":"Сараценія",
+"pl":"Saracenia",
+"be":"Сарацэнія"
+},
+"sundew":{
+"ru":"Росянка",
+"uk":"Росичка",
+"pl":"Rosiczka",
+"be":"Расіца"
+},
+"venus-flytrap":{
+"ru":"Венерина мухоловка|Диониея",
+"uk":"Венерина мухоловка|Діонея",
+"pl":"Muchołówka|Dionaea",
+"be":"Венерына мухалоўка|Дыянея"
+},
+"air-plants":{
+"ru":"Тилландсия|Воздушное растение",
+"uk":"Тілландсія|Повітряна рослина",
+"pl":"Tillandsia|Roślina powietrzna",
+"be":"Тыландсія|Паветраная расліна"
+},
+"dendrobium-orchid":{
+"ru":"Дендробиум|Орхидея",
+"uk":"Дендробіум|Орхідея",
+"pl":"Dendrobium|Storczyk",
+"be":"Дэндрабіум|Архідэя"
+},
+"epiphytes":{
+"ru":"Эпифиты",
+"uk":"Епіфіти",
+"pl":"Epifity",
+"be":"Эпіфіты"
+},
+"lichen":{
+"ru":"Лишайник",
+"uk":"Лишайник",
+"pl":"Porost",
+"be":"Лішайнік"
+},
+"mosses":{
+"ru":"Мох|Мхи",
+"uk":"Мох|Мохи",
+"pl":"Mech|Mchy",
+"be":"Мох|Мхі"
+},
+"oncidium-orchid":{
+"ru":"Онцидиум|Орхидея",
+"uk":"Онцидіум|Орхідея",
+"pl":"Oncidium|Storczyk",
+"be":"Анцыдыум|Архідэя"
+},
+"orchids":{
+"ru":"Орхидеи|Орхидея",
+"uk":"Орхідеї|Орхідея",
+"pl":"Storczyki|Orchidea|Storczyk",
+"be":"Архідэі|Архідэя"
+},
+"resurrection-fern":{
+"ru":"Папоротник воскресающий|Плеопельтис",
+"uk":"Папороть воскресна",
+"pl":"Paproć zmartwychwstająca",
+"be":"Папараць уваскрасаючая"
+},
+"spanish-moss":{
+"ru":"Тилландсия уснеевидная|Испанский мох",
+"uk":"Тілландсія уснеєвидна|Іспанський мох",
+"pl":"Tillandsia brodaczkowata|Mech hiszpański",
+"be":"Тыландсія|Іспанскі мох"
+},
+"tillandsia-xerographica":{
+"ru":"Тилландсия ксерографика",
+"uk":"Тілландсія ксерографіка",
+"pl":"Tillandsia xerographica",
+"be":"Тыландсія ксерографіка"
+},
+"vanda-orchid":{
+"ru":"Ванда|Орхидея",
+"uk":"Ванда|Орхідея",
+"pl":"Vanda|Storczyk",
+"be":"Ванда|Архідэя"
+},
+"vanilla":{
+"ru":"Ваниль|Орхидея ваниль",
+"uk":"Ваніль",
+"pl":"Wanilia",
+"be":"Ваніль"
+}
+}

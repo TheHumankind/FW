@@ -33,7 +33,7 @@ enum class Season {
  * A kind of plant from the bundled catalog, with its care data (not a plant the user owns).
  *
  * Descriptions and care texts are in English; [names] holds the localized names by language code
- * (`ru`, `uk`, `pl`, `be`), possibly missing.
+ * (`ru`, `uk`, `pl`, `be`), possibly missing; [aliases] are other names people search by (not shown).
  *
  * @property wateringDays days between waterings per season; a season without an entry means "no data / dormant".
  */
@@ -41,6 +41,7 @@ data class PlantSpecies(
     val id: String,
     val name: String,
     val names: Map<String, String>,
+    val aliases: List<String> = emptyList(),
     val description: String,
     val examples: String,
     val careTips: String,
