@@ -11,7 +11,6 @@ import com.example.flowerworld.feature.plantinfo.PlantInfoScreen
 import com.example.flowerworld.feature.plantinfo.PlantInfoViewModel
 import com.example.flowerworld.feature.addplant.AddPlantScreen
 import com.example.flowerworld.feature.addplant.AddPlantViewModel
-import com.example.flowerworld.feature.search.SearchScreen
 import com.example.flowerworld.feature.login.LoginScreen
 import com.example.flowerworld.feature.main.MainScreen
 import com.example.flowerworld.feature.welcome.WelcomeScreen
@@ -21,7 +20,6 @@ private object Routes {
     const val Welcome = "welcome"
     const val Login = "login"
     const val Main = "main"
-    const val Search = "search"
     const val AddPlant = "add_plant?title={${AddPlantViewModel.TitleArg}}"
     const val PlantInfo = "plant_info/{${PlantInfoViewModel.PlantIdArg}}"
 
@@ -55,7 +53,8 @@ fun AppNavigation() {
         composable(Routes.Main) {
             MainScreen(
                 onAddPlantClick = { navController.navigate(Routes.addPlant()) },
-                onSearchClick = { navController.navigate(Routes.Search) },
+                // the plant picked in the catalog goes into the new plant's species field
+                onCatalogPlantClick = { plant -> navController.navigate(Routes.addPlant(plant.displayName)) },
                 onPlantClick = { plant -> navController.navigate(Routes.plantInfo(plant.id)) }
             )
         }
@@ -64,13 +63,6 @@ fun AppNavigation() {
             arguments = listOf(navArgument(PlantInfoViewModel.PlantIdArg) { type = NavType.StringType })
         ) {
             PlantInfoScreen(onBackClick = { navController.popBackStack() })
-        }
-        composable(Routes.Search) {
-            SearchScreen(
-                onBackClick = { navController.popBackStack() },
-                // the picked plant's name goes into the new plant's species field
-                onPlantClick = { plant -> navController.navigate(Routes.addPlant(plant.displayName)) }
-            )
         }
         composable(
             route = Routes.AddPlant,

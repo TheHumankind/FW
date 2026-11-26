@@ -44,6 +44,7 @@ Do not assume every target user has them: newer Huawei/Honor devices may not.
 - Navigation: Navigation Compose with string routes (`navigation/AppNavigation.kt`); every route has its own ViewModels.
 - ViewModels get dependencies from `AppContainer` through `containerViewModelFactory` (see `MainViewModel.Factory`); `FlowerWorldApp` owns the container.
 - Reminders: `reminder/` (`ReminderScheduler` keeps one exact daily alarm at 09:00; `ReminderReceiver` shows one summary notification "to water today / overdue" (`WateringSummary`) and re-arms the next day; `BootReceiver`). `FlowerWorldApp` keeps alarms in sync with the database.
+- Plant search: footer tab `feature/search/` over `PlantCatalogRepository`; `data/remote/TreflePlantCatalog` (Trefle API, CC-BY-4.0, free token `TREFLE_TOKEN` in `local.properties`/gradle properties -> `BuildConfig`, never committed). Picking a result opens add-plant with the title prefilled. Attribution "Data: Trefle.io (CC-BY-4.0)" must stay on the screen.
 - Settings and one-time flags live behind `SettingsRepository` (`PrefsSettingsRepository`, SharedPreferences for now; move to DataStore when real settings arrive).
 - Photos: picked with the system photo picker (no permission), compressed by `PhotoStorage` (`FilePhotoStorage`: JPEG, max 800 px, `files/photos/`); a plant keeps only the path.
 - Plants live behind `PlantRepository`; `RoomPlantRepository` stores them in Room (`data/local/`: entities `plants` + `plant_photos`, DAO, mappers; sync fields `createdAt`/`updatedAt`/`isDeleted`). The database starts empty; `TestPlants` is only for previews.
@@ -77,7 +78,7 @@ For now we work with templates and local data. The code must be ready for a serv
 - UI state must provide `Loading` / `Success` / `Error`.
 
 ### What we do NOT add without the user's command
-Firebase, any server or networking, Google services. The backend choice is postponed until the local MVP
+Firebase, our own server, Google services (the read-only Trefle plant catalog search is allowed: the user asked for it). The backend choice is postponed until the local MVP
 (Room, screens, reminders) works. Keep all server access behind repository interfaces (e.g. `SyncRepository`)
 so any backend can be plugged in later by one new class; do not tie the code to Firestore-specific features.
 

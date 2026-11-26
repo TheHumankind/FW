@@ -1,5 +1,6 @@
 package com.example.flowerworld.feature.main
 
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,7 +10,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.data.fake.TestPlants
+import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.model.Plant
+import com.example.flowerworld.feature.search.SearchViewer
 import com.example.flowerworld.feature.settings.SettingsViewer
 import com.example.flowerworld.feature.graveyard.GraveyardViewer
 import com.example.flowerworld.feature.plants.PlantViewer
@@ -23,8 +26,8 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 @Composable
 fun MainScreen(
     onAddPlantClick: () -> Unit,
-    onSearchClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
+    onCatalogPlantClick: (CatalogPlant) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
 ) {
@@ -45,8 +48,8 @@ fun MainScreen(
         state = state,
         onFooterSelect = viewModel::onFooterSelect,
         onAddPlantClick = onAddPlantClick,
-        onSearchClick = onSearchClick,
         onPlantClick = onPlantClick,
+        onCatalogPlantClick = onCatalogPlantClick,
         onWaterPlant = viewModel::onWaterPlant,
         onPlantDied = viewModel::onPlantDied,
         onRevivePlant = viewModel::onRevivePlant,
@@ -59,19 +62,19 @@ private fun MainContent(
     state: MainUiState,
     onFooterSelect: (FooterTab) -> Unit,
     onAddPlantClick: () -> Unit,
-    onSearchClick: () -> Unit,
     onPlantClick: (Plant) -> Unit,
+    onCatalogPlantClick: (CatalogPlant) -> Unit,
     onWaterPlant: (Plant) -> Unit,
     onPlantDied: (Plant) -> Unit,
     onRevivePlant: (Plant) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    AppScreen(modifier = modifier.statusBarsPadding()) {
+    // the footer rides above the keyboard while the search field is used
+    AppScreen(modifier = modifier.statusBarsPadding().imePadding()) {
         when (state.selectedTab) {
             FooterTab.Plants -> PlantViewer(
                 plants = state.plants,
                 onAddPlantClick = onAddPlantClick,
-        onSearchClick = onSearchClick,
                 onPlantClick = onPlantClick,
                 onWaterPlant = onWaterPlant,
                 onPlantDied = onPlantDied,
@@ -86,6 +89,7 @@ private fun MainContent(
                 heading = state.cardHeading,
                 modifier = Modifier.weight(1f)
             )
+            FooterTab.Search -> SearchViewer(onPlantClick = onCatalogPlantClick, modifier = Modifier.weight(1f))
             FooterTab.Settings -> SettingsViewer(Modifier.weight(1f))
         }
         AppFooter(
@@ -103,8 +107,8 @@ private fun MainContentPreview() {
             state = MainUiState(plants = TestPlants),
             onFooterSelect = {},
             onAddPlantClick = {},
-            onSearchClick = {},
             onPlantClick = {},
+            onCatalogPlantClick = {},
             onWaterPlant = {},
             onPlantDied = {},
             onRevivePlant = {}

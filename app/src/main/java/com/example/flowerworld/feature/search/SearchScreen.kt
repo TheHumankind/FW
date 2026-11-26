@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +24,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -39,32 +40,36 @@ import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.model.PlantColor
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppDropdown
-import com.example.flowerworld.ui.components.AppScreen
+import com.example.flowerworld.ui.components.AppListScreen
 import com.example.flowerworld.ui.components.AppTextField
-import com.example.flowerworld.ui.components.AppTopBar
 import com.example.flowerworld.ui.components.PhotoBox
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
-/** Searches the online plant catalog. Calls [onPlantClick] with the plant the user picked. */
+/** Footer tab that searches the online plant catalog. Calls [onPlantClick] with the plant the user picked. */
 @Composable
-fun SearchScreen(
-    onBackClick: () -> Unit,
+fun SearchViewer(
     onPlantClick: (CatalogPlant) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = viewModel(factory = SearchViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val focusManager = LocalFocusManager.current
+    val keyboard = LocalSoftwareKeyboardController.current
     SearchContent(
         state = state,
         onQueryChange = viewModel::onQueryChange,
-        onSearch = viewModel::onSearch,
+        onSearch = {
+            // results need the room the keyboard takes
+            focusManager.clearFocus()
+            keyboard?.hide()
+            viewModel.onSearch()
+        },
         onFlowerColorSelect = viewModel::onFlowerColorSelect,
         onFoliageColorSelect = viewModel::onFoliageColorSelect,
         onEdibleToggle = viewModel::onEdibleToggle,
         onLoadMore = viewModel::onLoadMore,
         onPlantClick = onPlantClick,
-        onBackClick = onBackClick,
         modifier = modifier
     )
 }
@@ -79,11 +84,10 @@ private fun SearchContent(
     onEdibleToggle: () -> Unit,
     onLoadMore: () -> Unit,
     onPlantClick: (CatalogPlant) -> Unit,
-    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    AppScreen(modifier = modifier.navigationBarsPadding().imePadding()) {
-        AppTopBar(title = stringResource(R.string.search_title), onBackClick = onBackClick)
+    AppListScreen(title = stringResource(R.string.search_title), modifier = modifier) {
+      Column(Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.ListPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -113,7 +117,11 @@ private fun SearchContent(
             FilterChip(
                 selected = state.filters.edibleOnly,
                 onClick = onEdibleToggle,
-                label = { Text(stringResource(R.string.search_edible)) }
+                label = { Text(stringResource(R.string.search_edible)) },
+                colors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = MaterialTheme.colorScheme.primary,
+                    selectedLabelColor = MaterialTheme.colorScheme.onPrimary
+                )
             )
         }
         Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
@@ -124,6 +132,7 @@ private fun SearchContent(
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.fillMaxWidth().padding(8.dp)
         )
+      }
     }
 }
 
@@ -249,7 +258,7 @@ private fun SearchContentPreview() {
                 )
             ),
             onQueryChange = {}, onSearch = {}, onFlowerColorSelect = {}, onFoliageColorSelect = {},
-            onEdibleToggle = {}, onLoadMore = {}, onPlantClick = {}, onBackClick = {}
+            onEdibleToggle = {}, onLoadMore = {}, onPlantClick = {}
         )
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -19,12 +21,17 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Personal Trefle access token (free, from trefle.io). Put TREFLE_TOKEN=... into ~/.gradle/gradle.properties
-        // (works for every worktree) or into the environment; it must never be committed to the repository.
+        // Personal Trefle access token (free, from trefle.io). Put TREFLE_TOKEN=... into local.properties
+        // (not tracked by git), ~/.gradle/gradle.properties or the environment; never commit it.
+        val localProperties = Properties().apply {
+            val file = rootProject.file("local.properties")
+            if (file.exists()) file.reader().use { load(it) }
+        }
         val trefleToken = providers.gradleProperty("TREFLE_TOKEN")
             .orElse(providers.environmentVariable("TREFLE_TOKEN"))
-            .orElse("")
+            .orElse(localProperties.getProperty("TREFLE_TOKEN", ""))
             .get()
+            .trim()
         buildConfigField("String", "TREFLE_TOKEN", "\"$trefleToken\"")
     }
 

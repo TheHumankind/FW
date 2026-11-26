@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material3.MaterialTheme
@@ -29,6 +30,7 @@ import com.example.flowerworld.ui.theme.FlowerWorldTheme
 enum class FooterTab(val icon: ImageVector, @StringRes val label: Int) {
     Graveyard(Icons.Filled.Tombstone, R.string.graveyard_title),
     Plants(Icons.Filled.Eco, R.string.footer_plants),
+    Search(Icons.Filled.Search, R.string.search_title),
     Settings(Icons.Filled.Settings, R.string.footer_settings)
 }
 
