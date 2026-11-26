@@ -64,10 +64,8 @@ class AssetSpeciesCatalog(private val context: Context) : SpeciesCatalogReposito
 
     private fun read(): List<Entry> = try {
         val names = readAsset("plant_names.json")?.let(::JSONObject)
-        val phrases = readAsset("plant_phrases.json")?.let(::JSONObject)
-        val descriptions = readAsset("plant_descriptions.json")?.let(::JSONObject)
         val array = JSONArray(readAsset("plant_catalog.json") ?: throw IOException("plant_catalog.json is missing"))
-        (0 until array.length()).map { Entry(parse(array.getJSONObject(it), names, phrases, descriptions)) }
+        (0 until array.length()).map { Entry(parse(array.getJSONObject(it), names)) }
     } catch (e: JSONException) {
         throw IOException("The plant catalog is damaged", e)
     }
@@ -78,47 +76,20 @@ class AssetSpeciesCatalog(private val context: Context) : SpeciesCatalogReposito
         null
     }
 
-    private fun parse(
-        json: JSONObject,
-        allNames: JSONObject?,
-        phrases: JSONObject?,
-        descriptions: JSONObject?
-    ): PlantSpecies {
+    private fun parse(json: JSONObject, allNames: JSONObject?): PlantSpecies {
         val id = json.getString("id")
         val category = json.optString("category")
         val localized = allNames?.optJSONObject(id)
         // a localized value is "Main name|alias|alias": the main name is shown, the aliases are only searched
         val rawNames = localized?.keys()?.asSequence()?.associateWith { localized.getString(it) }.orEmpty()
-        val careTips = json.optString("careTips")
-        val description = json.optString("description")
-        val tipSentences = splitSentences(careTips)
-        val translatedDescriptions = descriptions?.optJSONObject(id)
-        val tipsByLanguage = mutableMapOf<String, String>()
-        val descriptionByLanguage = mutableMapOf<String, String>()
-        val fullyTranslated = mutableSetOf<String>()
-        for (language in TranslatedLanguages) {
-            // every sentence found in the phrase table is translated, the others stay English
-            var allTipsTranslated = true
-            val tips = tipSentences.map { sentence ->
-                phrases?.optJSONObject(sentence)?.optString(language)?.takeIf { it.isNotEmpty() }
-                    ?: sentence.also { allTipsTranslated = false }
-            }
-            if (tips.isNotEmpty() && tips != tipSentences) tipsByLanguage[language] = tips.joinToString(" ")
-            val translatedDescription = translatedDescriptions?.optString(language)?.takeIf { it.isNotEmpty() }
-            descriptionByLanguage[language] = translatedDescription ?: translateAlsoKnownAs(description, language)
-            if (translatedDescription != null && allTipsTranslated) fullyTranslated += language
-        }
         return PlantSpecies(
             id = id,
             name = json.getString("typeName"),
             names = rawNames.mapValues { it.value.substringBefore('|') },
             aliases = rawNames.values.flatMap { it.split('|').drop(1) },
-            description = description,
-            descriptionsByLanguage = descriptionByLanguage,
-            careTipsByLanguage = tipsByLanguage,
-            fullyTranslated = fullyTranslated,
+            description = json.optString("description"),
             examples = json.optString("commonExamples"),
-            careTips = careTips,
+            careTips = json.optString("careTips"),
             origin = json.optString("origin"),
             wateringDays = buildMap {
                 json.optIntOrNull("springInterval")?.let { put(Season.Spring, it) }
@@ -170,30 +141,9 @@ class AssetSpeciesCatalog(private val context: Context) : SpeciesCatalogReposito
         else -> SpeciesGroup.Garden
     }
 
-    private fun splitSentences(text: String): List<String> =
-        text.split(SentenceEnd).map { it.trim() }.filter { it.isNotEmpty() }
-
-    /** The "Also known as:" lead of a description in [language]; the names after it stay as they are. */
-    private fun translateAlsoKnownAs(description: String, language: String): String {
-        val lead = "Also known as:"
-        val translated = when (language) {
-            "ru" -> "Также называют:"
-            "uk" -> "Також називають:"
-            "pl" -> "Nazywane także:"
-            "be" -> "Таксама называюць:"
-            else -> return description
-        }
-        return if (description.startsWith(lead)) translated + description.removePrefix(lead) else description
-    }
-
     private fun JSONObject.optIntOrNull(name: String): Int? = if (isNull(name) || !has(name)) null else optInt(name)
 
     private companion object {
-        val TranslatedLanguages = listOf("ru", "uk", "pl", "be")
-
-        /** Sentences end after . ! ? followed by whitespace; the build script (tools/build_plant_phrases.py) uses the same rule. */
-        val SentenceEnd = Regex("(?<=[.!?])\\s+")
-
         /** Lower case, accents and diacritics removed (so "ё" matches "е"), for forgiving search. */
         fun normalize(text: String): String =
             Normalizer.normalize(text.lowercase(), Normalizer.Form.NFD).replace(Regex("\\p{Mn}+"), "").trim()
