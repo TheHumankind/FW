@@ -1,4 +1,4 @@
-package com.example.flowerworld.ui
+package com.example.flowerworld.ui.labels
 
 import androidx.annotation.StringRes
 import com.example.flowerworld.R

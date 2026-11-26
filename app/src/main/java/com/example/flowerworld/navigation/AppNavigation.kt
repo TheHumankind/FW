@@ -7,14 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.flowerworld.feature.plantinfo.PlantInfoScreen
-import com.example.flowerworld.feature.plantinfo.PlantInfoViewModel
 import com.example.flowerworld.feature.addplant.AddPlantScreen
 import com.example.flowerworld.feature.addplant.AddPlantViewModel
-import com.example.flowerworld.feature.species.SpeciesDetailScreen
-import com.example.flowerworld.feature.species.SpeciesDetailViewModel
+import com.example.flowerworld.feature.guide.SpeciesDetailScreen
+import com.example.flowerworld.feature.guide.SpeciesDetailViewModel
 import com.example.flowerworld.feature.login.LoginScreen
 import com.example.flowerworld.feature.main.MainScreen
+import com.example.flowerworld.feature.plantinfo.PlantInfoScreen
+import com.example.flowerworld.feature.plantinfo.PlantInfoViewModel
 import com.example.flowerworld.feature.welcome.WelcomeScreen
 
 /** Routes of the app; each one has its own back stack entry and so its own ViewModels. */

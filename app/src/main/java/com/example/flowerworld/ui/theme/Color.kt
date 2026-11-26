@@ -10,8 +10,6 @@ val Sage = Color(0xFFA3B18A)
 val Timberwolf = Color(0xFFDAD7CD)
 val TextPrimary = Color(0xFF1E1E1E)
 
-// Status colors: danger (delete, errors), caution, warning and good
+// Status colors: danger (delete, errors) and good
 val AlertDanger = Color(0xFFC5302C)
-val Caution = Color(0xFFFF741F)
-val Warning = Color(0xFFFFDE59)
 val Good = Color(0xFF01321F)

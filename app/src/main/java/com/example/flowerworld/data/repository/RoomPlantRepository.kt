@@ -3,7 +3,6 @@ package com.example.flowerworld.data.repository
 import com.example.flowerworld.data.local.PlantDao
 import com.example.flowerworld.data.local.toDomain
 import com.example.flowerworld.data.local.toEntity
-import com.example.flowerworld.data.local.toEntity
 import com.example.flowerworld.data.local.toPhotoEntities
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantPhoto

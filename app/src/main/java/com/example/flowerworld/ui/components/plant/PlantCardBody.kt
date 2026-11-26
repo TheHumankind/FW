@@ -1,4 +1,4 @@
-package com.example.flowerworld.ui.components
+package com.example.flowerworld.ui.components.plant
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +19,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantHeading
+import com.example.flowerworld.ui.components.MenuCardHeight
+import com.example.flowerworld.ui.components.PhotoBox
 
 /**
  * Inside of a [MenuCard] row: the latest photo on the left; on the right the plant's [heading] pinned

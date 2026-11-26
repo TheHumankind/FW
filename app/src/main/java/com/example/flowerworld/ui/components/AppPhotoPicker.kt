@@ -23,8 +23,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.flowerworld.R
-import com.example.flowerworld.ui.theme.FlowerWorldTheme
 import com.example.flowerworld.ui.theme.Dimens
+import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /**
  * Photo area: shows the [photoUri] if there is one, otherwise a placeholder; tap to pick another.

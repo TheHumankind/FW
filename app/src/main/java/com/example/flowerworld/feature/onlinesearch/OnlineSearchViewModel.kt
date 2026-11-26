@@ -1,4 +1,4 @@
-package com.example.flowerworld.feature.search
+package com.example.flowerworld.feature.onlinesearch
 
 import androidx.lifecycle.viewModelScope
 import com.example.flowerworld.di.containerViewModelFactory
@@ -6,37 +6,37 @@ import com.example.flowerworld.domain.model.CatalogFilters
 import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.model.PlantColor
 import com.example.flowerworld.domain.repository.CatalogNotConfiguredException
-import com.example.flowerworld.domain.repository.PlantCatalogRepository
+import com.example.flowerworld.domain.repository.OnlineCatalogRepository
 import com.example.flowerworld.ui.UiStateViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 /** Why the last search failed. */
-enum class SearchError { NotConfigured, Network }
+enum class OnlineSearchError { NotConfigured, Network }
 
 /** What the search screen shows below the filters. */
-sealed interface SearchResults {
+sealed interface OnlineSearchResults {
     /** Nothing was searched yet. */
-    data object Idle : SearchResults
-    data object Loading : SearchResults
+    data object Idle : OnlineSearchResults
+    data object Loading : OnlineSearchResults
     data class Success(
         val plants: List<CatalogPlant>,
         val hasMore: Boolean,
         val isLoadingMore: Boolean = false,
-    ) : SearchResults
-    data class Error(val error: SearchError) : SearchResults
+    ) : OnlineSearchResults
+    data class Error(val error: OnlineSearchError) : OnlineSearchResults
 }
 
-data class SearchUiState(
+data class OnlineSearchUiState(
     val query: String = "",
     val filters: CatalogFilters = CatalogFilters(),
-    val results: SearchResults = SearchResults.Idle,
+    val results: OnlineSearchResults = OnlineSearchResults.Idle,
 )
 
-class SearchViewModel(
-    private val catalog: PlantCatalogRepository
-) : UiStateViewModel<SearchUiState>(SearchUiState()) {
+class OnlineSearchViewModel(
+    private val catalog: OnlineCatalogRepository
+) : UiStateViewModel<OnlineSearchUiState>(OnlineSearchUiState()) {
     private var searchJob: Job? = null
     private var nextPage = 1
 
@@ -53,20 +53,20 @@ class SearchViewModel(
         searchJob?.cancel()
         val state = currentState
         if (state.query.isBlank() && state.filters.isEmpty) {
-            updateState { copy(results = SearchResults.Idle) }
+            updateState { copy(results = OnlineSearchResults.Idle) }
             return
         }
         nextPage = 1
-        updateState { copy(results = SearchResults.Loading) }
+        updateState { copy(results = OnlineSearchResults.Loading) }
         searchJob = viewModelScope.launch {
             val results = try {
                 val page = catalog.search(state.query, state.filters, nextPage)
                 nextPage++
-                SearchResults.Success(page.plants, page.hasMore)
+                OnlineSearchResults.Success(page.plants, page.hasMore)
             } catch (e: CatalogNotConfiguredException) {
-                SearchResults.Error(SearchError.NotConfigured)
+                OnlineSearchResults.Error(OnlineSearchError.NotConfigured)
             } catch (e: IOException) {
-                SearchResults.Error(SearchError.Network)
+                OnlineSearchResults.Error(OnlineSearchError.Network)
             }
             updateState { copy(results = results) }
         }
@@ -75,14 +75,14 @@ class SearchViewModel(
     /** Appends the next page when the user scrolled to the end of the list. */
     fun onLoadMore() {
         val state = currentState
-        val results = state.results as? SearchResults.Success ?: return
+        val results = state.results as? OnlineSearchResults.Success ?: return
         if (!results.hasMore || results.isLoadingMore) return
         updateState { copy(results = results.copy(isLoadingMore = true)) }
         searchJob = viewModelScope.launch {
             try {
                 val page = catalog.search(state.query, state.filters, nextPage)
                 nextPage++
-                updateState { copy(results = SearchResults.Success(results.plants + page.plants, page.hasMore)) }
+                updateState { copy(results = OnlineSearchResults.Success(results.plants + page.plants, page.hasMore)) }
             } catch (e: IOException) {
                 // keep what is shown; the next scroll to the end tries again
                 updateState { copy(results = results.copy(isLoadingMore = false)) }
@@ -96,6 +96,6 @@ class SearchViewModel(
     }
 
     companion object {
-        val Factory = containerViewModelFactory { SearchViewModel(it.plantCatalog) }
+        val Factory = containerViewModelFactory { OnlineSearchViewModel(it.onlineCatalog) }
     }
 }

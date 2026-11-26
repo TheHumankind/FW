@@ -1,4 +1,4 @@
-package com.example.flowerworld.feature.species
+package com.example.flowerworld.feature.guide
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,7 @@ import com.example.flowerworld.domain.model.Season
 import com.example.flowerworld.domain.model.SpeciesGroup
 import com.example.flowerworld.domain.model.SpeciesGrowthRate
 import com.example.flowerworld.domain.model.ToxicityLevel
-import com.example.flowerworld.feature.search.appLanguageCode
+import com.example.flowerworld.ui.appLanguageCode
 import com.example.flowerworld.ui.components.AppButton
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppScreen

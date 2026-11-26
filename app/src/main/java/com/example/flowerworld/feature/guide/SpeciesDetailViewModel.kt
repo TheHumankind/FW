@@ -1,4 +1,4 @@
-package com.example.flowerworld.feature.species
+package com.example.flowerworld.feature.guide
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.createSavedStateHandle

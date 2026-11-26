@@ -100,8 +100,6 @@
     <string name="color_magenta">Пурпурный</string>
     <string name="color_grey">Серый</string>
     <string name="color_black">Чёрный</string>
-    <string name="search_mode_guide">Справочник</string>
-    <string name="search_mode_online">Онлайн</string>
     <string name="guide_kind">Тип</string>
     <string name="guide_light">Освещение</string>
     <string name="guide_pet_safe">Безопасно для питомцев</string>

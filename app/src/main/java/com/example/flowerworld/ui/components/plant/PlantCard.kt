@@ -1,4 +1,4 @@
-package com.example.flowerworld.ui.components
+package com.example.flowerworld.ui.components.plant
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -17,6 +17,8 @@ import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantHeading
+import com.example.flowerworld.ui.components.MenuCard
+import com.example.flowerworld.ui.components.MenuCardItem
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 /**

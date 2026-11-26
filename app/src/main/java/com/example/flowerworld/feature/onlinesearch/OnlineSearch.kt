@@ -1,4 +1,4 @@
-package com.example.flowerworld.feature.search
+package com.example.flowerworld.feature.onlinesearch
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,15 +16,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -41,45 +38,21 @@ import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.CatalogFilters
 import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.model.PlantColor
-import com.example.flowerworld.domain.model.PlantSpecies
+import com.example.flowerworld.feature.guide.selectableChipColors
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppDropdown
-import com.example.flowerworld.ui.components.AppListScreen
 import com.example.flowerworld.ui.components.AppTextField
 import com.example.flowerworld.ui.components.PhotoBox
+import com.example.flowerworld.ui.labels.nameRes
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
-/**
- * Footer tab for finding plants: the bundled plant guide (works offline, has care data).
- * [onSpeciesClick] gets the entry the user picked.
- *
- * The online catalog search ([OnlineSearch], Trefle) is built and kept, but not shown for now: the
- * guide fits the app better. To bring it back, show [OnlineSearch] again next to [GuideSearch].
- */
-@Composable
-fun SearchViewer(
-    onSpeciesClick: (PlantSpecies) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    AppListScreen(title = stringResource(R.string.search_title), modifier = modifier) {
-        GuideSearch(onSpeciesClick = onSpeciesClick)
-    }
-}
-
-/** Colors of a chip that must be easy to see when it is on. */
-@Composable
-internal fun selectableChipColors() = FilterChipDefaults.filterChipColors(
-    selectedContainerColor = MaterialTheme.colorScheme.primary,
-    selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-)
-
-/** The online catalog (Trefle): by name, flower and leaf color, edibility. Not shown for now, see [SearchViewer]. */
+/** The online catalog (Trefle): by name, flower and leaf color, edibility. Not shown for now, see [GuideViewer]. */
 @Composable
 internal fun OnlineSearch(
     onPlantClick: (CatalogPlant) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: SearchViewModel = viewModel(factory = SearchViewModel.Factory)
+    viewModel: OnlineSearchViewModel = viewModel(factory = OnlineSearchViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
@@ -104,7 +77,7 @@ internal fun OnlineSearch(
 
 @Composable
 private fun SearchContent(
-    state: SearchUiState,
+    state: OnlineSearchUiState,
     onQueryChange: (String) -> Unit,
     onSearch: () -> Unit,
     onFlowerColorSelect: (PlantColor?) -> Unit,
@@ -177,21 +150,21 @@ private fun ColorDropdown(
 }
 
 @Composable
-private fun Results(results: SearchResults, onPlantClick: (CatalogPlant) -> Unit, onLoadMore: () -> Unit) {
+private fun Results(results: OnlineSearchResults, onPlantClick: (CatalogPlant) -> Unit, onLoadMore: () -> Unit) {
     when (results) {
-        SearchResults.Idle -> AppCenteredMessage(text = stringResource(R.string.search_idle))
-        SearchResults.Loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        OnlineSearchResults.Idle -> AppCenteredMessage(text = stringResource(R.string.search_idle))
+        OnlineSearchResults.Loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
-        is SearchResults.Error -> AppCenteredMessage(
+        is OnlineSearchResults.Error -> AppCenteredMessage(
             text = stringResource(
                 when (results.error) {
-                    SearchError.NotConfigured -> R.string.search_error_not_configured
-                    SearchError.Network -> R.string.search_error_network
+                    OnlineSearchError.NotConfigured -> R.string.search_error_not_configured
+                    OnlineSearchError.Network -> R.string.search_error_network
                 }
             )
         )
-        is SearchResults.Success -> if (results.plants.isEmpty()) {
+        is OnlineSearchResults.Success -> if (results.plants.isEmpty()) {
             AppCenteredMessage(text = stringResource(R.string.search_empty))
         } else {
             ResultList(results, onPlantClick, onLoadMore)
@@ -200,7 +173,7 @@ private fun Results(results: SearchResults, onPlantClick: (CatalogPlant) -> Unit
 }
 
 @Composable
-private fun ResultList(results: SearchResults.Success, onPlantClick: (CatalogPlant) -> Unit, onLoadMore: () -> Unit) {
+private fun ResultList(results: OnlineSearchResults.Success, onPlantClick: (CatalogPlant) -> Unit, onLoadMore: () -> Unit) {
     LazyColumn(
         contentPadding = androidx.compose.foundation.layout.PaddingValues(Dimens.ListPadding),
         verticalArrangement = Arrangement.spacedBy(Dimens.ListItemSpacing),
@@ -272,10 +245,10 @@ private fun ResultCard(plant: CatalogPlant, onClick: () -> Unit) {
 private fun SearchContentPreview() {
     FlowerWorldTheme {
         SearchContent(
-            state = SearchUiState(
+            state = OnlineSearchUiState(
                 query = "monstera",
                 filters = CatalogFilters(flowerColor = PlantColor.White),
-                results = SearchResults.Success(
+                results = OnlineSearchResults.Success(
                     plants = listOf(CatalogPlant(1, "Swiss cheese plant", "Monstera deliciosa", "Araceae", null)),
                     hasMore = false
                 )

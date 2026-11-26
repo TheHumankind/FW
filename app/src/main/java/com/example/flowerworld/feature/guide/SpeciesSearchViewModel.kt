@@ -1,4 +1,4 @@
-package com.example.flowerworld.feature.search
+package com.example.flowerworld.feature.guide
 
 import androidx.lifecycle.viewModelScope
 import com.example.flowerworld.di.containerViewModelFactory

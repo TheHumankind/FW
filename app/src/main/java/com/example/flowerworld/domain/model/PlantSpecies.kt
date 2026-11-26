@@ -1,34 +1,5 @@
 package com.example.flowerworld.domain.model
 
-import java.time.Month
-
-/** How much light a species wants. */
-enum class LightLevel { LowIndirect, MediumIndirect, BrightIndirect, StrongDirect, OutdoorFullSun, OutdoorPartialSun, OutdoorShade }
-
-enum class HumidityLevel { Low, Medium, High, VeryHigh }
-
-/** How harmful a species is for pets and people; [Unknown] when the source does not say. */
-enum class ToxicityLevel { NonToxic, MildlyToxic, Toxic, Unknown }
-
-enum class SpeciesGrowthRate { Slow, Moderate, Fast }
-
-/** Rough kinds of plants the catalog can be narrowed by. */
-enum class SpeciesGroup { Foliage, Succulents, Flowering, Edible, Garden, Special }
-
-/** Seasons of the northern hemisphere, which the care data is written for. */
-enum class Season {
-    Spring, Summer, Autumn, Winter;
-
-    companion object {
-        fun of(month: Month): Season = when (month) {
-            Month.MARCH, Month.APRIL, Month.MAY -> Spring
-            Month.JUNE, Month.JULY, Month.AUGUST -> Summer
-            Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER -> Autumn
-            else -> Winter
-        }
-    }
-}
-
 /**
  * A kind of plant from the bundled catalog, with its care data (not a plant the user owns).
  *

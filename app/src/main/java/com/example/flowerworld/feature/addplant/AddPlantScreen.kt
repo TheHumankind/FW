@@ -26,8 +26,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.ui.FieldError
-import com.example.flowerworld.ui.message
-import com.example.flowerworld.ui.nameRes
 import com.example.flowerworld.ui.components.AppButton
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppPhotoPicker
@@ -35,6 +33,8 @@ import com.example.flowerworld.ui.components.AppScreen
 import com.example.flowerworld.ui.components.AppTextField
 import com.example.flowerworld.ui.components.AppTopBar
 import com.example.flowerworld.ui.components.rememberPhotoPicker
+import com.example.flowerworld.ui.labels.nameRes
+import com.example.flowerworld.ui.message
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 

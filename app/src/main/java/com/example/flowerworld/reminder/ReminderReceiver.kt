@@ -1,6 +1,5 @@
 package com.example.flowerworld.reminder
 
-import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,16 +7,13 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 import com.example.flowerworld.FlowerWorldApp
 import com.example.flowerworld.MainActivity
 import com.example.flowerworld.R
-import com.example.flowerworld.ui.withAppLanguage
 import com.example.flowerworld.di.AppContainer
+import com.example.flowerworld.ui.withAppLanguage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -56,9 +52,8 @@ class ReminderReceiver : BroadcastReceiver() {
     }
 
     private fun showNotification(context: Context, summary: WateringSummary) {
-        val canNotify = ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) ==
-            PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
-        if (!canNotify) return
+        // false when the user denied the notification permission (Android 13+) or turned the app's notifications off
+        if (!NotificationManagerCompat.from(context).areNotificationsEnabled()) return
         createChannel(context)
         // strings in the language chosen in the settings, not the device one
         val localized = context.withAppLanguage()

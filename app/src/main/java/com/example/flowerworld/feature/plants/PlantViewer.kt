@@ -23,7 +23,7 @@ import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppIconButton
 import com.example.flowerworld.ui.components.AppListScreen
-import com.example.flowerworld.ui.components.PlantCard
+import com.example.flowerworld.ui.components.plant.PlantCard
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 

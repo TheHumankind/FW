@@ -102,8 +102,6 @@
     <string name="color_magenta">Magenta</string>
     <string name="color_grey">Grey</string>
     <string name="color_black">Black</string>
-    <string name="search_mode_guide">Plant guide</string>
-    <string name="search_mode_online">Online</string>
     <string name="guide_kind">Kind</string>
     <string name="guide_light">Light</string>
     <string name="guide_pet_safe">Safe for pets</string>

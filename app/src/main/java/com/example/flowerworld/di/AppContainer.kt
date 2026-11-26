@@ -2,22 +2,22 @@ package com.example.flowerworld.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.flowerworld.BuildConfig
+import com.example.flowerworld.data.catalog.AssetSpeciesCatalog
 import com.example.flowerworld.data.local.FlowerWorldDatabase
+import com.example.flowerworld.data.remote.TreflePlantCatalog
 import com.example.flowerworld.data.repository.PrefsSettingsRepository
 import com.example.flowerworld.data.repository.RoomPlantRepository
 import com.example.flowerworld.data.storage.FilePhotoStorage
+import com.example.flowerworld.domain.repository.OnlineCatalogRepository
 import com.example.flowerworld.domain.repository.PlantRepository
 import com.example.flowerworld.domain.repository.SettingsRepository
+import com.example.flowerworld.domain.repository.SpeciesCatalogRepository
 import com.example.flowerworld.domain.storage.PhotoStorage
 import com.example.flowerworld.domain.usecase.AddPlantPhotoUseCase
 import com.example.flowerworld.domain.usecase.AddPlantUseCase
 import com.example.flowerworld.domain.usecase.DeletePlantPhotoUseCase
 import com.example.flowerworld.reminder.ReminderScheduler
-import com.example.flowerworld.BuildConfig
-import com.example.flowerworld.data.remote.TreflePlantCatalog
-import com.example.flowerworld.data.catalog.AssetSpeciesCatalog
-import com.example.flowerworld.domain.repository.PlantCatalogRepository
-import com.example.flowerworld.domain.repository.SpeciesCatalogRepository
 
 /**
  * Manual dependency container: creates the app-wide singletons once and hands them to ViewModels.
@@ -40,7 +40,7 @@ class AppContainer(context: Context) {
     val plantRepository: PlantRepository by lazy { RoomPlantRepository(database.plantDao()) }
     val reminderScheduler: ReminderScheduler by lazy { ReminderScheduler(appContext, settingsRepository) }
     val settingsRepository: SettingsRepository by lazy { PrefsSettingsRepository(appContext) }
-    val plantCatalog: PlantCatalogRepository by lazy { TreflePlantCatalog(BuildConfig.TREFLE_TOKEN) }
+    val onlineCatalog: OnlineCatalogRepository by lazy { TreflePlantCatalog(BuildConfig.TREFLE_TOKEN) }
     val speciesCatalog: SpeciesCatalogRepository by lazy { AssetSpeciesCatalog(appContext) }
     val photoStorage: PhotoStorage by lazy { FilePhotoStorage(appContext) }
     val addPlantUseCase: AddPlantUseCase by lazy { AddPlantUseCase(plantRepository, photoStorage) }

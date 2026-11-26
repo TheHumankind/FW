@@ -100,8 +100,6 @@
     <string name="color_magenta">Magenta</string>
     <string name="color_grey">Szary</string>
     <string name="color_black">Czarny</string>
-    <string name="search_mode_guide">Poradnik</string>
-    <string name="search_mode_online">Online</string>
     <string name="guide_kind">Rodzaj</string>
     <string name="guide_light">Światło</string>
     <string name="guide_pet_safe">Bezpieczne dla zwierząt</string>

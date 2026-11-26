@@ -8,7 +8,7 @@ import java.io.IOException
 class CatalogNotConfiguredException : IllegalStateException("The plant catalog token is not set")
 
 /** Searches an online catalog of plants. */
-interface PlantCatalogRepository {
+interface OnlineCatalogRepository {
     /**
      * Finds plants by [query] (may be blank when [filters] are set) and [filters]; [page] starts at 1.
      *

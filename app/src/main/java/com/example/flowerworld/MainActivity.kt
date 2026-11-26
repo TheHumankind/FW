@@ -6,16 +6,16 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.flowerworld.domain.model.AppLanguage
 import com.example.flowerworld.navigation.AppNavigation
 import com.example.flowerworld.ui.AppLanguageProvider
-import com.example.flowerworld.ui.withAppLanguage
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
+import com.example.flowerworld.ui.withAppLanguage
 
 class MainActivity : ComponentActivity() {
     private val container get() = (application as FlowerWorldApp).container

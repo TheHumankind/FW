@@ -100,8 +100,6 @@
     <string name="color_magenta">Пурпурны</string>
     <string name="color_grey">Шэры</string>
     <string name="color_black">Чорны</string>
-    <string name="search_mode_guide">Даведнік</string>
-    <string name="search_mode_online">Анлайн</string>
     <string name="guide_kind">Тып</string>
     <string name="guide_light">Асвятленне</string>
     <string name="guide_pet_safe">Бяспечна для хатніх жывёл</string>

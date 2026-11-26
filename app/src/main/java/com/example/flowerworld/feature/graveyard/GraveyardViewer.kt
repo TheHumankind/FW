@@ -15,7 +15,7 @@ import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantHeading
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppListScreen
-import com.example.flowerworld.ui.components.DeadPlantCard
+import com.example.flowerworld.ui.components.plant.DeadPlantCard
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 

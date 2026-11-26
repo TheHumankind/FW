@@ -14,12 +14,13 @@ import com.example.flowerworld.data.repository.PrefsSettingsRepository
 import com.example.flowerworld.domain.model.AppLanguage
 import java.util.Locale
 
+/** The configuration of this context with [language] as its locale. */
+private fun Context.configurationFor(language: AppLanguage): Configuration =
+    Configuration(resources.configuration).apply { setLocale(Locale.forLanguageTag(language.tag)) }
+
 /** [resources] of this context in [language]. */
-private fun Context.localizedResources(language: AppLanguage): Resources {
-    val configuration = Configuration(resources.configuration)
-    configuration.setLocale(Locale.forLanguageTag(language.tag))
-    return createConfigurationContext(configuration).resources
-}
+private fun Context.localizedResources(language: AppLanguage): Resources =
+    createConfigurationContext(configurationFor(language)).resources
 
 /**
  * This context with the language the user has chosen in the settings; unchanged until one is chosen.
@@ -27,10 +28,12 @@ private fun Context.localizedResources(language: AppLanguage): Resources {
  */
 fun Context.withAppLanguage(): Context {
     val language = PrefsSettingsRepository.storedLanguage(this) ?: return this
-    val configuration = Configuration(resources.configuration)
-    configuration.setLocale(Locale.forLanguageTag(language.tag))
-    return createConfigurationContext(configuration)
+    return createConfigurationContext(configurationFor(language))
 }
+
+/** The two-letter language code of the app (it follows the language chosen in the settings). */
+@Composable
+fun appLanguageCode(): String = LocalConfiguration.current.locales[0].language
 
 /**
  * Shows [content] in [language] and switches it in place when [language] changes: no activity restart,

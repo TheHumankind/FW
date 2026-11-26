@@ -1,4 +1,4 @@
-package com.example.flowerworld.feature.search
+package com.example.flowerworld.feature.guide
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
@@ -44,16 +43,14 @@ import com.example.flowerworld.domain.model.Season
 import com.example.flowerworld.domain.model.SpeciesGroup
 import com.example.flowerworld.domain.model.SpeciesGrowthRate
 import com.example.flowerworld.domain.model.ToxicityLevel
+import com.example.flowerworld.ui.appLanguageCode
 import com.example.flowerworld.ui.components.AppCenteredMessage
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppTextField
+import com.example.flowerworld.ui.labels.nameRes
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 import java.time.LocalDate
-
-/** The two-letter language code of the app (it follows the language chosen in the settings). */
-@Composable
-fun appLanguageCode(): String = LocalConfiguration.current.locales[0].language
 
 /** The bundled plant guide: search by name in any language, narrow by kind, light and pet safety. */
 @Composable

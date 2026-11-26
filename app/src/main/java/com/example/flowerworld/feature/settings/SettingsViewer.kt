@@ -16,14 +16,15 @@ import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.AppLanguage
 import com.example.flowerworld.domain.model.IntervalUnit
 import com.example.flowerworld.domain.model.PlantHeading
-import com.example.flowerworld.ui.components.AppSettingsSection
-import com.example.flowerworld.ui.nameRes
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppListScreen
+import com.example.flowerworld.ui.components.AppSettingsSection
 import com.example.flowerworld.ui.components.AppTimeField
-import java.time.LocalTime
+import com.example.flowerworld.ui.labels.flag
+import com.example.flowerworld.ui.labels.nameRes
 import com.example.flowerworld.ui.theme.Dimens
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
+import java.time.LocalTime
 
 /** App settings: the language of the app. */
 @Composable

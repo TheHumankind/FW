@@ -4,7 +4,7 @@ import com.example.flowerworld.domain.model.CatalogFilters
 import com.example.flowerworld.domain.model.CatalogPage
 import com.example.flowerworld.domain.model.CatalogPlant
 import com.example.flowerworld.domain.repository.CatalogNotConfiguredException
-import com.example.flowerworld.domain.repository.PlantCatalogRepository
+import com.example.flowerworld.domain.repository.OnlineCatalogRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONException
@@ -20,7 +20,7 @@ import java.net.URLEncoder
  *
  * The JSON is parsed by hand (`org.json`) to avoid a library for three endpoints; the DTO stays inside this class.
  */
-class TreflePlantCatalog(private val token: String) : PlantCatalogRepository {
+class TreflePlantCatalog(private val token: String) : OnlineCatalogRepository {
 
     override suspend fun search(query: String, filters: CatalogFilters, page: Int): CatalogPage {
         if (token.isBlank()) throw CatalogNotConfiguredException()

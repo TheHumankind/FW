@@ -12,15 +12,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.data.fake.TestPlants
 import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.domain.model.PlantSpecies
-import com.example.flowerworld.feature.search.SearchViewer
-import com.example.flowerworld.feature.settings.SettingsViewer
 import com.example.flowerworld.feature.graveyard.GraveyardViewer
+import com.example.flowerworld.feature.guide.GuideViewer
+import com.example.flowerworld.feature.main.ReminderHintDialog
 import com.example.flowerworld.feature.plants.PlantViewer
+import com.example.flowerworld.feature.settings.SettingsViewer
+import com.example.flowerworld.reminder.ReminderSettings
 import com.example.flowerworld.ui.components.AppFooter
 import com.example.flowerworld.ui.components.AppScreen
-import com.example.flowerworld.reminder.ReminderSettings
 import com.example.flowerworld.ui.components.FooterTab
-import com.example.flowerworld.ui.components.ReminderHintDialog
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 @Composable
@@ -89,7 +89,7 @@ private fun MainContent(
                 heading = state.cardHeading,
                 modifier = Modifier.weight(1f)
             )
-            FooterTab.Search -> SearchViewer(
+            FooterTab.Search -> GuideViewer(
                 onSpeciesClick = onSpeciesClick,
                 modifier = Modifier.weight(1f)
             )

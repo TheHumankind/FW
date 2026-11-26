@@ -1,4 +1,4 @@
-package com.example.flowerworld.feature.species
+package com.example.flowerworld.feature.guide
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,9 +21,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flowerworld.R
 import com.example.flowerworld.domain.model.PlantSpecies
-import com.example.flowerworld.feature.search.GuideResults
-import com.example.flowerworld.feature.search.SpeciesSearchViewModel
-import com.example.flowerworld.feature.search.appLanguageCode
+import com.example.flowerworld.feature.guide.GuideResults
+import com.example.flowerworld.feature.guide.SpeciesSearchViewModel
+import com.example.flowerworld.ui.appLanguageCode
 import com.example.flowerworld.ui.components.AppTextButton
 import com.example.flowerworld.ui.components.AppTextField
 

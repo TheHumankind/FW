@@ -25,8 +25,8 @@ import com.example.flowerworld.domain.model.Plant
 import com.example.flowerworld.ui.components.AppDropdown
 import com.example.flowerworld.ui.components.AppTextButton
 import com.example.flowerworld.ui.components.AppTextField
+import com.example.flowerworld.ui.labels.nameRes
 import com.example.flowerworld.ui.message
-import com.example.flowerworld.ui.nameRes
 import com.example.flowerworld.ui.theme.FlowerWorldTheme
 
 private const val HoursInDay = 24
